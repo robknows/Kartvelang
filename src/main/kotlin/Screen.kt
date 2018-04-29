@@ -20,4 +20,8 @@ class Screen {
             Text(readLine)
         }
     }
+
+    fun showAnswer(a: String) {
+        text += "\n" + a
+    }
 }

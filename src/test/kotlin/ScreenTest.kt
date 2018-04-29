@@ -28,4 +28,14 @@ class ScreenTest {
         val answerText = s.awaitAnswer(mockBufferedReader)
         assertEquals("4", answerText.toString())
     }
+
+    @Test
+    fun canAppendAnswerText() {
+        val s = Screen()
+        val q = Question("Translate 'thanks'", "გმადლობ")
+        s.showQuestion(q)
+        val a = "გმადლომ"
+        s.showAnswer(a)
+        assertEquals("Translate 'thanks'\nგმადლომ", s.toString())
+    }
 }
