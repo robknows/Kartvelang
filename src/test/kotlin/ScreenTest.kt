@@ -9,4 +9,12 @@ class ScreenTest {
         val s = Screen()
         assertEquals("", s.toString())
     }
+
+    @Test
+    fun canShowQuestion() {
+        val s = Screen()
+        val q = Question("What is 2*2?", "4")
+        s.showQuestion(q)
+        assertEquals("What is 2*2?", s.toString())
+    }
 }
