@@ -1,7 +1,7 @@
 /*Created on 29/04/18. */
 import java.io.BufferedReader
 
-class Screen {
+class Screen(val printer: ColourPrinter) {
     var text: String = ""
 
     override fun toString(): String {
