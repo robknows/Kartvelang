@@ -34,6 +34,6 @@ class ScreenTest {
         s.showQuestion(q)
         val a = "გმადლომ"
         s.showAnswer(a)
-        assertEquals("Translate 'thanks'\nგმადლომ", s.toString())
+        assertEquals("Translate 'thanks'\nგმადლომ\n", s.toString())
     }
 }

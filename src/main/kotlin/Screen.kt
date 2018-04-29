@@ -2,14 +2,18 @@
 import java.io.BufferedReader
 
 class Screen(val printer: ColourPrinter) {
-    var text: String = ""
+    var lines: MutableList<Text> = mutableListOf()
 
     override fun toString(): String {
-        return text
+        return if (lines.isEmpty()) {
+            ""
+        } else {
+            lines.map({ txt -> txt.toString() }).reduce({ acc, nxt -> acc + nxt + "\n" })
+        }
     }
 
     fun showQuestion(q: Question) {
-        text = q.questionText
+        lines.add(Text(q.questionText))
     }
 
     fun awaitAnswer(source: BufferedReader): Text {
@@ -22,6 +26,6 @@ class Screen(val printer: ColourPrinter) {
     }
 
     fun showAnswer(a: String) {
-        text += "\n" + a
+        lines.add(Text("\n" + a))
     }
 }
