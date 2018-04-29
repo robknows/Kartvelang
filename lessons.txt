@@ -1,0 +1,33 @@
+1. Show question
+2. Await answer
+3. Mark answer
+4. If correct   => Show green 
+                => Allow user to proceed to next question
+4. If incorrect => Show red
+                => Require user to type correct answer
+                => Allow user to proceed to next question
+
+5. If no more questions remain => Finish
+6. If more questions remain    => Go to next question
+
+=== Algorithm ===
+
+while not questions.empty() {
+  q = questions.pop();
+  q_text = screen.show_question(q);
+  answer_text = screen.await_answer();
+  answer = answer_text.to_string();
+  marked = q.mark_answer(answer);
+  if marked.correct() {
+    answer_text.show_green();
+  } else {
+    answer_text.show_red(marked);
+    screen.prompt_correction(q);
+    screen.await_correction();
+    answer_text.show_corrected(marked);
+    questions.insert_corrected_repetition(q);
+  }
+  screen.show_continue();
+  screen.await_continue();
+  screen.clear();
+}
