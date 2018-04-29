@@ -72,4 +72,16 @@ class ScreenTest {
         assertEquals(Colour.R, s.lines[1].second.overlayColour)
         assertEquals(mutableSetOf(6), s.lines[1].second.overlayIndices)
     }
+
+    @Test
+    fun canAnnotateAnswerWithCorrection() {
+        val q = Question("Translate 'thanks'", "გმადლობ")
+        s.showQuestion(q)
+        val a = "გმადლომ"
+        s.showAnswer(a)
+        s.showAnswerIncorrectIndices(mutableSetOf(6))
+        s.showCorrection(q, mutableSetOf(6))
+
+        assertEquals("Translate 'thanks'\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", s.toString())
+    }
 }

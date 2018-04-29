@@ -22,10 +22,10 @@ while not questions.empty() {
     screen.show_answer_green();
   } else {
     screen.show_answer_red(mark.error_indices);
+    screen.show_correction(q, mark.error_indices);
     screen.update_text();
-    screen.prompt_correction(q);
+    screen.await_correction_retype(q);
     screen.await_correction();
-    screen.show_answer_corrected(mark.error_indices);
     questions.insert_corrected_repetition(q);
   }
   screen.update_text();

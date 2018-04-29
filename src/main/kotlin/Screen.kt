@@ -13,8 +13,21 @@ class Screen(val printer: ColourPrinter) {
         }
     }
 
+    fun print() {
+        lines.forEach({(_, txt) -> txt.printlnWith(printer) })
+    }
+
     fun showQuestion(q: Question) {
         lines.add(Pair(Q, Text(q.questionText)))
+    }
+
+    fun showAnswer(a: String) {
+        lines.add(Pair(A, Text(a)))
+    }
+
+    fun showCorrection(q: Question, errorIndices: Set<Int>) {
+        lines.add(Pair(C, Text(q.answerText.mapIndexed({ i, c -> if (i in errorIndices) { c } else { ' ' } }).joinToString(separator = ""))))
+        lines.add(Pair(C, Text("correct answer: " + q.answerText)))
     }
 
     fun awaitAnswer(source: BufferedReader): Text {
@@ -24,14 +37,6 @@ class Screen(val printer: ColourPrinter) {
         } else {
             Text(readLine)
         }
-    }
-
-    fun showAnswer(a: String) {
-        lines.add(Pair(A, Text(a)))
-    }
-
-    fun print() {
-        lines.forEach({(_, txt) -> txt.printlnWith(printer) })
     }
 
     fun showAnswerCorrect() {
@@ -56,6 +61,7 @@ class Screen(val printer: ColourPrinter) {
 }
 
 enum class LineLabel {
-    Q,
-    A
+    Q, // Question
+    A, // Answer
+    C  // Correction
 }
