@@ -49,4 +49,10 @@ class QuestionsTest {
         assertEquals(q3, questions.pop())
         assertEquals(0, questions.set.count())
     }
+
+    @Test
+    fun cantPopFromEmptyQuestions() {
+        val questions = Questions()
+        assertEquals(NullQuestion, questions.pop())
+    }
 }

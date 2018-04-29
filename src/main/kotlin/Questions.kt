@@ -10,6 +10,10 @@ class Questions {
     }
 
     fun pop(): Question {
-        return set.removeAt(0)
+        return if (count() < 1) {
+            NullQuestion
+        } else {
+            set.removeAt(0)
+        }
     }
 }
