@@ -1,3 +1,4 @@
+/*Created on 29/04/18. */
 open class Question(val questionText: String, val answerText: String) {
     fun markAnswer(attempt: String): Mark {
         val correct = answerText == attempt

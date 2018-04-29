@@ -1,10 +1,8 @@
+/*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Mockito
 import java.io.BufferedReader
-
-
-/*Created on 29/04/18. */
 
 class ScreenTest {
     @Test
