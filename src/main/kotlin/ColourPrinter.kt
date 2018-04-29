@@ -33,3 +33,9 @@ class ColourPrinter {
         println()
     }
 }
+
+enum class Colour {
+    WHITE, // 255
+    GREEN, // 028
+    RED    // 196
+}

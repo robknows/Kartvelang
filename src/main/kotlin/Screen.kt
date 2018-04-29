@@ -2,18 +2,20 @@
 import java.io.BufferedReader
 
 class Screen(val printer: ColourPrinter) {
-    var lines: MutableList<Text> = mutableListOf()
+    var lines: MutableList<Pair<String, Text>> = mutableListOf()
+    val Q = "question"
+    val A = "answer"
 
     override fun toString(): String {
         return if (lines.isEmpty()) {
             ""
         } else {
-            lines.map({ txt -> txt.toString() }).reduce({ acc, nxt -> acc + "\n" + nxt })
+            lines.map({ (_, txt) -> txt.toString() }).reduce({ acc, nxt -> acc + "\n" + nxt })
         }
     }
 
     fun showQuestion(q: Question) {
-        lines.add(Text(q.questionText))
+        lines.add(Pair(Q, Text(q.questionText)))
     }
 
     fun awaitAnswer(source: BufferedReader): Text {
@@ -26,10 +28,14 @@ class Screen(val printer: ColourPrinter) {
     }
 
     fun showAnswer(a: String) {
-        lines.add(Text(a))
+        lines.add(Pair(A, Text(a)))
     }
 
     fun print() {
-        lines.forEach({txt -> txt.printWith(printer) })
+        lines.forEach({(_, txt) -> txt.printWith(printer) })
+    }
+
+    fun showAnswerGreen() {
+        lines.find({ (label, _) -> label == A })?.second?.setGreen()
     }
 }

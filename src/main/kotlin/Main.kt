@@ -8,9 +8,12 @@ fun main(args: Array<String>) {
     colourPrinter.printlnWhite("white")
 
     val s = Screen(colourPrinter)
-    val q = Question("Translate 'thanks'", "გმადლობ")
+    val q = Question("Translate \"thanks\"", "გმადლობ")
     s.showQuestion(q)
     val a = "გმადლომ"
     s.showAnswer(a)
+
+    s.showAnswerGreen()
+
     s.print()
 }
