@@ -16,4 +16,8 @@ class Questions {
             set.removeAt(0)
         }
     }
+
+    fun empty(): Boolean {
+        return set.isEmpty()
+    }
 }

@@ -1,17 +1,18 @@
 /*Created on 29/04/18. */
 
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import org.junit.Test
 
 class QuestionsTest {
     @Test
-    fun questionsInitialisesEmpty() {
+    fun initialisedEmpty() {
         val questions = Questions()
         assertEquals(questions.count(), 0)
     }
 
     @Test
-    fun canCountAddedQuestions() {
+    fun canCount() {
         val questions = Questions()
         val q = Question("What is 2+2?", "4")
         questions.add(q)
@@ -51,8 +52,14 @@ class QuestionsTest {
     }
 
     @Test
-    fun cantPopFromEmptyQuestions() {
+    fun cantPopIfEmpty() {
         val questions = Questions()
         assertEquals(NullQuestion, questions.pop())
+    }
+
+    @Test
+    fun canCheckIfEmpty() {
+        val questions = Questions()
+        assertTrue(questions.empty())
     }
 }
