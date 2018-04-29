@@ -19,14 +19,14 @@ while not questions.empty() {
   answer = answer_text.to_string();
   mark = q.mark_answer(answer);
   if mark.correct {
-    answer_text.show_green();
+    screen.show_answer_green();
   } else {
     error_indices = mark.red_indices()
-    answer_text.show_red(error_indices);
+    screen.show_answer_red(error_indices);
     screen.update_text();
     screen.prompt_correction(q);
     screen.await_correction();
-    answer_text.show_corrected(error_indices);
+    screen.show_answer_corrected(error_indices);
     questions.insert_corrected_repetition(q);
   }
   screen.update_text();
