@@ -1,6 +1,8 @@
+import Colour.*
+
 /*Created on 29/04/18. */
 open class Text(private val text: String) {
-    var colour = Colour.WHITE
+    var colour = WHITE
 
     override fun toString(): String {
         return text
@@ -8,18 +10,18 @@ open class Text(private val text: String) {
 
     fun printWith(printer: ColourPrinter) {
         when(colour) {
-            Colour.WHITE -> printer.printlnWhite(text)
-            Colour.GREEN -> printer.printlnGreen(text)
-            Colour.RED   -> printer.printlnRed(text)
+            WHITE -> printer.printlnWhite(text)
+            GREEN -> printer.printlnGreen(text)
+            RED   -> printer.printlnRed(text)
         }
     }
 
     fun setGreen() {
-        colour = Colour.GREEN
+        colour = GREEN
     }
 
     fun setRed() {
-        colour = Colour.RED
+        colour = RED
     }
 }
 

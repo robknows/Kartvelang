@@ -1,10 +1,9 @@
 /*Created on 29/04/18. */
+import LineLabel.*
 import java.io.BufferedReader
 
 class Screen(val printer: ColourPrinter) {
-    var lines: MutableList<Pair<String, Text>> = mutableListOf()
-    val Q = "question"
-    val A = "answer"
+    var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
 
     override fun toString(): String {
         return if (lines.isEmpty()) {
@@ -38,4 +37,9 @@ class Screen(val printer: ColourPrinter) {
     fun showAnswerGreen() {
         lines.find({ (label, _) -> label == A })?.second?.setGreen()
     }
+}
+
+enum class LineLabel {
+    Q,
+    A
 }
