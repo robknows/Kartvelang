@@ -3,6 +3,10 @@ open class Text(private val text: String) {
     override fun toString(): String {
         return text
     }
+
+    fun printWith(printer: ColourPrinter) {
+        printer.printlnWhite(text)
+    }
 }
 
 object NullText : Text("")

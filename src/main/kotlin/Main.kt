@@ -6,4 +6,11 @@ fun main(args: Array<String>) {
     colourPrinter.printRed("red  ")
     colourPrinter.printGreen("green  ")
     colourPrinter.printlnWhite("white")
+
+    val s = Screen(colourPrinter)
+    val q = Question("Translate 'thanks'", "გმადლობ")
+    s.showQuestion(q)
+    val a = "გმადლომ"
+    s.showAnswer(a)
+    s.print()
 }

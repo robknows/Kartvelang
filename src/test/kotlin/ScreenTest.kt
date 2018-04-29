@@ -1,7 +1,8 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import java.io.BufferedReader
 
 class ScreenTest {
@@ -21,8 +22,8 @@ class ScreenTest {
 
     @Test
     fun canAwaitAnswer() {
-        val mockBufferedReader = Mockito.mock(BufferedReader::class.java)
-        Mockito.doReturn("4").`when`(mockBufferedReader).readLine()
+        val mockBufferedReader = mock(BufferedReader::class.java)
+        doReturn("4").`when`(mockBufferedReader).readLine()
 
         val answerText = s.awaitAnswer(mockBufferedReader)
         assertEquals("4", answerText.toString())
@@ -34,6 +35,6 @@ class ScreenTest {
         s.showQuestion(q)
         val a = "გმადლომ"
         s.showAnswer(a)
-        assertEquals("Translate 'thanks'\nგმადლომ\n", s.toString())
+        assertEquals("Translate 'thanks'\nგმადლომ", s.toString())
     }
 }

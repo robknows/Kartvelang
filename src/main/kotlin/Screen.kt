@@ -8,7 +8,7 @@ class Screen(val printer: ColourPrinter) {
         return if (lines.isEmpty()) {
             ""
         } else {
-            lines.map({ txt -> txt.toString() }).reduce({ acc, nxt -> acc + nxt + "\n" })
+            lines.map({ txt -> txt.toString() }).reduce({ acc, nxt -> acc + "\n" + nxt })
         }
     }
 
@@ -26,6 +26,10 @@ class Screen(val printer: ColourPrinter) {
     }
 
     fun showAnswer(a: String) {
-        lines.add(Text("\n" + a))
+        lines.add(Text(a))
+    }
+
+    fun print() {
+        lines.forEach({txt -> txt.printWith(printer) })
     }
 }
