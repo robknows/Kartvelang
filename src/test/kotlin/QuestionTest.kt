@@ -19,4 +19,12 @@ class QuestionTest {
         val mark = q.markAnswer(a)
         assertEquals(listOf(6), mark.errorIndices)
     }
+
+    @Test
+    fun canDiffAnCorrectWord() {
+        val q = Question("Translate 'thanks'", "გმადლობ")
+        val a = "გმადლობ"
+        val mark = q.markAnswer(a)
+        assertEquals(0, mark.errorIndices.count())
+    }
 }
