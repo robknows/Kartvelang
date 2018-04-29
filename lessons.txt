@@ -17,14 +17,15 @@ while not questions.empty() {
   q_text = screen.show_question(q);
   answer_text = screen.await_answer();
   answer = answer_text.to_string();
-  marked = q.mark_answer(answer);
-  if marked.correct() {
+  mark = q.mark_answer(answer);
+  if mark.correct {
     answer_text.show_green();
   } else {
-    answer_text.show_red(marked);
+    error_indices = mark.red_indices()
+    answer_text.show_red(error_indices);
     screen.prompt_correction(q);
     screen.await_correction();
-    answer_text.show_corrected(marked);
+    answer_text.show_corrected(error_indices);
     questions.insert_corrected_repetition(q);
   }
   screen.show_continue();
