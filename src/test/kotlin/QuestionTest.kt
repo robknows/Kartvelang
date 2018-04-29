@@ -1,6 +1,5 @@
 /*Created on 29/04/18. */
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertFalse
+import junit.framework.TestCase.*
 import org.junit.Test
 
 class QuestionTest {
@@ -10,6 +9,14 @@ class QuestionTest {
         val a = "გმადლომ"
         val mark = q.markAnswer(a)
         assertFalse(mark.correct)
+    }
+
+    @Test
+    fun canRecogniseCorrectAnswer() {
+        val q = Question("Translate 'thanks'", "გმადლობ")
+        val a = "გმადლობ"
+        val mark = q.markAnswer(a)
+        assertTrue(mark.correct)
     }
 
     @Test
