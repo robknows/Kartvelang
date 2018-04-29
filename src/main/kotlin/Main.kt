@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val a = "გმადლომ"
     s.showAnswer(a)
 
-    s.showAnswerGreen()
+    s.showAnswerIncorrectIndices(mutableSetOf(1, 6))
 
     s.print()
 }

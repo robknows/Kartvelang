@@ -32,10 +32,26 @@ class ColourPrinter {
         printWhite(s)
         println()
     }
+
+    fun print(c: Colour, s: String) {
+        when(c) {
+            Colour.W -> printWhite(s)
+            Colour.G -> printGreen(s)
+            Colour.R -> printRed(s)
+        }
+    }
+
+    fun println(c: Colour, s: String) {
+        when(c) {
+            Colour.W -> printlnWhite(s)
+            Colour.G -> printlnGreen(s)
+            Colour.R -> printlnRed(s)
+        }
+    }
 }
 
 enum class Colour {
-    WHITE, // 255
-    GREEN, // 028
-    RED    // 196
+    W, // 255
+    G, // 028
+    R    // 196
 }

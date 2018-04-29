@@ -31,11 +31,27 @@ class Screen(val printer: ColourPrinter) {
     }
 
     fun print() {
-        lines.forEach({(_, txt) -> txt.printWith(printer) })
+        lines.forEach({(_, txt) -> txt.printlnWith(printer) })
     }
 
-    fun showAnswerGreen() {
-        lines.find({ (label, _) -> label == A })?.second?.setGreen()
+    fun showAnswerCorrect() {
+        answerText()?.setAllGreen()
+    }
+
+    fun showAnswerEntirelyIncorrect() {
+        answerText()?.setAllRed()
+    }
+
+    fun showAnswerIncorrectIndices(indices: Set<Int>) {
+        val answerText = answerText()
+        if (answerText != null) {
+            answerText.setAllGreen()
+            answerText.setRed(indices)
+        }
+    }
+
+    private fun answerText(): Text? {
+        return lines.find({ (label, _) -> label == A })?.second
     }
 }
 

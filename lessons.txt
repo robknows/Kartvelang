@@ -21,12 +21,11 @@ while not questions.empty() {
   if mark.correct {
     screen.show_answer_green();
   } else {
-    error_indices = mark.red_indices()
-    screen.show_answer_red(error_indices);
+    screen.show_answer_red(mark.error_indices);
     screen.update_text();
     screen.prompt_correction(q);
     screen.await_correction();
-    screen.show_answer_corrected(error_indices);
+    screen.show_answer_corrected(mark.error_indices);
     questions.insert_corrected_repetition(q);
   }
   screen.update_text();
