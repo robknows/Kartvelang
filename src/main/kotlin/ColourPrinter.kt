@@ -18,6 +18,12 @@ class ColourPrinter {
         print(readLine)
     }
 
+    fun printBlue(s: String) {
+        val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;021m$s'").start()
+        val readLine = proc.inputStream.bufferedReader().readLine()
+        print(readLine)
+    }
+
     fun printlnRed(s: String) {
         printRed(s)
         println()
@@ -33,11 +39,17 @@ class ColourPrinter {
         println()
     }
 
+    fun printlnBlue(s: String) {
+        printBlue(s)
+        println()
+    }
+
     fun print(c: Colour, s: String) {
         when(c) {
             Colour.W -> printWhite(s)
             Colour.G -> printGreen(s)
             Colour.R -> printRed(s)
+            Colour.B -> printBlue(s)
         }
     }
 
@@ -46,6 +58,7 @@ class ColourPrinter {
             Colour.W -> printlnWhite(s)
             Colour.G -> printlnGreen(s)
             Colour.R -> printlnRed(s)
+            Colour.B -> printlnBlue(s)
         }
     }
 }
@@ -53,5 +66,6 @@ class ColourPrinter {
 enum class Colour {
     W, // 255
     G, // 028
-    R    // 196
+    R, // 196
+    B, // 021
 }

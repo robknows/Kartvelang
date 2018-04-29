@@ -26,8 +26,22 @@ class Screen(val printer: ColourPrinter) {
     }
 
     fun showCorrection(q: Question, errorIndices: Set<Int>) {
-        lines.add(Pair(C, Text(q.answerText.mapIndexed({ i, c -> if (i in errorIndices) { c } else { ' ' } }).joinToString(separator = ""))))
-        lines.add(Pair(C, Text("correct answer: " + q.answerText)))
+        val indicesCorrection = Text(q.answerText.mapIndexed({ i, c ->
+            if (i in errorIndices) {
+                c
+            } else {
+                ' '
+            }
+        }).joinToString(separator = ""))
+        indicesCorrection.baseColour = Colour.B
+
+        val fullCorrection = Text("correct answer: " + q.answerText)
+        fullCorrection.baseColour = Colour.W
+        fullCorrection.overlayColour = Colour.B
+        fullCorrection.overlayIndices = (0..15).toMutableSet()
+
+        lines.add(Pair(C, indicesCorrection))
+        lines.add(Pair(C, fullCorrection))
     }
 
     fun awaitAnswer(source: BufferedReader): Text {

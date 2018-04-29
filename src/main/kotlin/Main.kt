@@ -12,8 +12,10 @@ fun main(args: Array<String>) {
     s.showQuestion(q)
     val a = "გმადლომ"
     s.showAnswer(a)
+    val incorrectIndices = mutableSetOf(6)
 
-    s.showAnswerIncorrectIndices(mutableSetOf(1, 6))
+    s.showAnswerIncorrectIndices(incorrectIndices)
+    s.showCorrection(q, incorrectIndices)
 
     s.print()
 }
