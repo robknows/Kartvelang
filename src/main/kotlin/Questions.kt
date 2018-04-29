@@ -1,7 +1,11 @@
 class Questions {
-    val count: Int = 0
+    val set: MutableList<Question> = mutableListOf()
 
-    fun add(question: String, answer: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun add(question: Question) {
+        set.add(question)
+    }
+
+    fun count(): Int {
+        return set.count()
     }
 }
