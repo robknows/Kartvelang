@@ -94,12 +94,11 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         lines.add(Pair(C, fullCorrection))
     }
 
-    fun showLessonAccuracy(accuracyPc: Double) {
-        lines.add(Pair(I, Text("Accuracy:    " + accuracyPc.toString() + "%%")))
-    }
-
-    fun showLessonDuration(seconds: Double) {
+    fun showPostLessonInfo(accuracyPc: Double, seconds: Double, hint: String) {
+        val acc = if (accuracyPc == 100.0) { "100" } else { accuracyPc.toString() }
+        lines.add(Pair(I, Text("Accuracy:    $acc%%")))
         lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
+        lines.add(Pair(I, Text("Hint: $hint")))
     }
 
     fun showMarkedAnswer(mark: Mark) {

@@ -131,4 +131,12 @@ class ScreenTest {
         assertEquals("", s.toString())
         assertEquals(mutableListOf<Pair<LineLabel, Text>>(), s.lines)
     }
+
+    @Test
+    fun canShowPostLessonInfo() {
+        s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
+
+        assertEquals("Accuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+        assertEquals(3, s.lines.count())
+    }
 }

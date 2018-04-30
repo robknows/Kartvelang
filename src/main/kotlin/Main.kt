@@ -28,8 +28,7 @@ fun main(args: Array<String>) {
     val lesson = Lesson(s, qs)
 
     val results = lesson.complete()
-    s.showLessonAccuracy(results.accuracyPc)
-    s.showLessonDuration(results.timeSeconds)
+    s.showPostLessonInfo(results.accuracyPc, results.timeSeconds, randomHint())
     s.print()
     s.clear()
 
@@ -42,4 +41,8 @@ fun printTitle(printer: ColourPrinter) {
     printer.printGreen("tve")
     printer.printWhite("lang")
     printer.printlnBlue(" ===")
+}
+
+fun randomHint(): String {
+    return "All nominative nouns in Georgian end in a vowel"
 }
