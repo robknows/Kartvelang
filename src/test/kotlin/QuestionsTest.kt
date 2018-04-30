@@ -83,5 +83,35 @@ class QuestionsTest {
         questions.insertDelayed(q3)
 
         assertEquals(q3, questions.set.last())
+        assertTrue(questions.set.containsAll(setOf(q1, q2)))
+        assertEquals(3, questions.count())
+    }
+
+    @Test
+    fun canInsertDelayedRepetitionForHigherNumberOfQuestions() {
+        val questions = Questions()
+        val q1 = Question("What is 2+1?", "3")
+        val q2 = Question("What is 2+2?", "4")
+        val q3 = Question("What is 2+3?", "5")
+        val q4 = Question("What is 2+4?", "6")
+        val q5 = Question("What is 2+5?", "7")
+        val q6 = Question("What is 2+6?", "8")
+        val q7 = Question("What is 2+7?", "9")
+        val q8 = Question("What is 2+8?", "10")
+        val q9 = Question("What is 2+9?", "11")
+        questions.add(q1)
+        questions.add(q2)
+        questions.add(q3)
+        questions.add(q4)
+        questions.add(q5)
+        questions.add(q6)
+        questions.add(q7)
+        questions.add(q8)
+
+        questions.insertDelayed(q9)
+
+        assertEquals(q9, questions.set[3])
+        assertTrue(questions.set.containsAll(setOf(q1, q2, q3, q4, q5, q6, q7, q8)))
+        assertEquals(9, questions.count())
     }
 }

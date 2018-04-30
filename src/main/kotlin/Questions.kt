@@ -23,6 +23,10 @@ class Questions {
     }
 
     fun insertDelayed(q: Question) {
-        add(q)
+        if (set.count() < 4) {
+            add(q)
+        } else {
+            set.add(3, q)
+        }
     }
 }
