@@ -34,6 +34,7 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
     }
 
     fun awaitCorrection(q: Question, source: BufferedReader) {
+        printer.printlnWhite("Type out the correct answer:")
         while (source.readLine()!! != q.answerText) {}
     }
 
