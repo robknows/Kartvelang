@@ -105,7 +105,7 @@ class ScreenTest {
 
         s.awaitCorrection(q)
 
-        verify(mockBufferedReader, times(1)).readLine()
+        verify(mockBufferedReader).readLine()
     }
 
     @Test(timeout = 50)
