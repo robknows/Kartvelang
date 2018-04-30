@@ -31,6 +31,13 @@ class ScreenTest {
         assertEquals("4", s.awaitAnswer(mockBufferedReader).toString())
     }
 
+    @Test(timeout = 700)
+    fun canAwaitAnswerIgnoringWhitespace() {
+        val input = BufferedReader(StringReader("\n\n\n4"))
+
+        assertEquals("4", s.awaitAnswer(input).toString())
+    }
+
     @Test
     fun canAppendAnswerText() {
         val q = Question("Translate 'thanks'", "გმადლობ")

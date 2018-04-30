@@ -26,8 +26,8 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
 
     fun awaitAnswer(source: BufferedReader): Text {
         val readLine = source.readLine()
-        return if (readLine == null) {
-            NullText
+        return if (readLine == null || readLine.isEmpty()) {
+            awaitAnswer(source)
         } else {
             Text(readLine)
         }
