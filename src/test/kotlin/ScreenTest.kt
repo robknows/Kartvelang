@@ -16,7 +16,9 @@ class ScreenTest {
     @Test
     fun canShowQuestion() {
         val q = Question("What is 2*2?", "4")
+
         s.showQuestion(q)
+
         assertEquals("What is 2*2?", s.toString())
     }
 
@@ -25,26 +27,27 @@ class ScreenTest {
         val mockBufferedReader = mock(BufferedReader::class.java)
         doReturn("4").`when`(mockBufferedReader).readLine()
 
-        val answerText = s.awaitAnswer(mockBufferedReader)
-        assertEquals("4", answerText.toString())
+        assertEquals("4", s.awaitAnswer(mockBufferedReader).toString())
     }
 
     @Test
     fun canAppendAnswerText() {
         val q = Question("Translate 'thanks'", "გმადლობ")
+
         s.showQuestion(q)
-        val a = "გმადლომ"
-        s.showAnswer(a)
+        s.showAnswer("გმადლომ")
+
         assertEquals("Translate 'thanks'\nგმადლომ", s.toString())
     }
 
     @Test
     fun correctAnswerCanBeTurnedGreen() {
         val q = Question("Translate 'thanks'", "გმადლობ")
+
         s.showQuestion(q)
-        val a = "გმადლობ"
-        s.showAnswer(a)
+        s.showAnswer("გმადლობ")
         s.showAnswerCorrect()
+
         assertEquals(Colour.W, s.lines[0].second.baseColour)
         assertEquals(Colour.G, s.lines[1].second.baseColour)
     }
@@ -52,10 +55,11 @@ class ScreenTest {
     @Test
     fun incorrectAnswerCanBeTurnedRed() {
         val q = Question("Translate 'thanks'", "გმადლობ")
+
         s.showQuestion(q)
-        val a = "ayylmao"
-        s.showAnswer(a)
+        s.showAnswer("ayylmao")
         s.showAnswerEntirelyIncorrect()
+
         assertEquals(Colour.W, s.lines[0].second.baseColour)
         assertEquals(Colour.R, s.lines[1].second.baseColour)
     }
@@ -63,10 +67,11 @@ class ScreenTest {
     @Test
     fun incorrectIndicesCanBeTurnedRed() {
         val q = Question("Translate 'thanks'", "გმადლობ")
+
         s.showQuestion(q)
-        val a = "გმადლომ"
-        s.showAnswer(a)
+        s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
+
         assertEquals(Colour.W, s.lines[0].second.baseColour)
         assertEquals(Colour.G, s.lines[1].second.baseColour)
         assertEquals(Colour.R, s.lines[1].second.overlayColour)
@@ -76,9 +81,9 @@ class ScreenTest {
     @Test
     fun canAnnotateAnswerWithCorrection() {
         val q = Question("Translate 'thanks'", "გმადლობ")
+
         s.showQuestion(q)
-        val a = "გმადლომ"
-        s.showAnswer(a)
+        s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
         s.showCorrection(q, mutableSetOf(6))
 
