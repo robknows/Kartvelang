@@ -9,26 +9,3 @@
 
 5. If no more questions remain => Finish
 6. If more questions remain    => Go to next question
-
-=== Algorithm ===
-
-while not questions.empty() {
-  q = questions.pop();
-  q_text = screen.print_question(q);
-  answer_text = screen.await_answer();
-  answer = answer_text.to_string();
-  mark = q.mark_answer(answer);
-  if mark.correct {
-    screen.show_answer_green();
-  } else {
-    screen.show_answer_red(mark.error_indices);
-    screen.show_correction(q, mark.error_indices);
-    screen.update_text();
-    screen.await_correction_retype(q);
-    screen.await_correction();
-    questions.insert_delayed_repetition(q);
-  }
-  screen.update_text();
-  screen.await_continue();
-  screen.clear();
-}
