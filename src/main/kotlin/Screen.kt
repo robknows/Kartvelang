@@ -2,7 +2,7 @@
 import LineLabel.*
 import java.io.BufferedReader
 
-class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter) {
+class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter, var input: BufferedReader) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
 
     override fun toString(): String {
@@ -24,18 +24,18 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         printer.printlnWhite("-".repeat(maxLengthLine))
     }
 
-    fun awaitAnswer(source: BufferedReader): Text {
-        val readLine = source.readLine()
+    fun awaitAnswer(): Text {
+        val readLine = input.readLine()
         return if (readLine == null || readLine.isEmpty()) {
-            awaitAnswer(source)
+            awaitAnswer()
         } else {
             Text(readLine)
         }
     }
 
-    fun awaitCorrection(q: Question, source: BufferedReader) {
+    fun awaitCorrection(q: Question) {
         printer.printlnWhite("Type out the correct answer:")
-        while (source.readLine()!! != q.answerText) {}
+        while (input.readLine()!! != q.answerText) {}
     }
 
     fun awaitKeyPress(key: Key) {
@@ -92,6 +92,10 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
 
     fun clear() {
         lines.clear()
+    }
+
+    fun close() {
+        input.close()
     }
 }
 

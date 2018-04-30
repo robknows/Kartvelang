@@ -18,7 +18,9 @@ fun main(args: Array<String>) {
         println("Couldn't create keyboard hook")
         System.exit(1)
     }
-    val s = Screen(colourPrinter, KeyWaiter())
+
+    val input = BufferedReader(InputStreamReader(System.`in`))
+    val s = Screen(colourPrinter, KeyWaiter(), input)
 
     val qs = Questions()
     qs.add(Question("Type \"abc\"", "abc"))
@@ -39,14 +41,12 @@ fun printTitle(colourPrinter: ColourPrinter) {
 }
 
 fun lesson(s: Screen, qs: Questions) {
-    val inputStreamReader = InputStreamReader(System.`in`)
     val startTime = Calendar.getInstance().time.time
     while (!qs.empty()) {
         val q = qs.pop()
         s.showQuestion(q)
         s.print()
-        val bufferedInput = BufferedReader(inputStreamReader)
-        val a = s.awaitAnswer(bufferedInput).toString()
+        val a = s.awaitAnswer().toString()
         s.showAnswer(a)
         val mark = q.markAnswer(a)
         if (mark.correct) {
@@ -57,7 +57,7 @@ fun lesson(s: Screen, qs: Questions) {
             s.showAnswerIncorrectIndices(errorIndices)
             s.showCorrection(q, errorIndices)
             s.print()
-            s.awaitCorrection(q, bufferedInput)
+            s.awaitCorrection(q)
             qs.insertDelayed(q)
         }
         s.awaitKeyPress(Key.ENTER)
@@ -65,5 +65,5 @@ fun lesson(s: Screen, qs: Questions) {
     }
     val endTime = Calendar.getInstance().time.time
     println("Lesson time: " + ((endTime - startTime).toDouble() / 1000).toString() + " seconds")
-    inputStreamReader.close()
+    s.close()
 }

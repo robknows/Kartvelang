@@ -7,7 +7,8 @@ import java.io.StringReader
 
 class ScreenTest {
     private val mockKeyWaiter = mock(KeyWaiter::class.java)!!
-    private val s = Screen(ColourPrinter(), mockKeyWaiter)
+    private val mockBufferedReader = mock(BufferedReader::class.java)
+    private val s = Screen(ColourPrinter(), mockKeyWaiter, mockBufferedReader)
 
     @Test
     fun initialisedBlank() {
@@ -25,17 +26,16 @@ class ScreenTest {
 
     @Test(timeout = 700)
     fun canAwaitAnswer() {
-        val mockBufferedReader = mock(BufferedReader::class.java)
         doReturn("4").`when`(mockBufferedReader).readLine()
 
-        assertEquals("4", s.awaitAnswer(mockBufferedReader).toString())
+        assertEquals("4", s.awaitAnswer().toString())
     }
 
     @Test(timeout = 700)
     fun canAwaitAnswerIgnoringWhitespace() {
-        val input = BufferedReader(StringReader("\n\n\n4"))
+        s.input = BufferedReader(StringReader("\n\n\n4"))
 
-        assertEquals("4", s.awaitAnswer(input).toString())
+        assertEquals("4", s.awaitAnswer().toString())
     }
 
     @Test
@@ -100,21 +100,20 @@ class ScreenTest {
 
     @Test(timeout = 700)
     fun canAwaitCorrection() {
-        val mockBufferedReader = mock(BufferedReader::class.java)
         doReturn("გმადლობ").`when`(mockBufferedReader).readLine()
         val q = Question("Translate 'thanks'", "გმადლობ")
 
-        s.awaitCorrection(q, mockBufferedReader)
+        s.awaitCorrection(q)
 
         verify(mockBufferedReader, times(1)).readLine()
     }
 
     @Test(timeout = 50)
     fun canAwaitCorrectionAfterMultipleAttempts() {
-        val input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
+        s.input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
         val q = Question("Translate 'thanks'", "გმადლობ")
 
-        s.awaitCorrection(q, input)
+        s.awaitCorrection(q)
     }
 
     @Test
