@@ -25,7 +25,7 @@ class LessonTest {
 
         lesson.start()
 
-        verify(mockPrinter, times(24)).printlnWhite(Matchers.anyString())
+        verify(mockPrinter, times(23)).printlnWhite(Matchers.anyString())
         verify(mockPrinter, times(3)).printlnGreen(Matchers.anyString())
         verify(mockPrinter, never()).printlnRed(Matchers.anyString())
     }
@@ -48,5 +48,6 @@ class LessonTest {
 
         assertEquals(75.0, lessonResults.accuracyPc)
         assertTrue(lessonResults.timeSeconds < 1.0)
+        assertTrue(lessonResults.timeSeconds > 0.0)
     }
 }

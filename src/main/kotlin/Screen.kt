@@ -94,6 +94,10 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         lines.add(Pair(C, fullCorrection))
     }
 
+    fun showLessonAccuracy(accuracyPc: Double) {
+        lines.add(Pair(I, Text("Accuracy:    " + accuracyPc.toString() + "%%")))
+    }
+
     fun showLessonDuration(seconds: Double) {
         lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
     }

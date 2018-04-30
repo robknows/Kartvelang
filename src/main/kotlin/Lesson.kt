@@ -24,14 +24,13 @@ class Lesson(val s: Screen, val qs: Questions) {
             s.clear()
             answered++
         }
-        val accuracy = 100 * (answered - mistakes).toDouble() / answered
         val endTime = Calendar.getInstance().time.time
-        val lessonTimeSeconds = (endTime - startTime).toDouble() / 1000
-        s.showLessonDuration(lessonTimeSeconds)
         s.print()
         s.clear()
         s.close()
-        return LessonResults(accuracy, lessonTimeSeconds)
+        return LessonResults(
+                100 * (answered - mistakes).toDouble() / answered, // accuracyPc
+                (endTime - startTime).toDouble() / 1000)           // timeSeconds
     }
 
     data class LessonResults(val accuracyPc: Double, val timeSeconds: Double)

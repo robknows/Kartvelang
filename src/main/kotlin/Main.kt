@@ -5,12 +5,11 @@ import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.*
 
 fun main(args: Array<String>) {
-    val colourPrinter = ColourPrinter()
+    val printer = ColourPrinter()
 
-    printTitle(colourPrinter)
+    printTitle(printer)
 
     try {
         GlobalScreen.registerNativeHook()
@@ -20,24 +19,27 @@ fun main(args: Array<String>) {
     }
 
     val input = BufferedReader(InputStreamReader(System.`in`))
-    val s = Screen(colourPrinter, KeyWaiter(), input)
+    val s = Screen(printer, KeyWaiter(), input)
 
     val qs = Questions()
     qs.add(Question("Type \"abc\"", "abc"))
     qs.add(Question("Type \"doremi\"", "doremi"))
     qs.add(Question("Type \"onetwothree\"", "onetwothree"))
-
     val lesson = Lesson(s, qs)
 
-    lesson.start()
+    val results = lesson.start()
+    s.showLessonAccuracy(results.accuracyPc)
+    s.showLessonDuration(results.timeSeconds)
+    s.print()
+    s.clear()
 
     System.exit(0)
 }
 
-fun printTitle(colourPrinter: ColourPrinter) {
-    colourPrinter.printBlue("=== ")
-    colourPrinter.printRed("kar")
-    colourPrinter.printGreen("tve")
-    colourPrinter.printWhite("lang")
-    colourPrinter.printlnBlue(" ===")
+fun printTitle(printer: ColourPrinter) {
+    printer.printBlue("=== ")
+    printer.printRed("kar")
+    printer.printGreen("tve")
+    printer.printWhite("lang")
+    printer.printlnBlue(" ===")
 }
