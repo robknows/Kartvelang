@@ -109,4 +109,18 @@ class ScreenTest {
 
         s.awaitCorrection(q, input)
     }
+
+    @Test
+    fun canClearScreen() {
+        val q = Question("Translate 'thanks'", "გმადლობ")
+
+        s.showQuestion(q)
+        s.showAnswer("გმადლომ")
+        s.showAnswerIncorrectIndices(mutableSetOf(6))
+        s.showCorrection(q, mutableSetOf(6))
+        s.clear()
+
+        assertEquals("", s.toString())
+        assertEquals(mutableListOf<Pair<LineLabel, Text>>(), s.lines)
+    }
 }

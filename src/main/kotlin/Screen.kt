@@ -89,6 +89,10 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         lines.add(Pair(C, indicesCorrection))
         lines.add(Pair(C, fullCorrection))
     }
+
+    fun clear() {
+        lines.clear()
+    }
 }
 
 enum class LineLabel {
