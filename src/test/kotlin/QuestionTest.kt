@@ -24,7 +24,7 @@ class QuestionTest {
         val q = Question("Translate 'thanks'", "გმადლობ")
         val a = "გმადლომ"
         val mark = q.markAnswer(a)
-        assertEquals(listOf(6), mark.errorIndices)
+        assertEquals(setOf(6), mark.errorIndices)
     }
 
     @Test

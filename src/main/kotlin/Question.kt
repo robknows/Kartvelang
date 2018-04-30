@@ -7,14 +7,14 @@ open class Question(val questionText: String, val answerText: String) {
     }
 
     // Assumption: attempt.length == answerText.length
-    private fun diffWord(attempt: String): List<Int> {
-        val indices = mutableListOf<Int>()
+    private fun diffWord(attempt: String): Set<Int> {
+        val indices = mutableSetOf<Int>()
         for (i in 0..(answerText.length - 1)) {
             if (answerText[i] != attempt[i]) {
                 indices.add(i)
             }
         }
-        return indices.toList()
+        return indices.toSet()
     }
 }
 
