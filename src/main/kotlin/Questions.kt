@@ -21,4 +21,8 @@ class Questions {
     fun empty(): Boolean {
         return set.isEmpty()
     }
+
+    fun insertDelayed(q: Question) {
+        add(q)
+    }
 }

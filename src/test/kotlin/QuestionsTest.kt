@@ -70,4 +70,18 @@ class QuestionsTest {
 
         assertTrue(questions.empty())
     }
+
+    @Test
+    fun canInsertDelayedRepetitionForSmallNumberOfQuestions() {
+        val questions = Questions()
+        val q1 = Question("What is 2+1?", "3")
+        val q2 = Question("What is 2+2?", "4")
+        val q3 = Question("What is 2+3?", "5")
+        questions.add(q1)
+        questions.add(q2)
+
+        questions.insertDelayed(q3)
+
+        assertEquals(q3, questions.set.last())
+    }
 }

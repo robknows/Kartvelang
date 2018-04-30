@@ -26,7 +26,7 @@ while not questions.empty() {
     screen.update_text();
     screen.await_correction_retype(q);
     screen.await_correction();
-    questions.insert_corrected_repetition(q);
+    questions.insert_delayed_repetition(q);
   }
   screen.update_text();
   screen.enable_continue();
