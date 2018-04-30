@@ -13,12 +13,12 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
-    private fun maxLengthLine(): Int {
-        return lines.map({ (_, txt) -> txt.toString().length }).max() ?: 0
-    }
+    fun clear() { lines.clear() }
+
+    fun close() { input.close() }
 
     fun print() {
-        val maxLengthLine = maxLengthLine()
+        val maxLengthLine = lines.map({ (_, txt) -> txt.toString().length }).max() ?: 0
         printer.printlnWhite("-".repeat(maxLengthLine))
         lines.forEach({(_, txt) -> txt.printlnWith(printer) })
         printer.printlnWhite("-".repeat(maxLengthLine))
@@ -47,12 +47,12 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
-    private fun answerText(): Text? {
-        return lines.find({ (label, _) -> label == A })?.second
-    }
-
     fun showQuestion(q: Question) {
         lines.add(Pair(Q, Text(q.questionText)))
+    }
+
+    private fun answerText(): Text? {
+        return lines.find({ (label, _) -> label == A })?.second
     }
 
     fun showAnswer(a: String) {
@@ -76,21 +76,21 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
     }
 
     fun showCorrection(correctAnswer: String, errorIndices: Set<Int>) {
-        val indicesCorrection = Text(correctAnswer.mapIndexed({ i, c ->
+        val corrections = Text(correctAnswer.mapIndexed({ i, c ->
             if (i in errorIndices) {
                 c
             } else {
                 ' '
             }
         }).joinToString(separator = ""))
-        indicesCorrection.baseColour = Colour.B
+        corrections.baseColour = Colour.B
 
         val fullCorrection = Text("correct answer: $correctAnswer")
         fullCorrection.baseColour = Colour.W
         fullCorrection.overlayColour = Colour.B
         fullCorrection.overlayIndices = (0..15).toMutableSet()
 
-        lines.add(Pair(C, indicesCorrection))
+        lines.add(Pair(C, corrections))
         lines.add(Pair(C, fullCorrection))
     }
 
@@ -100,14 +100,6 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
 
     fun showLessonDuration(seconds: Double) {
         lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
-    }
-
-    fun clear() {
-        lines.clear()
-    }
-
-    fun close() {
-        input.close()
     }
 
     fun showMarkedAnswer(mark: Mark) {
