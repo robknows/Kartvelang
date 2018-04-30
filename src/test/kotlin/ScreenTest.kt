@@ -8,7 +8,8 @@ import java.io.StringReader
 class ScreenTest {
     private val mockKeyWaiter = mock(KeyWaiter::class.java)!!
     private val mockBufferedReader = mock(BufferedReader::class.java)
-    private val s = Screen(ColourPrinter(), mockKeyWaiter, mockBufferedReader)
+    private val mockPrinter = mock(ColourPrinter::class.java)
+    private val s = Screen(mockPrinter, mockKeyWaiter, mockBufferedReader)
 
     @Test
     fun initialisedBlank() {
@@ -106,6 +107,7 @@ class ScreenTest {
         s.awaitCorrection(q.answerText)
 
         verify(mockBufferedReader).readLine()
+        verify(mockPrinter).printlnWhite("Type out the correct answer:")
     }
 
     @Test(timeout = 50)

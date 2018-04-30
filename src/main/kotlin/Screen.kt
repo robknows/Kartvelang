@@ -94,6 +94,10 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         lines.add(Pair(C, fullCorrection))
     }
 
+    fun showLessonDuration(seconds: Double) {
+        lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
+    }
+
     fun clear() {
         lines.clear()
     }
@@ -102,13 +106,19 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         input.close()
     }
 
-    fun showLessonDuration(seconds: Double) {
-        printer.printlnWhite("Lesson time: " + seconds.toString() + " seconds")
+    fun showMarkedAnswer(mark: Mark) {
+        if (mark.correct) {
+            showAnswerCorrect()
+        } else {
+            showAnswerIncorrectIndices(mark.errorIndices)
+            showCorrection(mark.correctAnswer, mark.errorIndices)
+        }
     }
 }
 
 enum class LineLabel {
     Q, // Question
     A, // Answer
-    C  // Correction
+    C, // Correction
+    I, // Information
 }

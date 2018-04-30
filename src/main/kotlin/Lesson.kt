@@ -11,18 +11,11 @@ class Lesson(val s: Screen, val qs: Questions) {
             val a = s.awaitAnswer().toString()
             s.showAnswer(a)
             val mark = q.markAnswer(a)
-            if (mark.correct) {
-                s.showAnswerCorrect()
-                s.print()
-            } else {
-                val errorIndices = mark.errorIndices
-                s.showAnswerIncorrectIndices(errorIndices)
-                s.showCorrection(q.answerText, errorIndices)
-                s.print()
-                s.awaitCorrection(q.answerText)
-            }
+            s.showMarkedAnswer(mark)
+            s.print()
             if (!mark.correct) {
                 qs.insertDelayed(q)
+                s.awaitCorrection(q.answerText)
             }
             s.awaitKeyPress(Key.ENTER)
             s.clear()

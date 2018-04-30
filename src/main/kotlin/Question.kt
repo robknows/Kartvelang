@@ -3,7 +3,7 @@ open class Question(val questionText: String, val answerText: String) {
     fun markAnswer(attempt: String): Mark {
         val correct = answerText == attempt
         val diff = diffWord(attempt)
-        return Mark(correct, diff)
+        return Mark(correct, diff, answerText)
     }
 
     // Assumption: attempt.length == answerText.length
