@@ -13,8 +13,15 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
+    private fun maxLengthLine(): Int {
+        return lines.map({ (_, txt) -> txt.toString().length }).max() ?: 0
+    }
+
     fun print() {
+        val maxLengthLine = maxLengthLine()
+        printer.printlnWhite("-".repeat(maxLengthLine))
         lines.forEach({(_, txt) -> txt.printlnWith(printer) })
+        printer.printlnWhite("-".repeat(maxLengthLine))
     }
 
     fun awaitAnswer(source: BufferedReader): Text {
