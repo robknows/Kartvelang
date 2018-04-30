@@ -33,13 +33,20 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
+    private fun prompt(s: String) {
+        val prompt = Pair(C, Text(s))
+        lines.add(prompt)
+        print()
+        lines.remove(prompt)
+    }
+
     fun awaitCorrection(correctAnswer: String) {
-        printer.printlnWhite("Type out the correct answer:")
+        prompt("Type out the correct answer:")
         while (input.readLine()!! != correctAnswer) {}
     }
 
     fun awaitKeyPress(key: Key) {
-        printer.printlnWhite("Press " + key.name.toLowerCase() + " to continue")
+        prompt("Press " + key.name.toLowerCase() + " to continue")
         if (key == Key.ENTER) {
             input.readLine()
         } else {

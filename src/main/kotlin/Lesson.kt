@@ -14,7 +14,6 @@ class Lesson(val s: Screen, val qs: Questions) {
             s.showAnswer(a)
             val mark = q.markAnswer(a)
             s.showMarkedAnswer(mark)
-            s.print()
             if (!mark.correct) {
                 qs.insertDelayed(q)
                 s.awaitCorrection(q.answerText)
