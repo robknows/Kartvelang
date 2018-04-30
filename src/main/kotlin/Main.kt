@@ -56,6 +56,7 @@ fun lesson(s: Screen, qs: Questions) {
             s.showCorrection(q, errorIndices)
             s.print()
             s.awaitCorrection(q, bufferedInput)
+            qs.insertDelayed(q)
         }
         s.awaitKeyPress(Key.ENTER)
         s.clear()

@@ -65,6 +65,15 @@ class QuestionsTest {
     }
 
     @Test
+    fun canPopIfOnlyOneQuestion() {
+        val questions = Questions()
+        val q1 = Question("What is 2+1?", "3")
+        questions.add(q1)
+
+        assertEquals(q1, questions.pop())
+    }
+
+    @Test
     fun canCheckIfEmpty() {
         val questions = Questions()
 
