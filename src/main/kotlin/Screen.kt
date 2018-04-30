@@ -40,7 +40,11 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
 
     fun awaitKeyPress(key: Key) {
         printer.printlnWhite("Press " + key.name.toLowerCase() + " to continue")
-        keyWaiter.await(key.keyCode)
+        if (key == Key.ENTER) {
+            input.readLine()
+        } else {
+            keyWaiter.await(key.keyCode)
+        }
     }
 
     private fun answerText(): Text? {
