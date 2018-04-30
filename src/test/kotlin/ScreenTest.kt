@@ -22,7 +22,7 @@ class ScreenTest {
         assertEquals("What is 2*2?", s.toString())
     }
 
-    @Test
+    @Test(timeout = 700)
     fun canAwaitAnswer() {
         val mockBufferedReader = mock(BufferedReader::class.java)
         doReturn("4").`when`(mockBufferedReader).readLine()
@@ -101,7 +101,7 @@ class ScreenTest {
         verify(mockBufferedReader, times(1)).readLine()
     }
 
-    @Test
+    @Test(timeout = 50)
     fun canAwaitCorrectionAfterMultipleAttempts() {
         val input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
         val q = Question("Translate 'thanks'", "გმადლობ")
