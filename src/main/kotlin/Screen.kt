@@ -17,12 +17,41 @@ class Screen(val printer: ColourPrinter) {
         lines.forEach({(_, txt) -> txt.printlnWith(printer) })
     }
 
+    fun awaitAnswer(source: BufferedReader): Text {
+        val readLine = source.readLine()
+        return if (readLine == null) {
+            NullText
+        } else {
+            Text(readLine)
+        }
+    }
+
+    private fun answerText(): Text? {
+        return lines.find({ (label, _) -> label == A })?.second
+    }
+
     fun showQuestion(q: Question) {
         lines.add(Pair(Q, Text(q.questionText)))
     }
 
     fun showAnswer(a: String) {
         lines.add(Pair(A, Text(a)))
+    }
+
+    fun showAnswerCorrect() {
+        answerText()?.setAllGreen()
+    }
+
+    fun showAnswerEntirelyIncorrect() {
+        answerText()?.setAllRed()
+    }
+
+    fun showAnswerIncorrectIndices(indices: Set<Int>) {
+        val answerText = answerText()
+        if (answerText != null) {
+            answerText.setAllGreen()
+            answerText.setRed(indices)
+        }
     }
 
     fun showCorrection(q: Question, errorIndices: Set<Int>) {
@@ -42,35 +71,6 @@ class Screen(val printer: ColourPrinter) {
 
         lines.add(Pair(C, indicesCorrection))
         lines.add(Pair(C, fullCorrection))
-    }
-
-    fun awaitAnswer(source: BufferedReader): Text {
-        val readLine = source.readLine()
-        return if (readLine == null) {
-            NullText
-        } else {
-            Text(readLine)
-        }
-    }
-
-    fun showAnswerCorrect() {
-        answerText()?.setAllGreen()
-    }
-
-    fun showAnswerEntirelyIncorrect() {
-        answerText()?.setAllRed()
-    }
-
-    fun showAnswerIncorrectIndices(indices: Set<Int>) {
-        val answerText = answerText()
-        if (answerText != null) {
-            answerText.setAllGreen()
-            answerText.setRed(indices)
-        }
-    }
-
-    private fun answerText(): Text? {
-        return lines.find({ (label, _) -> label == A })?.second
     }
 }
 
