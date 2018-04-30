@@ -21,7 +21,7 @@ class Lesson(val s: Screen, val qs: Questions) {
             s.clear()
         }
         val endTime = Calendar.getInstance().time.time
-        s.showLessonDuration(((endTime - startTime).toDouble() / 1000))
+        s.showLessonDuration((endTime - startTime).toDouble() / 1000)
         s.print()
         s.clear()
         s.close()
