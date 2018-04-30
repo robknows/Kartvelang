@@ -5,6 +5,7 @@ import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.*
 
 fun main(args: Array<String>) {
     val colourPrinter = ColourPrinter()
@@ -39,6 +40,7 @@ fun printTitle(colourPrinter: ColourPrinter) {
 
 fun lesson(s: Screen, qs: Questions) {
     val inputStreamReader = InputStreamReader(System.`in`)
+    val startTime = Calendar.getInstance().time.time
     while (!qs.empty()) {
         val q = qs.pop()
         s.showQuestion(q)
@@ -61,5 +63,7 @@ fun lesson(s: Screen, qs: Questions) {
         s.awaitKeyPress(Key.ENTER)
         s.clear()
     }
+    val endTime = Calendar.getInstance().time.time
+    println("Lesson time: " + ((endTime - startTime).toDouble() / 1000).toString() + " seconds")
     inputStreamReader.close()
 }
