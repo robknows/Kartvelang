@@ -1,5 +1,5 @@
 /*Created on 29/04/18. */
-class ColourPrinter {
+open class ColourPrinter {
     fun printRed(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;196m$s'").start()
         val readLine = proc.inputStream.bufferedReader().readLine()
@@ -29,12 +29,12 @@ class ColourPrinter {
         println()
     }
 
-    fun printlnGreen(s: String) {
+    open fun printlnGreen(s: String) {
         printGreen(s)
         println()
     }
 
-    fun printlnWhite(s: String) {
+    open fun printlnWhite(s: String) {
         printWhite(s)
         println()
     }

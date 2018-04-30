@@ -27,7 +27,9 @@ fun main(args: Array<String>) {
     qs.add(Question("Type \"doremi\"", "doremi"))
     qs.add(Question("Type \"onetwothree\"", "onetwothree"))
 
-    lesson(s, qs)
+    val lesson = Lesson(s, qs)
+
+    lesson.start()
 
     System.exit(0)
 }
@@ -38,32 +40,4 @@ fun printTitle(colourPrinter: ColourPrinter) {
     colourPrinter.printGreen("tve")
     colourPrinter.printWhite("lang")
     colourPrinter.printlnBlue(" ===")
-}
-
-fun lesson(s: Screen, qs: Questions) {
-    val startTime = Calendar.getInstance().time.time
-    while (!qs.empty()) {
-        val q = qs.pop()
-        s.showQuestion(q)
-        s.print()
-        val a = s.awaitAnswer().toString()
-        s.showAnswer(a)
-        val mark = q.markAnswer(a)
-        if (mark.correct) {
-            s.showAnswerCorrect()
-            s.print()
-        } else {
-            val errorIndices = mark.errorIndices
-            s.showAnswerIncorrectIndices(errorIndices)
-            s.showCorrection(q, errorIndices)
-            s.print()
-            s.awaitCorrection(q)
-            qs.insertDelayed(q)
-        }
-        s.awaitKeyPress(Key.ENTER)
-        s.clear()
-    }
-    val endTime = Calendar.getInstance().time.time
-    println("Lesson time: " + ((endTime - startTime).toDouble() / 1000).toString() + " seconds")
-    s.close()
 }

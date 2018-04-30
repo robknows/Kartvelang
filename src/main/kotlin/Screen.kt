@@ -101,6 +101,10 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
     fun close() {
         input.close()
     }
+
+    fun showLessonDuration(seconds: Double) {
+        printer.printlnWhite("Lesson time: " + seconds.toString() + " seconds")
+    }
 }
 
 enum class LineLabel {
