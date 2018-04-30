@@ -17,9 +17,11 @@ class Lesson(val s: Screen, val qs: Questions) {
             } else {
                 val errorIndices = mark.errorIndices
                 s.showAnswerIncorrectIndices(errorIndices)
-                s.showCorrection(q, errorIndices)
+                s.showCorrection(q.answerText, errorIndices)
                 s.print()
-                s.awaitCorrection(q)
+                s.awaitCorrection(q.answerText)
+            }
+            if (!mark.correct) {
                 qs.insertDelayed(q)
             }
             s.awaitKeyPress(Key.ENTER)

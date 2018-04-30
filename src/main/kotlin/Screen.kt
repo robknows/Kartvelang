@@ -33,9 +33,9 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
-    fun awaitCorrection(q: Question) {
+    fun awaitCorrection(correctAnswer: String) {
         printer.printlnWhite("Type out the correct answer:")
-        while (input.readLine()!! != q.answerText) {}
+        while (input.readLine()!! != correctAnswer) {}
     }
 
     fun awaitKeyPress(key: Key) {
@@ -75,8 +75,8 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
-    fun showCorrection(q: Question, errorIndices: Set<Int>) {
-        val indicesCorrection = Text(q.answerText.mapIndexed({ i, c ->
+    fun showCorrection(correctAnswer: String, errorIndices: Set<Int>) {
+        val indicesCorrection = Text(correctAnswer.mapIndexed({ i, c ->
             if (i in errorIndices) {
                 c
             } else {
@@ -85,7 +85,7 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }).joinToString(separator = ""))
         indicesCorrection.baseColour = Colour.B
 
-        val fullCorrection = Text("correct answer: " + q.answerText)
+        val fullCorrection = Text("correct answer: $correctAnswer")
         fullCorrection.baseColour = Colour.W
         fullCorrection.overlayColour = Colour.B
         fullCorrection.overlayIndices = (0..15).toMutableSet()

@@ -6,7 +6,7 @@ import java.io.BufferedReader
 import java.io.StringReader
 
 class LessonTest {
-    @Test(timeout = 950)
+    @Test(timeout = 1000)
     fun canCompleteSimpleLesson() {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
@@ -24,5 +24,6 @@ class LessonTest {
 
         verify(mockPrinter, times(24)).printlnWhite(Matchers.anyString())
         verify(mockPrinter, times(3)).printlnGreen(Matchers.anyString())
+        verify(mockPrinter, never()).printlnRed(Matchers.anyString())
     }
 }

@@ -24,7 +24,7 @@ open class ColourPrinter {
         print(readLine)
     }
 
-    fun printlnRed(s: String) {
+    open fun printlnRed(s: String) {
         printRed(s)
         println()
     }
