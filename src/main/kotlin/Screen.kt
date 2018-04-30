@@ -1,11 +1,8 @@
 /*Created on 29/04/18. */
 import LineLabel.*
-import org.jnativehook.GlobalScreen
-import org.jnativehook.keyboard.NativeKeyEvent
-import org.jnativehook.keyboard.NativeKeyListener
 import java.io.BufferedReader
 
-class Screen(val printer: ColourPrinter) {
+class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
 
     override fun toString(): String {
@@ -33,9 +30,9 @@ class Screen(val printer: ColourPrinter) {
         while (source.readLine()!! != q.answerText) {}
     }
 
-    fun awaitContinue() {
-        printer.printlnWhite("Press enter to continue")
-        KeyWaiter(NativeKeyEvent.VC_ENTER).await()
+    fun awaitKeyPress(key: Key) {
+        printer.printlnWhite("Press " + key.name.toLowerCase() + " to continue")
+        keyWaiter.await(key.keyCode)
     }
 
     private fun answerText(): Text? {
@@ -90,38 +87,4 @@ enum class LineLabel {
     Q, // Question
     A, // Answer
     C  // Correction
-}
-
-class KeyWaiter(private val keyCode: Int) {
-    private class KeyListener(private val keyCode: Int, @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") private val lock: Object) : NativeKeyListener {
-        override fun nativeKeyPressed(e: NativeKeyEvent?) {
-            if (e != null) {
-                if (e.keyCode == keyCode) {
-                    synchronized(lock) {
-                        lock.notifyAll()
-                    }
-                }
-            }
-        }
-
-        override fun nativeKeyReleased(e: NativeKeyEvent?) {}
-
-        override fun nativeKeyTyped(e: NativeKeyEvent?) {}
-    }
-
-    fun await() {
-        try {
-            val lock = java.lang.Object()
-            val keyListener = KeyListener(keyCode, lock)
-            GlobalScreen.addNativeKeyListener(keyListener)
-            synchronized(lock) {
-                lock.wait()
-            }
-            GlobalScreen.removeNativeKeyListener(keyListener)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            println("Exiting")
-            System.exit(1)
-        }
-    }
 }

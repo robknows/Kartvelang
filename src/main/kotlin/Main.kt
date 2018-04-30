@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
         System.exit(1)
     }
 
-    val s = Screen(colourPrinter)
+    val s = Screen(colourPrinter, KeyWaiter())
     val q = Question("Translate \"thanks\"", "გმადლობ")
 
     s.showQuestion(q)
@@ -40,6 +40,6 @@ fun main(args: Array<String>) {
         s.print()
         s.awaitCorrection(q, BufferedReader(InputStreamReader(System.`in`)))
     }
-    s.awaitContinue()
+    s.awaitKeyPress(Key.ENTER)
     System.exit(0)
 }
