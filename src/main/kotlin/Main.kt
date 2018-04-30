@@ -26,14 +26,6 @@ fun main(args: Array<String>) {
 
     lesson(s, qs)
 
-//    val bufferedInput = BufferedReader(InputStreamReader(System.`in`))
-//    var line = bufferedInput.readLine()
-//    while (line != null) {
-//        colourPrinter.printlnWhite(line)
-//        line = bufferedInput.readLine()
-//    }
-
-
     System.exit(0)
 }
 
