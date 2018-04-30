@@ -2,7 +2,7 @@
 import java.util.*
 
 class Lesson(val s: Screen, val qs: Questions) {
-    fun start(): LessonResults {
+    fun complete(): LessonResults {
         var mistakes = 0
         var answered = 0
         val startTime = Calendar.getInstance().time.time

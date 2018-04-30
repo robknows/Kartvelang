@@ -27,7 +27,7 @@ fun main(args: Array<String>) {
     qs.add(Question("Type \"onetwothree\"", "onetwothree"))
     val lesson = Lesson(s, qs)
 
-    val results = lesson.start()
+    val results = lesson.complete()
     s.showLessonAccuracy(results.accuracyPc)
     s.showLessonDuration(results.timeSeconds)
     s.print()
