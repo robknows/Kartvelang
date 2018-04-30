@@ -29,7 +29,6 @@ while not questions.empty() {
     questions.insert_delayed_repetition(q);
   }
   screen.update_text();
-  screen.enable_continue();
   screen.await_continue();
   screen.clear();
 }
