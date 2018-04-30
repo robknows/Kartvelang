@@ -35,19 +35,7 @@ class Screen(val printer: ColourPrinter) {
 
     fun awaitContinue() {
         printer.printlnWhite("Press enter to continue")
-        try {
-            val lock = java.lang.Object()
-            val keyListener = KeyListener(lock)
-            GlobalScreen.addNativeKeyListener(keyListener)
-            synchronized(lock) {
-                lock.wait()
-            }
-            GlobalScreen.removeNativeKeyListener(keyListener)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            println("Exiting")
-            System.exit(1)
-        }
+        KeyWaiter(NativeKeyEvent.VC_ENTER).await()
     }
 
     private fun answerText(): Text? {
@@ -104,18 +92,36 @@ enum class LineLabel {
     C  // Correction
 }
 
-class KeyListener(@Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") private val lock: Object) : NativeKeyListener {
-    override fun nativeKeyPressed(e: NativeKeyEvent?) {
-        if (e != null) {
-            if (e.keyCode == NativeKeyEvent.VC_ENTER) {
-                synchronized(lock) {
-                    lock.notifyAll()
+class KeyWaiter(private val keyCode: Int) {
+    private class KeyListener(private val keyCode: Int, @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") private val lock: Object) : NativeKeyListener {
+        override fun nativeKeyPressed(e: NativeKeyEvent?) {
+            if (e != null) {
+                if (e.keyCode == keyCode) {
+                    synchronized(lock) {
+                        lock.notifyAll()
+                    }
                 }
             }
         }
+
+        override fun nativeKeyReleased(e: NativeKeyEvent?) {}
+
+        override fun nativeKeyTyped(e: NativeKeyEvent?) {}
     }
 
-    override fun nativeKeyReleased(e: NativeKeyEvent?) {}
-
-    override fun nativeKeyTyped(e: NativeKeyEvent?) {}
+    fun await() {
+        try {
+            val lock = java.lang.Object()
+            val keyListener = KeyListener(keyCode, lock)
+            GlobalScreen.addNativeKeyListener(keyListener)
+            synchronized(lock) {
+                lock.wait()
+            }
+            GlobalScreen.removeNativeKeyListener(keyListener)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            println("Exiting")
+            System.exit(1)
+        }
+    }
 }
