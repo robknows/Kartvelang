@@ -11,23 +11,15 @@ fun main(args: Array<String>) {
 
     printTitle(printer)
 
-    try {
-        GlobalScreen.registerNativeHook()
-    } catch (ex: NativeHookException) {
-        println("Couldn't create keyboard hook")
-        System.exit(1)
-    }
-
     val input = BufferedReader(InputStreamReader(System.`in`))
     val s = Screen(printer, KeyWaiter(), input)
 
-    val qs = Questions()
-    qs.add(Question("Type \"abc\"", "abc"))
-    qs.add(Question("Type \"doremi\"", "doremi"))
-    qs.add(Question("Type \"onetwothree\"", "onetwothree"))
+    val qs = Questions(args[0])
+
     val lesson = Lesson(s, qs)
 
     val results = lesson.complete()
+
     s.showPostLessonInfo(results.accuracyPc, results.timeSeconds, randomHint())
     s.print()
     s.clear()
@@ -45,4 +37,13 @@ fun printTitle(printer: ColourPrinter) {
 
 fun randomHint(): String {
     return "All nominative nouns in Georgian end in a vowel"
+}
+
+fun registerKeyboardHook() {
+    try {
+        GlobalScreen.registerNativeHook()
+    } catch (ex: NativeHookException) {
+        println("Couldn't create keyboard hook")
+        System.exit(1)
+    }
 }

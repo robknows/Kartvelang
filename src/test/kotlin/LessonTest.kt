@@ -30,7 +30,7 @@ class LessonTest {
     }
 
     @Test(timeout = 1000)
-    fun canGetAccuracyPc() {
+    fun canGetLessonResults() {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
@@ -46,6 +46,25 @@ class LessonTest {
         val lessonResults = lesson.complete()
 
         assertEquals(75.0, lessonResults.accuracyPc)
+        assertTrue(lessonResults.timeSeconds < 1.0)
+        assertTrue(lessonResults.timeSeconds > 0.0)
+    }
+
+    @Test(timeout = 1000)
+    fun canCompleteLoadedGreetingsLesson() {
+        val mockPrinter = mock(ColourPrinter::class.java)
+        val mockKeyWaiter = mock(KeyWaiter::class.java)
+        val input = BufferedReader(StringReader("გმადლობ\n\nგამარჯობა\n\nსასიამოვნუა\n\nროგორ ხარ?\n\nკარგად\n\n"))
+        val s = Screen(mockPrinter, mockKeyWaiter, input)
+
+        val filename = "../../src/test/resources/questions_loader_test_1.json"
+        val qs = Questions(filename)
+
+        val lesson = Lesson(s, qs)
+
+        val lessonResults = lesson.complete()
+
+        assertEquals(100.0, lessonResults.accuracyPc)
         assertTrue(lessonResults.timeSeconds < 1.0)
         assertTrue(lessonResults.timeSeconds > 0.0)
     }
