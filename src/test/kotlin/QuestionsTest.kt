@@ -123,4 +123,17 @@ class QuestionsTest {
         assertTrue(questions.set.containsAll(setOf(q1, q2, q3, q4, q5, q6, q7, q8)))
         assertEquals(9, questions.count())
     }
+
+    @Test
+    fun canLoadQuestionsFromFile() {
+        val filename = "../../src/test/resources/questions_loader_test_1.json"
+        val qs = Questions(filename)
+
+        assertEquals("გმადლობ",     qs.set[0].answerText)
+        assertEquals("გამარჯობა",   qs.set[1].answerText)
+        assertEquals("სასიამოვნუა", qs.set[2].answerText)
+        assertEquals("როგორ ხარ?",  qs.set[3].answerText)
+        assertEquals("კარგად",      qs.set[4].answerText)
+        assertEquals(5, qs.count())
+    }
 }
