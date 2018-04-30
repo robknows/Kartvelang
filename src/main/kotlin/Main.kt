@@ -25,4 +25,5 @@ fun main(args: Array<String>) {
     s.showAnswerIncorrectIndices(errorIndices)
     s.showCorrection(q, errorIndices)
     s.print()
+    s.awaitCorrection(q, BufferedReader(InputStreamReader(System.`in`)))
 }
