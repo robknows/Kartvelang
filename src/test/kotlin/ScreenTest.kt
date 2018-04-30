@@ -1,9 +1,9 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 import java.io.BufferedReader
+import java.io.StringReader
 
 class ScreenTest {
     val s = Screen(ColourPrinter())
@@ -88,5 +88,24 @@ class ScreenTest {
         s.showCorrection(q, mutableSetOf(6))
 
         assertEquals("Translate 'thanks'\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", s.toString())
+    }
+
+    @Test(timeout = 700)
+    fun canAwaitCorrection() {
+        val mockBufferedReader = mock(BufferedReader::class.java)
+        doReturn("გმადლობ").`when`(mockBufferedReader).readLine()
+        val q = Question("Translate 'thanks'", "გმადლობ")
+
+        s.awaitCorrection(q, mockBufferedReader)
+
+        verify(mockBufferedReader, times(1)).readLine()
+    }
+
+    @Test
+    fun canAwaitCorrectionAfterMultipleAttempts() {
+        val input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
+        val q = Question("Translate 'thanks'", "გმადლობ")
+
+        s.awaitCorrection(q, input)
     }
 }

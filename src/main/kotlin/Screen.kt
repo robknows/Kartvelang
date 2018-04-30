@@ -26,6 +26,10 @@ class Screen(val printer: ColourPrinter) {
         }
     }
 
+    fun awaitCorrection(q: Question, source: BufferedReader) {
+        while (source.readLine()!! != q.answerText) {}
+    }
+
     private fun answerText(): Text? {
         return lines.find({ (label, _) -> label == A })?.second
     }
