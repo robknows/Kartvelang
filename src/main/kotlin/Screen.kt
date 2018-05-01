@@ -55,7 +55,7 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
     }
 
     fun showTranslateQuestion(q: TranslateQuestion) {
-        lines.add(Pair(Q, Text("Translate \"${q.english}\"")))
+        lines.add(Pair(Q, Text("Translate \"${q.given}\"")))
     }
 
     private fun answerText(): Text? {

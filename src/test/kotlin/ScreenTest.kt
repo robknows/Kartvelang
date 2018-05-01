@@ -94,7 +94,7 @@ class ScreenTest {
         s.showTranslateQuestion(q)
         s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
-        s.showCorrection(q.georgian, mutableSetOf(6))
+        s.showCorrection(q.answer, mutableSetOf(6))
 
         assertEquals("Translate \"thanks\"\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", s.toString())
     }
@@ -104,7 +104,7 @@ class ScreenTest {
         doReturn("გმადლობ").`when`(mockBufferedReader).readLine()
         val q = TranslateQuestion("thanks", "გმადლობ")
 
-        s.awaitCorrection(q.georgian)
+        s.awaitCorrection(q.answer)
 
         verify(mockBufferedReader).readLine()
         verify(mockPrinter).printlnWhite("Type out the correct answer:")
@@ -115,7 +115,7 @@ class ScreenTest {
         s.input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
         val q = TranslateQuestion("thanks", "გმადლობ")
 
-        s.awaitCorrection(q.georgian)
+        s.awaitCorrection(q.answer)
     }
 
     @Test
@@ -125,7 +125,7 @@ class ScreenTest {
         s.showTranslateQuestion(q)
         s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
-        s.showCorrection(q.georgian, mutableSetOf(6))
+        s.showCorrection(q.answer, mutableSetOf(6))
         s.clear()
 
         assertEquals("", s.toString())

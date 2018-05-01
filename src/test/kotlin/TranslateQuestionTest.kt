@@ -44,7 +44,7 @@ class TranslateQuestionTest {
     fun canFillInProduction() {
         val q = Productions.introduction(greeting_hello, name_Keti)
 
-        TestCase.assertEquals("hello, I am called Keti", q.english)
-        TestCase.assertEquals("გამარჯობა, მე მქვია ქეთი", q.georgian)
+        TestCase.assertEquals("hello, I am called Keti", q.given)
+        TestCase.assertEquals("გამარჯობა, მე მქვია ქეთი", q.answer)
     }
 }

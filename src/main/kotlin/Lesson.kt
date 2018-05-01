@@ -16,7 +16,7 @@ class Lesson(val s: Screen, val qs: Questions) {
             s.showMarkedAnswer(mark)
             if (!mark.correct) {
                 qs.insertDelayed(q)
-                s.awaitCorrection(q.georgian)
+                s.awaitCorrection(q.answer)
                 mistakes++
             }
             s.awaitKeyPress(Key.ENTER)
