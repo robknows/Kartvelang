@@ -1,0 +1,42 @@
+[
+  {
+    "tag": "greeting",
+    "english": "hello",
+    "georgian": "გამარჯობა"
+  },
+  {
+    "tag": "greeting",
+    "english": "nice to meet you",
+    "georgian": "სასიამოვნუა"
+  },
+  {
+    "tag": "phrase",
+    "english": "what are you called",
+    "georgian": "შენ რა გქვია"
+  },
+  {
+    "tag": "name",
+    "english": "Keti",
+    "georgian": "ქეთი"
+  },
+  {
+    "tag": "phrase",
+    "english": "how are you",
+    "georgian": "როგორ ხარ"
+  },
+  {
+    "tag": "mood",
+    "english": "alright",
+    "georgian": "კარგად"
+  },
+  {
+    "tag": "mood",
+    "english": "not bad",
+    "georgian": "არამიშავს"
+  },
+  {
+    "tag": "farewell",
+    "english": "see you soon",
+    "georgian": "ნახვამდის"
+  }
+]
