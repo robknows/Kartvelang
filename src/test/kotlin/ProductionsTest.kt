@@ -9,6 +9,8 @@ class ProductionsTest {
     val greeting_hello = Word("hello", "გამარჯობა")
     val greeting_nicetomeetyou = Word("nice to meet you", "სასიამოვნოა")
 
+    val farewell_seeyousoon = Word("see you soon", "ნახვამდის")
+
     val name_Keti = Word("Keti", "ქეთი")
 
     val phrase_whatareyoucalled = Word("what are you called", "შენ რა გქვია")
@@ -28,6 +30,14 @@ class ProductionsTest {
 
         TestCase.assertEquals("hello, I am called Keti", q.given)
         TestCase.assertEquals("გამარჯობა, მე მქვია ქეთი", q.answer)
+    }
+
+    @Test
+    fun canProduceFarewell() {
+        val q = p.farewell(farewell_seeyousoon, name_Keti)
+
+        TestCase.assertEquals("see you soon Keti", q.given)
+        TestCase.assertEquals("ნახვამდის ქეთი", q.answer)
     }
 
     @Test

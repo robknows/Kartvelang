@@ -18,6 +18,10 @@ class Productions {
     fun introduction(greeting: Word, name: Word): TranslateQuestion {
         return TranslateQuestion("${greeting.english}, I am called ${name.english}", "${greeting.georgian}, მე მქვია ${name.georgian}")
     }
+
+    fun farewell(farewell: Word, name: Word): TranslateQuestion {
+        return TranslateQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
+    }
 }
 
 private fun <E> MutableList<E>.concatList(phrases: Collection<E>): MutableList<E> {
