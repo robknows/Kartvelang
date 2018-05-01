@@ -139,12 +139,11 @@ class QuestionsTest {
 
     @Test
     fun canConstructQuestionsFromCollectionOfTranslateQuestion() {
-        val greeting_hello = Word("hello", "გამარჯობა")
-        val greeting_nicetomeetyou = Word("nice to meet you", "სასიამოვნოა")
-        val name_Keti = Word("Keti", "ქეთი")
-        val p = Productions()
+        val q1 = TranslateQuestion("What is 2+1?", "3")
+        val q2 = TranslateQuestion("What is 2+2?", "4")
+        val q3 = TranslateQuestion("What is 2+3?", "5")
 
-        val questions = listOf(greeting_hello, greeting_nicetomeetyou, name_Keti).map(p::dictionary)
+        val questions = listOf(q1, q2, q3)
         val qs = Questions(questions)
 
         assertEquals(questions, qs.set)
