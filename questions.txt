@@ -1,0 +1,5 @@
+productions with names:
+=> randomly choose from the available list of names
+
+productions with possible 'thanks':
+=> randomly put them in
