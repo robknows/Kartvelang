@@ -2,7 +2,11 @@
 open class TranslateQuestion(val given: String, val answer: String) {
     fun markAnswer(attempt: String): Mark {
         val correct = answer == attempt
-        val diff = diffWord(attempt)
+        val diff = if (answer.length == attempt.length) {
+            diffWord(attempt)
+        } else {
+            (0..(attempt.length - 1)).toSet()
+        }
         return Mark(correct, diff, answer)
     }
 

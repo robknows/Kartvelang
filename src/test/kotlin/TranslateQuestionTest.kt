@@ -47,4 +47,13 @@ class TranslateQuestionTest {
         TestCase.assertEquals("def", q.given)
         TestCase.assertEquals("abc", q.answer)
     }
+
+    @Test
+    fun canMarkAnIncorrectAnswerOfDifferentLength() {
+        val q = TranslateQuestion("abc", "def")
+
+        val mark = q.markAnswer("memes")
+
+        TestCase.assertEquals(setOf(0, 1, 2, 3, 4), mark.errorIndices)
+    }
 }
