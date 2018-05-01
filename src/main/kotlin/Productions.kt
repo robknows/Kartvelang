@@ -1,14 +1,19 @@
 /*Created on 01/05/18. */
 class Productions {
-    fun introductionQuestions(greetings: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslateQuestion> {
-        val directTranslations = greetings.toMutableList().concatList(phrases).map(this::dictionary)
-        val introductions = mutableListOf<TranslateQuestion>()
-        for (greeting in greetings) {
-            for (name in names) {
-                introductions.add(introduction(greeting, name))
+    fun introductionQuestions(greetings: List<Word>, farewells: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslateQuestion> {
+        val directTranslations = concat(greetings, phrases, farewells).map(this::dictionary)
+
+        val greetingsTranslations = mutableListOf<TranslateQuestion>()
+        val farewellsTranslations = mutableListOf<TranslateQuestion>()
+        for (name in names) {
+            for (greeting in greetings) {
+                greetingsTranslations.add(introduction(greeting, name))
+            }
+            for (farewell in farewells) {
+                farewellsTranslations.add(farewell(farewell, name))
             }
         }
-        return introductions.concatList(directTranslations)
+        return concat(directTranslations, greetingsTranslations, farewellsTranslations)
     }
 
     fun dictionary(w: Word): TranslateQuestion {
@@ -27,4 +32,8 @@ class Productions {
 private fun <E> MutableList<E>.concatList(phrases: Collection<E>): MutableList<E> {
     addAll(phrases)
     return this
+}
+
+private fun <E> concat(vararg c: List<E>): List<E> {
+    return c.map({ l -> l.toMutableList() }).reduce({ acc, nxt -> acc.concatList(nxt) }).toList()
 }

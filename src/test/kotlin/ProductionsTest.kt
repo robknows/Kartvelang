@@ -43,21 +43,25 @@ class ProductionsTest {
     @Test
     fun canAssembleIntroductionQuestions() {
         val greetings = listOf(greeting_hello, greeting_nicetomeetyou)
+        val farewells = listOf(farewell_seeyousoon)
         val names = listOf(name_Keti)
         val phrases = listOf(phrase_whatareyoucalled)
 
-        val qs = p.introductionQuestions(greetings, names, phrases)
+        val qs = p.introductionQuestions(greetings, farewells, names, phrases)
 
-        val q1 = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
-        val q2 = TranslateQuestion("nice to meet you, I am called Keti", "სასიამოვნოა, მე მქვია ქეთი")
-        val q3 = TranslateQuestion("hello", "გამარჯობა")
-        val q4 = TranslateQuestion("nice to meet you", "სასიამოვნოა")
-        val q5 = TranslateQuestion("what are you called", "შენ რა გქვია")
-        val expected = listOf(q1, q2, q3, q4, q5)
+        val q1 = TranslateQuestion("hello", "გამარჯობა")
+        val q2 = TranslateQuestion("nice to meet you", "სასიამოვნოა")
+        val q3 = TranslateQuestion("what are you called", "შენ რა გქვია")
+        val q4 = TranslateQuestion("see you soon", "ნახვამდის")
+        val q5 = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+        val q6 = TranslateQuestion("nice to meet you, I am called Keti", "სასიამოვნოა, მე მქვია ქეთი")
+        val q7 = TranslateQuestion("see you soon Keti", "ნახვამდის ქეთი")
+        val expected = listOf(q1, q2, q3, q4, q5, q6, q7)
 
-        for (i in 0..4) {
+        for (i in 0..6) {
             assertEquals(expected[i].given, qs[i].given)
             assertEquals(expected[i].answer, qs[i].answer)
         }
+        assertEquals(7, qs.count())
     }
 }
