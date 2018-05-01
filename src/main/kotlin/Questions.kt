@@ -49,3 +49,12 @@ class Questions {
         }
     }
 }
+
+fun elevator_smalltalk(): Questions {
+    val p = Productions()
+    return Questions(p.introductionQuestions(
+            listOf(greeting_hello, greeting_nicetomeetyou),
+            listOf(farewell_seeyousoon),
+            listOf(name_Keti),
+            listOf(phrase_whatareyoucalled, mood_alright, mood_notbad)))
+}
