@@ -13,8 +13,13 @@ fun main(args: Array<String>) {
 
     val input = BufferedReader(InputStreamReader(System.`in`))
     val s = Screen(printer, KeyWaiter(), input)
+    val p = Productions()
 
-    val qs = Questions(args[0])
+    val qs = Questions(p.introductionQuestions(
+            listOf(greeting_hello, greeting_nicetomeetyou),
+            listOf(farewell_seeyousoon),
+            listOf(name_Keti),
+            listOf(phrase_whatareyoucalled, mood_alright, mood_notbad)))
 
     val lesson = Lesson(s, qs)
 
