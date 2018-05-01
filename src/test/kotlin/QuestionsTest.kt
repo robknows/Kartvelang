@@ -125,19 +125,6 @@ class QuestionsTest {
     }
 
     @Test
-    fun canLoadQuestionsFromFile() {
-        val filename = "../../src/test/resources/questions_loader_test_1.json"
-        val qs = Questions(filename)
-
-        assertEquals("გმადლობ",     qs.set[0].answer)
-        assertEquals("გამარჯობა",   qs.set[1].answer)
-        assertEquals("სასიამოვნუა", qs.set[2].answer)
-        assertEquals("როგორ ხარ?",  qs.set[3].answer)
-        assertEquals("კარგად",      qs.set[4].answer)
-        assertEquals(5, qs.count())
-    }
-
-    @Test
     fun canConstructQuestionsFromCollectionOfTranslateQuestion() {
         val q1 = TranslateQuestion("What is 2+1?", "3")
         val q2 = TranslateQuestion("What is 2+2?", "4")

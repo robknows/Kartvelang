@@ -1,22 +1,9 @@
 /*Created on 29/04/18. */
-import org.json.JSONArray
-import java.io.File
 
 class Questions {
     val set: MutableList<TranslateQuestion> = mutableListOf()
 
     constructor()
-    constructor(filename: String) {
-        val bufferedReader = File(filename).inputStream().reader().buffered()
-        val text = bufferedReader.readText()
-        bufferedReader.close()
-
-        val jsonQuestions = JSONArray(text)
-        for (i in 0..(jsonQuestions.length() - 1)) {
-            val q = jsonQuestions.getJSONObject(i)
-            set.add(TranslateQuestion(q.getString("question"), q.getString("answer")))
-        }
-    }
     constructor(qs: Collection<TranslateQuestion>) {
         set.addAll(qs)
     }
