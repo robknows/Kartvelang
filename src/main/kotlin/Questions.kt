@@ -56,5 +56,5 @@ fun elevator_smalltalk(): Questions {
             listOf(greeting_hello, greeting_nicetomeetyou),
             listOf(farewell_seeyousoon),
             listOf(name_Keti),
-            listOf(phrase_whatareyoucalled, mood_alright, mood_notbad)))
+            listOf(phrase_whatareyoucalled, phrase_howareyou, mood_alright, mood_notbad)))
 }

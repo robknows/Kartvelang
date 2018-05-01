@@ -9,6 +9,7 @@ val farewell_seeyousoon = Word("see you soon", "ნახვამდის")
 val name_Keti = Word("Keti", "ქეთი")
 
 val phrase_whatareyoucalled = Word("what are you called", "შენ რა გქვია")
+val phrase_howareyou = Word("how are you", "როგორ ხარ")
 
 val mood_notbad = Word("not bad", "არამიშავს")
 val mood_alright = Word("alright", "ნახვამდის")
