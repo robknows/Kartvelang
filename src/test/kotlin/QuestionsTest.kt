@@ -136,4 +136,17 @@ class QuestionsTest {
         assertEquals("კარგად",      qs.set[4].answer)
         assertEquals(5, qs.count())
     }
+
+    @Test
+    fun canConstructQuestionsFromCollectionOfTranslateQuestion() {
+        val greeting_hello = Word("hello", "გამარჯობა")
+        val greeting_nicetomeetyou = Word("nice to meet you", "სასიამოვნოა")
+        val name_Keti = Word("Keti", "ქეთი")
+        val p = Productions()
+
+        val questions = listOf(greeting_hello, greeting_nicetomeetyou, name_Keti).map(p::dictionary)
+        val qs = Questions(questions)
+
+        assertEquals(questions, qs.set)
+    }
 }

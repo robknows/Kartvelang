@@ -17,6 +17,9 @@ class Questions {
             set.add(TranslateQuestion(q.getString("question"), q.getString("answer")))
         }
     }
+    constructor(qs: Collection<TranslateQuestion>) {
+        set.addAll(qs)
+    }
 
     fun add(question: TranslateQuestion) {
         set.add(question)
