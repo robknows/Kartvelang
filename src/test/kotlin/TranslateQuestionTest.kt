@@ -1,11 +1,12 @@
 /*Created on 29/04/18. */
+import junit.framework.TestCase
 import junit.framework.TestCase.*
 import org.junit.Test
 
-class QuestionTest {
+class TranslateQuestionTest {
     @Test
     fun canRecogniseIncorrectAnswer() {
-        val q = Question("Translate 'thanks'", "გმადლობ")
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლომ")
 
@@ -14,7 +15,7 @@ class QuestionTest {
 
     @Test
     fun canRecogniseCorrectAnswer() {
-        val q = Question("Translate 'thanks'", "გმადლობ")
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლობ")
 
@@ -23,7 +24,7 @@ class QuestionTest {
 
     @Test
     fun canDiffAnIncorrectWord() {
-        val q = Question("Translate 'thanks'", "გმადლობ")
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლომ")
 
@@ -32,10 +33,18 @@ class QuestionTest {
 
     @Test
     fun canDiffAnCorrectWord() {
-        val q = Question("Translate 'thanks'", "გმადლობ")
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლობ")
 
         assertEquals(0, mark.errorIndices.count())
+    }
+
+    @Test
+    fun canFillInProduction() {
+        val q = Productions.introduction(greeting_hello, name_Keti)
+
+        TestCase.assertEquals("hello, I am called Keti", q.english)
+        TestCase.assertEquals("გამარჯობა, მე მქვია ქეთი", q.georgian)
     }
 }

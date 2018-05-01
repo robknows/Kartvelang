@@ -16,9 +16,9 @@ class LessonTest {
         val s = Screen(mockPrinter, mockKeyWaiter, input)
 
         val qs = Questions()
-        qs.add(Question("Type \"abc\"", "abc"))
-        qs.add(Question("Type \"doremi\"", "doremi"))
-        qs.add(Question("Type \"onetwothree\"", "onetwothree"))
+        qs.add(TranslateQuestion("Type \"abc\"", "abc"))
+        qs.add(TranslateQuestion("Type \"doremi\"", "doremi"))
+        qs.add(TranslateQuestion("Type \"onetwothree\"", "onetwothree"))
 
         val lesson = Lesson(s, qs)
 
@@ -37,9 +37,9 @@ class LessonTest {
         val s = Screen(mockPrinter, mockKeyWaiter, input)
 
         val qs = Questions()
-        qs.add(Question("Type \"abc\"", "abc"))
-        qs.add(Question("Type \"doremi\"", "doremi"))
-        qs.add(Question("Type \"onetwothree\"", "onetwothree"))
+        qs.add(TranslateQuestion("Type \"abc\"", "abc"))
+        qs.add(TranslateQuestion("Type \"doremi\"", "doremi"))
+        qs.add(TranslateQuestion("Type \"onetwothree\"", "onetwothree"))
 
         val lesson = Lesson(s, qs)
 

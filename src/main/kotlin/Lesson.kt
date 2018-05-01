@@ -8,7 +8,7 @@ class Lesson(val s: Screen, val qs: Questions) {
         val startTime = Calendar.getInstance().time.time
         while (!qs.empty()) {
             val q = qs.pop()
-            s.showQuestion(q)
+            s.showTranslateQuestion(q)
             s.print()
             val a = s.awaitAnswer().toString()
             s.showAnswer(a)
@@ -16,7 +16,7 @@ class Lesson(val s: Screen, val qs: Questions) {
             s.showMarkedAnswer(mark)
             if (!mark.correct) {
                 qs.insertDelayed(q)
-                s.awaitCorrection(q.answerText)
+                s.awaitCorrection(q.georgian)
                 mistakes++
             }
             s.awaitKeyPress(Key.ENTER)

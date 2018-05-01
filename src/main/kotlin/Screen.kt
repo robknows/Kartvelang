@@ -54,8 +54,8 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
         }
     }
 
-    fun showQuestion(q: Question) {
-        lines.add(Pair(Q, Text(q.questionText)))
+    fun showTranslateQuestion(q: TranslateQuestion) {
+        lines.add(Pair(Q, Text("Translate \"${q.english}\"")))
     }
 
     private fun answerText(): Text? {
@@ -119,7 +119,7 @@ class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaite
 }
 
 enum class LineLabel {
-    Q, // Question
+    Q, // TranslateQuestion
     A, // Answer
     C, // Correction
     I, // Information

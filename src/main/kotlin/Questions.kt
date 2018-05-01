@@ -3,7 +3,7 @@ import org.json.JSONArray
 import java.io.File
 
 class Questions {
-    val set: MutableList<Question> = mutableListOf()
+    val set: MutableList<TranslateQuestion> = mutableListOf()
 
     constructor()
     constructor(filename: String) {
@@ -14,11 +14,11 @@ class Questions {
         val jsonQuestions = JSONArray(text)
         for (i in 0..(jsonQuestions.length() - 1)) {
             val q = jsonQuestions.getJSONObject(i)
-            set.add(Question(q.getString("question"), q.getString("answer")))
+            set.add(TranslateQuestion(q.getString("question"), q.getString("answer")))
         }
     }
 
-    fun add(question: Question) {
+    fun add(question: TranslateQuestion) {
         set.add(question)
     }
 
@@ -26,9 +26,9 @@ class Questions {
         return set.count()
     }
 
-    fun pop(): Question {
+    fun pop(): TranslateQuestion {
         return if (count() < 1) {
-            NullQuestion
+            NullTranslateQuestion
         } else {
             set.removeAt(0)
         }
@@ -38,7 +38,7 @@ class Questions {
         return set.isEmpty()
     }
 
-    fun insertDelayed(q: Question) {
+    fun insertDelayed(q: TranslateQuestion) {
         if (set.count() < 4) {
             add(q)
         } else {
