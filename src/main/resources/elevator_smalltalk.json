@@ -1,9 +1,5 @@
 [
   {
-    "question": "Translate \"Thanks\"",
-    "answer": "გმადლობ"
-  },
-  {
     "question": "Translate \"Hello\"",
     "answer": "გამარჯობა"
   },
@@ -16,7 +12,19 @@
     "answer": "როგორ ხარ?"
   },
   {
-    "question": "Translate \"I am well\"",
+    "question": "Translate \"Alright\"",
     "answer": "კარგად"
+  },
+  {
+    "question": "Translate \"Not bad\"",
+    "answer": "არამიშავს"
+  },
+  {
+    "question": "Translate \"Thanks\"",
+    "answer": "გმადლობ"
+  },
+  {
+    "question": "Translate \"See you soon\"",
+    "answer": "ნახვამდის"
   }
 ]
