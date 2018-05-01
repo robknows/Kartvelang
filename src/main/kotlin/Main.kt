@@ -5,6 +5,7 @@ import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.*
 
 fun main(args: Array<String>) {
     val printer = ColourPrinter()
@@ -34,7 +35,16 @@ fun printTitle(printer: ColourPrinter) {
 }
 
 fun randomHint(): String {
-    return "All nominative nouns in Georgian end in a vowel"
+    val hints = listOf(
+            "All nominative nouns in Georgian end in a vowel",
+            "Georgian has no long vowels",
+            "Nouns whose root ends in a consonant have \"ი\" added to the end in the nominative case",
+            "Georgian uses postpositions rather than prepositions")
+    return hints.randomChoice()
+}
+
+private fun <E> List<E>.randomChoice(): E {
+    return get(Random().nextInt(size))
 }
 
 fun registerKeyboardHook() {
