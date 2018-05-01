@@ -16,6 +16,10 @@ open class TranslateQuestion(val given: String, val answer: String) {
         }
         return indices.toSet()
     }
+
+    fun flipped(): TranslateQuestion {
+        return TranslateQuestion(answer, given)
+    }
 }
 
 object NullTranslateQuestion : TranslateQuestion("", "")

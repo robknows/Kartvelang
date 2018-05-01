@@ -47,4 +47,12 @@ class TranslateQuestionTest {
         TestCase.assertEquals("hello, I am called Keti", q.given)
         TestCase.assertEquals("გამარჯობა, მე მქვია ქეთი", q.answer)
     }
+
+    @Test
+    fun canFlipQuestionAndAnswer() {
+        val q = TranslateQuestion("abc", "def").flipped()
+
+        TestCase.assertEquals("def", q.given)
+        TestCase.assertEquals("abc", q.answer)
+    }
 }
