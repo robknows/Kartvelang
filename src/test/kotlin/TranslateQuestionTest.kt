@@ -49,83 +49,123 @@ class TranslateQuestionTest {
     }
 
     @Test
-    fun canMarkAnIncorrectAnswerOfDifferentLength() {
+    fun canMarkAnIncorrectAnswerThatIsTooLong() {
         val q = TranslateQuestion("abc", "def")
 
-        val mark1 = q.markAnswer("memes")
+        val mark = q.markAnswer("memes")
 
-        TestCase.assertEquals(setOf(0, 1, 2, 3, 4), mark1.errorIndices)
-
-        val mark2 = q.markAnswer("a")
-
-        TestCase.assertEquals(setOf(0, 1, 2), mark2.errorIndices)
+        TestCase.assertEquals(setOf(0, 1, 2, 3, 4), mark.errorIndices)
     }
 
     @Test
-    fun ignoresExcessWhitespaceWhenMarkingSingleWord() {
+    fun canMarkAnIncorrectAnswerThatIsTooShort() {
+        val q = TranslateQuestion("abc", "def")
+
+        val mark = q.markAnswer("a")
+
+        TestCase.assertEquals(setOf(0, 1, 2), mark.errorIndices)
+    }
+
+    @Test
+    fun ignoresExcessWhitespaceAfterAnswer() {
         val q = TranslateQuestion("thanks", "გმადლობ")
 
-        val mark1 = q.markAnswer("გმადლობ   ")
+        val mark = q.markAnswer("გმადლობ   ")
 
-        assertTrue(mark1.correct)
-        assertEquals(0, mark1.errorIndices.count())
-
-        val mark2 = q.markAnswer("    გმადლობ")
-
-        assertTrue(mark2.correct)
-        assertEquals(0, mark2.errorIndices.count())
-
-        val mark3 = q.markAnswer("    გმადლობ    ")
-
-        assertTrue(mark3.correct)
-        assertEquals(0, mark3.errorIndices.count())
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
     }
 
     @Test
-    fun excessWhitespaceDoesntCauseMarkingProblemsForIncorrectAnswers() {
+    fun ignoresExcessWhitespaceBeforeAnswer() {
         val q = TranslateQuestion("thanks", "გმადლობ")
 
-        val mark1 = q.markAnswer("დმადლომ   ")
+        val mark = q.markAnswer("    გმადლობ")
 
-        assertFalse(mark1.correct)
-        assertEquals(setOf(0, 6), mark1.errorIndices)
-
-        val mark2 = q.markAnswer("    დმადლომ")
-
-        assertFalse(mark2.correct)
-        assertEquals(setOf(0, 6), mark2.errorIndices)
-
-        val mark3 = q.markAnswer("    დმადლომ    ")
-
-        assertFalse(mark3.correct)
-        assertEquals(setOf(0, 6), mark3.errorIndices)
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
     }
 
     @Test
-    fun ignoresGrammarWhenMarking() {
-        val q1 = TranslateQuestion("how are you", "როგორ ხარ")
+    fun ignoresExcessWhitespaceOnBothSidesOfAnswer() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
-        val mark1 = q1.markAnswer("როგორ ხარ?")
+        val mark = q.markAnswer("    გმადლობ    ")
 
-        assertTrue(mark1.correct)
-        assertEquals(0, mark1.errorIndices.count())
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
+    }
 
-        val mark2 = q1.markAnswer("როგორ, ხარ")
+    @Test
+    fun excessWhitespaceAfterAnswerDoesntCauseMarkingProblemsForIncorrectAnswers() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
-        assertTrue(mark2.correct)
-        assertEquals(0, mark2.errorIndices.count())
+        val mark = q.markAnswer("დმადლომ   ")
 
-        val mark3 = q1.markAnswer("როგორ ხარ.")
+        assertFalse(mark.correct)
+        assertEquals(setOf(0, 6), mark.errorIndices)
+    }
 
-        assertTrue(mark3.correct)
-        assertEquals(0, mark3.errorIndices.count())
+    @Test
+    fun excessWhitespaceBeforeAnswerDoesntCauseMarkingProblemsForIncorrectAnswers() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
 
-        val q2 = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+        val mark = q.markAnswer("    დმადლომ")
 
-        val mark4 = q2.markAnswer("გამარჯობა მე მქვია ქეთი")
+        assertFalse(mark.correct)
+        assertEquals(setOf(0, 6), mark.errorIndices)
 
-        assertTrue(mark4.correct)
-        assertEquals(0, mark4.errorIndices.count())
+    }
+
+    @Test
+    fun excessWhitespaceBothSidesDoesntCauseMarkingProblemsForIncorrectAnswers() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
+
+        val mark = q.markAnswer("    დმადლომ    ")
+
+        assertFalse(mark.correct)
+        assertEquals(setOf(0, 6), mark.errorIndices)
+    }
+
+    @Test
+    fun ignoresQuestionMarksWhenMarking() {
+        val q = TranslateQuestion("how are you", "როგორ ხარ")
+
+        val mark = q.markAnswer("როგორ ხარ?")
+
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
+    }
+
+    @Test
+    fun ignoresCommasWhenMarking() {
+        val q = TranslateQuestion("how are you", "როგორ ხარ")
+
+        val mark = q.markAnswer("როგორ, ხარ")
+
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
+
+    }
+
+    @Test
+    fun ignoresFullStopsWhenMarking() {
+        val q = TranslateQuestion("how are you", "როგორ ხარ")
+
+        val mark = q.markAnswer("როგორ ხარ.")
+
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
+    }
+
+    @Test
+    fun ignoresGrammarEvenIfItsInTheAnswerText() {
+        val q = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+
+        val mark = q.markAnswer("გამარჯობა მე მქვია ქეთი")
+
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
     }
 
     @Test
