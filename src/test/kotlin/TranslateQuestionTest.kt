@@ -103,21 +103,28 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresGrammarWhenMarking() {
-        val q = TranslateQuestion("how are you", "როგორ ხარ")
+        val q1 = TranslateQuestion("how are you", "როგორ ხარ")
 
-        val mark1 = q.markAnswer("როგორ ხარ?")
+        val mark1 = q1.markAnswer("როგორ ხარ?")
 
         assertTrue(mark1.correct)
         assertEquals(0, mark1.errorIndices.count())
 
-        val mark2 = q.markAnswer("როგორ, ხარ")
+        val mark2 = q1.markAnswer("როგორ, ხარ")
 
         assertTrue(mark2.correct)
         assertEquals(0, mark2.errorIndices.count())
 
-        val mark3 = q.markAnswer("როგორ ხარ.")
+        val mark3 = q1.markAnswer("როგორ ხარ.")
 
         assertTrue(mark3.correct)
         assertEquals(0, mark3.errorIndices.count())
+
+        val q2 = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+
+        val mark4 = q2.markAnswer("გამარჯობა მე მქვია ქეთი")
+
+        assertTrue(mark4.correct)
+        assertEquals(0, mark4.errorIndices.count())
     }
 }
