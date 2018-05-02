@@ -18,9 +18,9 @@ class ScreenTest {
 
     @Test
     fun canShowQuestion() {
-        val q = TranslateQuestion("2*2", "4")
+        val q = TranslationQuestion("2*2", "4")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
 
         assertEquals("Translate \"2*2\"", s.toString())
     }
@@ -41,9 +41,9 @@ class ScreenTest {
 
     @Test
     fun canAppendAnswerText() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("გმადლომ")
 
         assertEquals("Translate \"thanks\"\nგმადლომ", s.toString())
@@ -51,9 +51,9 @@ class ScreenTest {
 
     @Test
     fun correctAnswerCanBeTurnedGreen() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("გმადლობ")
         s.showAnswerCorrect()
 
@@ -63,9 +63,9 @@ class ScreenTest {
 
     @Test
     fun incorrectAnswerCanBeTurnedRed() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("ayylmao")
         s.showAnswerEntirelyIncorrect()
 
@@ -75,9 +75,9 @@ class ScreenTest {
 
     @Test
     fun incorrectIndicesCanBeTurnedRed() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
 
@@ -89,9 +89,9 @@ class ScreenTest {
 
     @Test
     fun canAnnotateAnswerWithCorrection() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
         s.showCorrection(q.answer, mutableSetOf(6))
@@ -102,7 +102,7 @@ class ScreenTest {
     @Test(timeout = 700)
     fun canAwaitCorrection() {
         doReturn("გმადლობ").`when`(mockBufferedReader).readLine()
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         s.awaitCorrection(q.answer)
 
@@ -113,16 +113,16 @@ class ScreenTest {
     @Test(timeout = 50)
     fun canAwaitCorrectionAfterMultipleAttempts() {
         s.input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         s.awaitCorrection(q.answer)
     }
 
     @Test
     fun canClearScreen() {
-        val q = TranslateQuestion("Translate \"thanks\"", "გმადლობ")
+        val q = TranslationQuestion("Translate \"thanks\"", "გმადლობ")
 
-        s.showTranslateQuestion(q)
+        s.showTranslationQuestion(q)
         s.showAnswer("გმადლომ")
         s.showAnswerIncorrectIndices(mutableSetOf(6))
         s.showCorrection(q.answer, mutableSetOf(6))

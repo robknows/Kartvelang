@@ -8,7 +8,7 @@ class Lesson(val s: Screen, val qs: Questions) {
         val startTime = Calendar.getInstance().time.time
         while (!qs.empty()) {
             val q = qs.pop()
-            s.showTranslateQuestion(q)
+            s.showTranslationQuestion(q)
             s.print()
             val a = s.awaitAnswer().toString()
             s.showAnswer(a)

@@ -54,7 +54,7 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         }
     }
 
-    open fun showTranslateQuestion(q: TranslateQuestion) {
+    open fun showTranslationQuestion(q: TranslationQuestion) {
         lines.add(Pair(Q, Text("Translate \"${q.given}\"")))
     }
 
@@ -62,12 +62,12 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         lines.add(Pair(A, Text(a)))
     }
 
-    open fun showMarkedAnswer(mark: Mark) {
-        if (mark.correct) {
+    open fun showMarkedAnswer(translationMark: TranslationMark) {
+        if (translationMark.correct) {
             showAnswerCorrect()
         } else {
-            showAnswerIncorrectIndices(mark.errorIndices)
-            showCorrection(mark.correctAnswer, mark.errorIndices)
+            showAnswerIncorrectIndices(translationMark.errorIndices)
+            showCorrection(translationMark.correctAnswer, translationMark.errorIndices)
         }
     }
 
@@ -119,7 +119,7 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
 }
 
 enum class LineLabel {
-    Q, // TranslateQuestion
+    Q, // TranslationQuestion
     A, // Answer
     C, // Correction
     I, // Information

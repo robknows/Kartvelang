@@ -49,13 +49,13 @@ class ProductionsTest {
 
         val qs = p.introductionQuestions(greetings, farewells, names, phrases)
 
-        val q1 = TranslateQuestion("hello", "გამარჯობა")
-        val q2 = TranslateQuestion("nice to meet you", "სასიამოვნოა")
-        val q3 = TranslateQuestion("what are you called", "შენ რა გქვია")
-        val q4 = TranslateQuestion("see you soon", "ნახვამდის")
-        val q5 = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
-        val q6 = TranslateQuestion("nice to meet you, I am called Keti", "სასიამოვნოა, მე მქვია ქეთი")
-        val q7 = TranslateQuestion("see you soon Keti", "ნახვამდის ქეთი")
+        val q1 = TranslationQuestion("hello", "გამარჯობა")
+        val q2 = TranslationQuestion("nice to meet you", "სასიამოვნოა")
+        val q3 = TranslationQuestion("what are you called", "შენ რა გქვია")
+        val q4 = TranslationQuestion("see you soon", "ნახვამდის")
+        val q5 = TranslationQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+        val q6 = TranslationQuestion("nice to meet you, I am called Keti", "სასიამოვნოა, მე მქვია ქეთი")
+        val q7 = TranslationQuestion("see you soon Keti", "ნახვამდის ქეთი")
         val expected = listOf(q1, q2, q3, q4, q5, q6, q7)
 
         for (i in 0..6) {

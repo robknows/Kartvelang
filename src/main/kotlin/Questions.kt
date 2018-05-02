@@ -1,14 +1,14 @@
 /*Created on 29/04/18. */
 
 class Questions {
-    val set: MutableList<TranslateQuestion> = mutableListOf()
+    val set: MutableList<TranslationQuestion> = mutableListOf()
 
     constructor()
-    constructor(qs: Collection<TranslateQuestion>) {
+    constructor(qs: Collection<TranslationQuestion>) {
         set.addAll(qs)
     }
 
-    fun add(question: TranslateQuestion) {
+    fun add(question: TranslationQuestion) {
         set.add(question)
     }
 
@@ -16,9 +16,9 @@ class Questions {
         return set.count()
     }
 
-    fun pop(): TranslateQuestion {
+    fun pop(): TranslationQuestion {
         return if (count() < 1) {
-            NullTranslateQuestion
+            NullTranslationQuestion
         } else {
             set.removeAt(0)
         }
@@ -28,7 +28,7 @@ class Questions {
         return set.isEmpty()
     }
 
-    fun insertDelayed(q: TranslateQuestion) {
+    fun insertDelayed(q: TranslationQuestion) {
         if (set.count() < 4) {
             add(q)
         } else {

@@ -1,10 +1,10 @@
 /*Created on 01/05/18. */
 class Productions {
-    fun introductionQuestions(greetings: List<Word>, farewells: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslateQuestion> {
+    fun introductionQuestions(greetings: List<Word>, farewells: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslationQuestion> {
         val directTranslations = concat(greetings, phrases, farewells).map(this::dictionary)
 
-        val greetingsTranslations = mutableListOf<TranslateQuestion>()
-        val farewellsTranslations = mutableListOf<TranslateQuestion>()
+        val greetingsTranslations = mutableListOf<TranslationQuestion>()
+        val farewellsTranslations = mutableListOf<TranslationQuestion>()
         for (name in names) {
             for (greeting in greetings) {
                 greetingsTranslations.add(introduction(greeting, name))
@@ -16,16 +16,16 @@ class Productions {
         return concat(directTranslations, greetingsTranslations, farewellsTranslations)
     }
 
-    fun dictionary(w: Word): TranslateQuestion {
-        return TranslateQuestion(w.english, w.georgian)
+    fun dictionary(w: Word): TranslationQuestion {
+        return TranslationQuestion(w.english, w.georgian)
     }
 
-    fun introduction(greeting: Word, name: Word): TranslateQuestion {
-        return TranslateQuestion("${greeting.english}, I am called ${name.english}", "${greeting.georgian}, მე მქვია ${name.georgian}")
+    fun introduction(greeting: Word, name: Word): TranslationQuestion {
+        return TranslationQuestion("${greeting.english}, I am called ${name.english}", "${greeting.georgian}, მე მქვია ${name.georgian}")
     }
 
-    fun farewell(farewell: Word, name: Word): TranslateQuestion {
-        return TranslateQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
+    fun farewell(farewell: Word, name: Word): TranslationQuestion {
+        return TranslationQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
     }
 }
 

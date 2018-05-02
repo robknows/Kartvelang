@@ -15,7 +15,7 @@ class QuestionsTest {
     fun canCount() {
         val questions = Questions()
 
-        val q = TranslateQuestion("What is 2+2?", "4")
+        val q = TranslationQuestion("What is 2+2?", "4")
         questions.add(q)
 
         assertEquals(1, questions.count())
@@ -24,9 +24,9 @@ class QuestionsTest {
     @Test
     fun canAddMultipleQuestionsInOrder() {
         val questions = Questions()
-        val q1 = TranslateQuestion("What is 2+1?", "3")
-        val q2 = TranslateQuestion("What is 2+2?", "4")
-        val q3 = TranslateQuestion("What is 2+3?", "5")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = TranslationQuestion("What is 2+2?", "4")
+        val q3 = TranslationQuestion("What is 2+3?", "5")
 
         questions.add(q1)
         questions.add(q2)
@@ -41,9 +41,9 @@ class QuestionsTest {
     @Test
     fun canPopNextQuestion() {
         val questions = Questions()
-        val q1 = TranslateQuestion("What is 2+1?", "3")
-        val q2 = TranslateQuestion("What is 2+2?", "4")
-        val q3 = TranslateQuestion("What is 2+3?", "5")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = TranslationQuestion("What is 2+2?", "4")
+        val q3 = TranslationQuestion("What is 2+3?", "5")
 
         questions.add(q1)
         questions.add(q2)
@@ -61,13 +61,13 @@ class QuestionsTest {
     fun cantPopIfEmpty() {
         val questions = Questions()
 
-        assertEquals(NullTranslateQuestion, questions.pop())
+        assertEquals(NullTranslationQuestion, questions.pop())
     }
 
     @Test
     fun canPopIfOnlyOneQuestion() {
         val questions = Questions()
-        val q1 = TranslateQuestion("What is 2+1?", "3")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
         questions.add(q1)
 
         assertEquals(q1, questions.pop())
@@ -83,9 +83,9 @@ class QuestionsTest {
     @Test
     fun canInsertDelayedRepetitionForSmallNumberOfQuestions() {
         val questions = Questions()
-        val q1 = TranslateQuestion("What is 2+1?", "3")
-        val q2 = TranslateQuestion("What is 2+2?", "4")
-        val q3 = TranslateQuestion("What is 2+3?", "5")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = TranslationQuestion("What is 2+2?", "4")
+        val q3 = TranslationQuestion("What is 2+3?", "5")
         questions.add(q1)
         questions.add(q2)
 
@@ -99,15 +99,15 @@ class QuestionsTest {
     @Test
     fun canInsertDelayedRepetitionForHigherNumberOfQuestions() {
         val questions = Questions()
-        val q1 = TranslateQuestion("What is 2+1?", "3")
-        val q2 = TranslateQuestion("What is 2+2?", "4")
-        val q3 = TranslateQuestion("What is 2+3?", "5")
-        val q4 = TranslateQuestion("What is 2+4?", "6")
-        val q5 = TranslateQuestion("What is 2+5?", "7")
-        val q6 = TranslateQuestion("What is 2+6?", "8")
-        val q7 = TranslateQuestion("What is 2+7?", "9")
-        val q8 = TranslateQuestion("What is 2+8?", "10")
-        val q9 = TranslateQuestion("What is 2+9?", "11")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = TranslationQuestion("What is 2+2?", "4")
+        val q3 = TranslationQuestion("What is 2+3?", "5")
+        val q4 = TranslationQuestion("What is 2+4?", "6")
+        val q5 = TranslationQuestion("What is 2+5?", "7")
+        val q6 = TranslationQuestion("What is 2+6?", "8")
+        val q7 = TranslationQuestion("What is 2+7?", "9")
+        val q8 = TranslationQuestion("What is 2+8?", "10")
+        val q9 = TranslationQuestion("What is 2+9?", "11")
         questions.add(q1)
         questions.add(q2)
         questions.add(q3)
@@ -126,9 +126,9 @@ class QuestionsTest {
 
     @Test
     fun canConstructQuestionsFromCollectionOfTranslateQuestion() {
-        val q1 = TranslateQuestion("What is 2+1?", "3")
-        val q2 = TranslateQuestion("What is 2+2?", "4")
-        val q3 = TranslateQuestion("What is 2+3?", "5")
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = TranslationQuestion("What is 2+2?", "4")
+        val q3 = TranslationQuestion("What is 2+3?", "5")
 
         val questions = listOf(q1, q2, q3)
         val qs = Questions(questions)

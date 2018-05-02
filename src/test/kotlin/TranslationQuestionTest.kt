@@ -3,10 +3,10 @@ import junit.framework.TestCase
 import junit.framework.TestCase.*
 import org.junit.Test
 
-class TranslateQuestionTest {
+class TranslationQuestionTest {
     @Test
     fun canRecogniseIncorrectAnswer() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლომ")
 
@@ -15,7 +15,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canRecogniseCorrectAnswer() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლობ")
 
@@ -24,7 +24,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canDiffAnIncorrectWord() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლომ")
 
@@ -33,7 +33,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canDiffAnCorrectWord() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლობ")
 
@@ -42,7 +42,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canFlipQuestionAndAnswer() {
-        val q = TranslateQuestion("abc", "def").flipped()
+        val q = TranslationQuestion("abc", "def").flipped()
 
         TestCase.assertEquals("def", q.given)
         TestCase.assertEquals("abc", q.answer)
@@ -50,7 +50,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canMarkAnIncorrectAnswerThatIsTooLong() {
-        val q = TranslateQuestion("abc", "def")
+        val q = TranslationQuestion("abc", "def")
 
         val mark = q.markAnswer("memes")
 
@@ -59,7 +59,7 @@ class TranslateQuestionTest {
 
     @Test
     fun canMarkAnIncorrectAnswerThatIsTooShort() {
-        val q = TranslateQuestion("abc", "def")
+        val q = TranslationQuestion("abc", "def")
 
         val mark = q.markAnswer("a")
 
@@ -68,7 +68,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresExcessWhitespaceAfterAnswer() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("გმადლობ   ")
 
@@ -78,7 +78,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresExcessWhitespaceBeforeAnswer() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("    გმადლობ")
 
@@ -88,7 +88,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresExcessWhitespaceOnBothSidesOfAnswer() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("    გმადლობ    ")
 
@@ -98,7 +98,7 @@ class TranslateQuestionTest {
 
     @Test
     fun excessWhitespaceAfterAnswerDoesntCauseMarkingProblemsForIncorrectAnswers() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("დმადლომ   ")
 
@@ -108,7 +108,7 @@ class TranslateQuestionTest {
 
     @Test
     fun excessWhitespaceBeforeAnswerDoesntCauseMarkingProblemsForIncorrectAnswers() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("    დმადლომ")
 
@@ -119,7 +119,7 @@ class TranslateQuestionTest {
 
     @Test
     fun excessWhitespaceBothSidesDoesntCauseMarkingProblemsForIncorrectAnswers() {
-        val q = TranslateQuestion("thanks", "გმადლობ")
+        val q = TranslationQuestion("thanks", "გმადლობ")
 
         val mark = q.markAnswer("    დმადლომ    ")
 
@@ -129,7 +129,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresQuestionMarksWhenMarking() {
-        val q = TranslateQuestion("how are you", "როგორ ხარ")
+        val q = TranslationQuestion("how are you", "როგორ ხარ")
 
         val mark = q.markAnswer("როგორ ხარ?")
 
@@ -139,7 +139,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresCommasWhenMarking() {
-        val q = TranslateQuestion("how are you", "როგორ ხარ")
+        val q = TranslationQuestion("how are you", "როგორ ხარ")
 
         val mark = q.markAnswer("როგორ, ხარ")
 
@@ -150,7 +150,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresFullStopsWhenMarking() {
-        val q = TranslateQuestion("how are you", "როგორ ხარ")
+        val q = TranslationQuestion("how are you", "როგორ ხარ")
 
         val mark = q.markAnswer("როგორ ხარ.")
 
@@ -160,7 +160,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresGrammarEvenIfItsInTheAnswerText() {
-        val q = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+        val q = TranslationQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
 
         val mark = q.markAnswer("გამარჯობა მე მქვია ქეთი")
 
@@ -170,7 +170,7 @@ class TranslateQuestionTest {
 
     @Test
     fun ignoresExcessWhitespaceBetweenWords() {
-        val q = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+        val q = TranslationQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
 
         val mark = q.markAnswer("გამარჯობა  მე  მქვია  ქეთი")
 

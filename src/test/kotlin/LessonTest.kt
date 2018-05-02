@@ -9,9 +9,9 @@ import java.io.BufferedReader
 import java.io.StringReader
 
 class LessonTest {
-    val q1 = TranslateQuestion("Type \"abc\"", "abc")
-    val q2 = TranslateQuestion("Type \"doremi\"", "doremi")
-    val q3 = TranslateQuestion("Type \"onetwothree\"", "onetwothree")
+    val q1 = TranslationQuestion("Type \"abc\"", "abc")
+    val q2 = TranslationQuestion("Type \"doremi\"", "doremi")
+    val q3 = TranslationQuestion("Type \"onetwothree\"", "onetwothree")
 
     @Test(timeout = 3000)
     fun canCompleteSimpleLessonWithAllCorrectAnswers() {
@@ -25,15 +25,15 @@ class LessonTest {
 
         lesson.complete()
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q1)
+        inOrder.verify(spyScreen).showTranslationQuestion(q1)
         inOrder.verify(spyScreen).showAnswer("abc")
         inOrder.verify(spyScreen).showMarkedAnswer(q1.markAnswer("abc"))
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q2)
+        inOrder.verify(spyScreen).showTranslationQuestion(q2)
         inOrder.verify(spyScreen).showAnswer("doremi")
         inOrder.verify(spyScreen).showMarkedAnswer(q2.markAnswer("doremi"))
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q3)
+        inOrder.verify(spyScreen).showTranslationQuestion(q3)
         inOrder.verify(spyScreen).showAnswer("onetwothree")
         inOrder.verify(spyScreen).showMarkedAnswer(q3.markAnswer("onetwothree"))
 
@@ -59,7 +59,7 @@ class LessonTest {
 
         lesson.complete()
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q1)
+        inOrder.verify(spyScreen).showTranslationQuestion(q1)
         inOrder.verify(spyScreen).showAnswer("abc")
         inOrder.verify(spyScreen).showMarkedAnswer(q1.markAnswer("abc"))
         inOrder.verify(spyScreen).awaitKeyPress(Key.ENTER)
@@ -81,20 +81,20 @@ class LessonTest {
 
         lesson.complete()
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q1)
+        inOrder.verify(spyScreen).showTranslationQuestion(q1)
         inOrder.verify(spyScreen).showAnswer("abc")
         inOrder.verify(spyScreen).showMarkedAnswer(q1.markAnswer("abc"))
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q2)
+        inOrder.verify(spyScreen).showTranslationQuestion(q2)
         inOrder.verify(spyScreen).showAnswer("doremu")
         inOrder.verify(spyScreen).showMarkedAnswer(q2.markAnswer("doremu"))
         inOrder.verify(spyScreen).awaitCorrection("doremi")
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q3)
+        inOrder.verify(spyScreen).showTranslationQuestion(q3)
         inOrder.verify(spyScreen).showAnswer("onetwothree")
         inOrder.verify(spyScreen).showMarkedAnswer(q3.markAnswer("onetwothree"))
 
-        inOrder.verify(spyScreen).showTranslateQuestion(q2)
+        inOrder.verify(spyScreen).showTranslationQuestion(q2)
         inOrder.verify(spyScreen).showAnswer("doremi")
         inOrder.verify(spyScreen).showMarkedAnswer(q2.markAnswer("doremi"))
 

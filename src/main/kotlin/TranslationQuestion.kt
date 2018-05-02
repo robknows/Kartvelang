@@ -1,8 +1,8 @@
 /*Created on 29/04/18. */
 import kotlin.math.max
 
-open class TranslateQuestion(val given: String, val answer: String) {
-    fun markAnswer(attempt: String): Mark {
+open class TranslationQuestion(val given: String, val answer: String) {
+    fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)
         val answer  = prepareForMarking(answer)
@@ -12,7 +12,7 @@ open class TranslateQuestion(val given: String, val answer: String) {
         } else {
             (0 until max(attempt.length, answer.length)).toSet()
         }
-        return Mark(correct, diff, answer)
+        return TranslationMark(correct, diff, answer)
     }
 
     // Assumption: answer.length == attempt.length
@@ -26,8 +26,8 @@ open class TranslateQuestion(val given: String, val answer: String) {
         return indices.toSet()
     }
 
-    fun flipped(): TranslateQuestion {
-        return TranslateQuestion(answer, given)
+    fun flipped(): TranslationQuestion {
+        return TranslationQuestion(answer, given)
     }
 }
 
@@ -43,4 +43,6 @@ private fun Char.isPunctuation(): Boolean {
     return toChar() in setOf('?', ',', '.')
 }
 
-object NullTranslateQuestion : TranslateQuestion("", "")
+object NullTranslationQuestion : TranslationQuestion("", "")
+
+data class TranslationMark(val correct: Boolean, val errorIndices: Set<Int>, val correctAnswer: String)
