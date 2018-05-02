@@ -1,14 +1,15 @@
+/*Created on 29/04/18. */
 import kotlin.math.max
 
-/*Created on 29/04/18. */
 open class TranslateQuestion(val given: String, val answer: String) {
     fun markAnswer(attempt: String): Mark {
-        val trimmedAttempt = attempt.trim().filter({ char -> !char.isPunctuation() })
-        val correct = answer == trimmedAttempt
-        val diff = if (answer.length == trimmedAttempt.length) {
-            diffWord(trimmedAttempt)
+        @Suppress("NAME_SHADOWING")
+        val attempt = attempt.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() })
+        val correct = answer == attempt
+        val diff = if (answer.length == attempt.length) {
+            diffWord(attempt)
         } else {
-            (0..(max(trimmedAttempt.length, answer.length) - 1)).toSet()
+            (0..(max(attempt.length, answer.length) - 1)).toSet()
         }
         return Mark(correct, diff, answer)
     }
