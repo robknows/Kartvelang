@@ -37,5 +37,3 @@ open class Text(private val text: String) {
         overlayIndices.addAll(indices.toMutableList())
     }
 }
-
-object NullText : Text("")
