@@ -13,7 +13,7 @@ class LessonTest {
     val q2 = TranslateQuestion("Type \"doremi\"", "doremi")
     val q3 = TranslateQuestion("Type \"onetwothree\"", "onetwothree")
 
-    @Test(timeout = 1000)
+    @Test(timeout = 3000)
     fun canCompleteSimpleLessonWithAllCorrectAnswers() {
         val input = BufferedReader(StringReader("abc\n\ndoremi\n\nonetwothree\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
@@ -46,7 +46,7 @@ class LessonTest {
         verify(spyScreen, never()).showAnswerIncorrectIndices(Matchers.anySetOf(Int::class.java))
     }
 
-    @Test(timeout = 1000)
+    @Test(timeout = 3000)
     fun lessonEventsOccurInCorrectOrder() {
         val input = BufferedReader(StringReader("abc\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
@@ -69,7 +69,7 @@ class LessonTest {
         verify(spyScreen, times(2)).print()
     }
 
-    @Test(timeout = 1000)
+    @Test(timeout = 3000)
     fun canCompleteSimpleLessonWithAMistake() {
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
@@ -104,7 +104,7 @@ class LessonTest {
         verify(spyScreen).close()
     }
 
-    @Test(timeout = 2700)
+    @Test(timeout = 3000)
     fun canGetLessonResults() {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
