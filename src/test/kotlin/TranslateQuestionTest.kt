@@ -100,4 +100,14 @@ class TranslateQuestionTest {
         assertFalse(mark3.correct)
         assertEquals(setOf(0, 6), mark3.errorIndices)
     }
+
+    @Test
+    fun ignoresGrammarWhenMarking() {
+        val q = TranslateQuestion("how are you", "როგორ ხარ")
+
+        val mark1 = q.markAnswer("როგორ ხარ?")
+
+        assertTrue(mark1.correct)
+        assertEquals(0, mark1.errorIndices.count())
+    }
 }

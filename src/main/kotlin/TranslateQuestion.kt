@@ -3,7 +3,7 @@ import kotlin.math.max
 /*Created on 29/04/18. */
 open class TranslateQuestion(val given: String, val answer: String) {
     fun markAnswer(attempt: String): Mark {
-        val trimmedAttempt = attempt.trim()
+        val trimmedAttempt = attempt.trim().filter({ char -> !char.isPunctuation() })
         val correct = answer == trimmedAttempt
         val diff = if (answer.length == trimmedAttempt.length) {
             diffWord(trimmedAttempt)
@@ -27,6 +27,10 @@ open class TranslateQuestion(val given: String, val answer: String) {
     fun flipped(): TranslateQuestion {
         return TranslateQuestion(answer, given)
     }
+}
+
+private fun Char.isPunctuation(): Boolean {
+    return toChar() in setOf('?')
 }
 
 object NullTranslateQuestion : TranslateQuestion("", "")
