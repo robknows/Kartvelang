@@ -1,6 +1,16 @@
 /*Created on 01/05/18. */
 data class Word(val english: String, val georgian: String)
 
+fun String.excludeIndex(i: Int): String {
+    return when (i) {
+        0 -> drop(1)
+        length - 1 -> dropLast(1)
+        else -> take(i - 1) + drop(i)
+    }
+}
+
+val alphabet = Word("abcdefghijklmnopqrstuvwxyz", "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ")
+
 val greeting_hello = Word("hello", "გამარჯობა")
 val greeting_nicetomeetyou = Word("nice to meet you", "სასიამოვნოა")
 
