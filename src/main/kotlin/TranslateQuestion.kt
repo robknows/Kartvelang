@@ -10,7 +10,7 @@ open class TranslateQuestion(val given: String, val answer: String) {
         val diff = if (answer.length == attempt.length) {
             diffWord(answer, attempt)
         } else {
-            (0..(max(attempt.length, answer.length) - 1)).toSet()
+            (0 until max(attempt.length, answer.length)).toSet()
         }
         return Mark(correct, diff, answer)
     }
@@ -18,7 +18,7 @@ open class TranslateQuestion(val given: String, val answer: String) {
     // Assumption: answer.length == attempt.length
     private fun diffWord(answer: String, attempt: String): Set<Int> {
         val indices = mutableSetOf<Int>()
-        for (i in 0..(answer.length - 1)) {
+        for (i in 0 until answer.length) {
             if (answer[i] != attempt[i]) {
                 indices.add(i)
             }
