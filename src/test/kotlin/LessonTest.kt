@@ -24,7 +24,7 @@ class LessonTest {
 
         lesson.complete()
 
-        verify(mockPrinter, times(23)).printlnWhite(Matchers.anyString())
+        verify(mockPrinter, times(21)).printlnWhite(Matchers.anyString())
         verify(mockPrinter, times(3)).printlnGreen(Matchers.anyString())
         verify(mockPrinter, never()).printlnRed(Matchers.anyString())
     }

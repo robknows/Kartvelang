@@ -24,7 +24,6 @@ class Lesson(val s: Screen, val qs: Questions) {
             answered++
         }
         val endTime = Calendar.getInstance().time.time
-        s.print()
         s.clear()
         s.close()
         return LessonResults(
