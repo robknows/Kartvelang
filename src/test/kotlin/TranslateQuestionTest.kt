@@ -74,5 +74,30 @@ class TranslateQuestionTest {
 
         assertTrue(mark2.correct)
         assertEquals(0, mark2.errorIndices.count())
+
+        val mark3 = q.markAnswer("    გმადლობ    ")
+
+        assertTrue(mark3.correct)
+        assertEquals(0, mark3.errorIndices.count())
+    }
+
+    @Test
+    fun excessWhitespaceDoesntCauseMarkingProblemsForIncorrectAnswers() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
+
+        val mark1 = q.markAnswer("დმადლომ   ")
+
+        assertFalse(mark1.correct)
+        assertEquals(setOf(0, 6), mark1.errorIndices)
+
+        val mark2 = q.markAnswer("    დმადლომ")
+
+        assertFalse(mark2.correct)
+        assertEquals(setOf(0, 6), mark2.errorIndices)
+
+        val mark3 = q.markAnswer("    დმადლომ    ")
+
+        assertFalse(mark3.correct)
+        assertEquals(setOf(0, 6), mark3.errorIndices)
     }
 }
