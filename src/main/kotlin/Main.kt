@@ -15,7 +15,9 @@ fun main(args: Array<String>) {
     val input = BufferedReader(InputStreamReader(System.`in`))
     val s = Screen(printer, KeyWaiter(), input)
 
-    val lesson = Lesson(s, elevator_smalltalk())
+    val small = Questions(Productions().introductionQuestions(listOf(greeting_hello), listOf(farewell_seeyousoon), listOf(name_Keti), listOf()))
+
+    val lesson = Lesson(s, small)
 
     val results = lesson.complete()
 

@@ -12,4 +12,4 @@ val phrase_whatareyoucalled = Word("what are you called", "შენ რა გ�
 val phrase_howareyou = Word("how are you", "როგორ ხარ")
 
 val mood_notbad = Word("not bad", "არამიშავს")
-val mood_alright = Word("alright", "ნახვამდის")
+val mood_alright = Word("alright", "კარგად")
