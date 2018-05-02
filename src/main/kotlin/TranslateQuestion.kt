@@ -3,11 +3,12 @@ import kotlin.math.max
 /*Created on 29/04/18. */
 open class TranslateQuestion(val given: String, val answer: String) {
     fun markAnswer(attempt: String): Mark {
-        val correct = answer == attempt
-        val diff = if (answer.length == attempt.length) {
-            diffWord(attempt)
+        val trimmedAttempt = attempt.trim()
+        val correct = answer == trimmedAttempt
+        val diff = if (answer.length == trimmedAttempt.length) {
+            diffWord(trimmedAttempt)
         } else {
-            (0..(max(attempt.length, answer.length) - 1)).toSet()
+            (0..(max(trimmedAttempt.length, answer.length) - 1)).toSet()
         }
         return Mark(correct, diff, answer)
     }

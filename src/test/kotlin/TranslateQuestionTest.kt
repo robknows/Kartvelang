@@ -59,6 +59,20 @@ class TranslateQuestionTest {
         val mark2 = q.markAnswer("a")
 
         TestCase.assertEquals(setOf(0, 1, 2), mark2.errorIndices)
+    }
 
+    @Test
+    fun ignoresExcessWhitespaceWhenMarkingSingleWord() {
+        val q = TranslateQuestion("thanks", "გმადლობ")
+
+        val mark1 = q.markAnswer("გმადლობ   ")
+
+        assertTrue(mark1.correct)
+        assertEquals(0, mark1.errorIndices.count())
+
+        val mark2 = q.markAnswer("    გმადლობ")
+
+        assertTrue(mark2.correct)
+        assertEquals(0, mark2.errorIndices.count())
     }
 }

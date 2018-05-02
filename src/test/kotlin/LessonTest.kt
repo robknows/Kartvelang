@@ -29,7 +29,7 @@ class LessonTest {
         verify(mockPrinter, never()).printlnRed(Matchers.anyString())
     }
 
-    @Test(timeout = 1000)
+    @Test(timeout = 2700)
     fun canGetLessonResults() {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
