@@ -6,7 +6,7 @@ import java.io.BufferedReader
 import java.io.StringReader
 
 class ScreenTest {
-    private val mockKeyWaiter = mock(KeyWaiter::class.java)!!
+    private val mockKeyWaiter = mock(KeyWaiter::class.java)
     private val mockBufferedReader = mock(BufferedReader::class.java)
     private val mockPrinter = mock(ColourPrinter::class.java)
     private val s = Screen(mockPrinter, mockKeyWaiter, mockBufferedReader)
