@@ -30,7 +30,7 @@ open class TranslateQuestion(val given: String, val answer: String) {
 }
 
 private fun Char.isPunctuation(): Boolean {
-    return toChar() in setOf('?')
+    return toChar() in setOf('?', ',', '.')
 }
 
 object NullTranslateQuestion : TranslateQuestion("", "")

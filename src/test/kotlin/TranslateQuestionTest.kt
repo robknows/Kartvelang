@@ -109,5 +109,15 @@ class TranslateQuestionTest {
 
         assertTrue(mark1.correct)
         assertEquals(0, mark1.errorIndices.count())
+
+        val mark2 = q.markAnswer("როგორ, ხარ")
+
+        assertTrue(mark2.correct)
+        assertEquals(0, mark2.errorIndices.count())
+
+        val mark3 = q.markAnswer("როგორ ხარ.")
+
+        assertTrue(mark3.correct)
+        assertEquals(0, mark3.errorIndices.count())
     }
 }
