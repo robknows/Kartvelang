@@ -1,38 +1,38 @@
 /*Created on 29/04/18. */
 
 class Questions {
-    val set: MutableList<TranslationQuestion> = mutableListOf()
+    val translationQuestions: MutableList<TranslationQuestion> = mutableListOf()
 
     constructor()
     constructor(qs: Collection<TranslationQuestion>) {
-        set.addAll(qs)
+        translationQuestions.addAll(qs)
     }
 
     fun add(question: TranslationQuestion) {
-        set.add(question)
+        translationQuestions.add(question)
     }
 
     fun count(): Int {
-        return set.count()
+        return translationQuestions.count()
     }
 
     fun pop(): TranslationQuestion {
         return if (count() < 1) {
             NullTranslationQuestion
         } else {
-            set.removeAt(0)
+            translationQuestions.removeAt(0)
         }
     }
 
     fun empty(): Boolean {
-        return set.isEmpty()
+        return translationQuestions.isEmpty()
     }
 
     fun insertDelayed(q: TranslationQuestion) {
-        if (set.count() < 4) {
+        if (translationQuestions.count() < 4) {
             add(q)
         } else {
-            set.add(3, q)
+            translationQuestions.add(3, q)
         }
     }
 }

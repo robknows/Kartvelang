@@ -1,8 +1,8 @@
 /*Created on 29/04/18. */
 import kotlin.math.max
 
-open class TranslationQuestion(val given: String, val answer: String) {
-    fun markAnswer(attempt: String): TranslationMark {
+open class TranslationQuestion(val given: String, override val answer: String) : Question<TranslationMark> {
+    override fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)
         val answer  = prepareForMarking(answer)
@@ -26,6 +26,19 @@ open class TranslationQuestion(val given: String, val answer: String) {
         return indices.toSet()
     }
 
+    override fun complete(s: Screen, q: Question<TranslationMark>): Boolean {
+        if (q !is TranslationQuestion) {
+            return false
+        }
+        s.showTranslationQuestion(q)
+        s.print()
+        val a = s.awaitAnswer().toString()
+        s.showAnswer(a)
+        val mark = q.markAnswer(a)
+        s.showMarkedAnswer(mark)
+        return mark.correct
+    }
+
     fun flipped(): TranslationQuestion {
         return TranslationQuestion(answer, given)
     }
@@ -43,6 +56,6 @@ private fun Char.isPunctuation(): Boolean {
     return toChar() in setOf('?', ',', '.')
 }
 
-object NullTranslationQuestion : TranslationQuestion("", "")
+data class TranslationMark(override val correct: Boolean, val errorIndices: Set<Int>, val correctAnswer: String) : Mark
 
-data class TranslationMark(val correct: Boolean, val errorIndices: Set<Int>, val correctAnswer: String)
+object NullTranslationQuestion : TranslationQuestion("", "")
