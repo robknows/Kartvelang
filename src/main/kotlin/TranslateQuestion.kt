@@ -32,7 +32,11 @@ open class TranslateQuestion(val given: String, val answer: String) {
 }
 
 private fun prepareForMarking(s: String): String {
-    return s.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() })
+    return s.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() }).despace()
+}
+
+private fun String.despace(): String {
+    return split(" ").filter({ l -> !l.isEmpty() }).reduce({ acc, nxt -> "$acc $nxt" })
 }
 
 private fun Char.isPunctuation(): Boolean {

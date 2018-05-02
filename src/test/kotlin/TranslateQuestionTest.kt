@@ -127,4 +127,14 @@ class TranslateQuestionTest {
         assertTrue(mark4.correct)
         assertEquals(0, mark4.errorIndices.count())
     }
+
+    @Test
+    fun ignoresExcessWhitespaceBetweenWords() {
+        val q = TranslateQuestion("hello, I am called Keti", "გამარჯობა, მე მქვია ქეთი")
+
+        val mark = q.markAnswer("გამარჯობა  მე  მქვია  ქეთი")
+
+        assertTrue(mark.correct)
+        assertEquals(0, mark.errorIndices.count())
+    }
 }
