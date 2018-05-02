@@ -5,7 +5,7 @@ import org.junit.Test
 class MultipleChoiceQuestionTest {
     @Test
     fun canMarkMultipleChoiceQuestion() {
-        val q = MultipleChoiceQuestion("m in monkey", "მ", alphabet.georgian.excludeIndex(11))
+        val q = MultipleChoiceQuestion("m in monkey", "მ", Triple("ო", "გ", "წ"))
 
         val mark = q.markAnswer("მ")
 
