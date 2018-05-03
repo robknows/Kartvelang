@@ -1,7 +1,7 @@
 /*Created on 29/04/18. */
 import kotlin.math.max
 
-open class TranslationQuestion(val given: String, override val answer: String) : Question<TranslationMark> {
+open class TranslationQuestion(val given: String, override val answer: String) : Question<TranslationMark, TranslationOverlay> {
     override fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)
@@ -26,16 +26,14 @@ open class TranslationQuestion(val given: String, override val answer: String) :
         return indices.toSet()
     }
 
-    override fun complete(s: Screen, q: Question<TranslationMark>): Boolean {
-        if (q !is TranslationQuestion) {
-            return false
-        }
-        s.showTranslationQuestion(q)
+    override fun complete(s: Screen, o: TranslationOverlay): Boolean {
+        s.overlay = o
+        o.showQuestion(this)
         s.print()
         val a = s.awaitAnswer().toString()
-        s.showAnswer(a)
-        val mark = q.markAnswer(a)
-        s.showMarkedAnswer(mark)
+        o.showAnswer(a)
+        val mark = markAnswer(a)
+        o.showMarkedAnswer(mark)
         return mark.correct
     }
 

@@ -2,6 +2,8 @@
 import java.util.*
 
 class Lesson(val s: Screen, val qs: Questions) {
+    val translationOverlay = TranslationOverlay()
+
     fun complete(): LessonResults {
         var mistakes = 0
         var answered = 0
@@ -9,7 +11,7 @@ class Lesson(val s: Screen, val qs: Questions) {
         while (!qs.empty()) {
             val q = qs.pop()
 
-            val correct = q.complete(s, q)
+            val correct = q.complete(s, translationOverlay)
 
             if (!correct) {
                 s.awaitCorrection(q.answer)

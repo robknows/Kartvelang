@@ -10,6 +10,14 @@ open class Text(private val text: String) {
         return text
     }
 
+    fun toLine(): String {
+        if (text.isEmpty()) {
+            return ""
+        } else {
+            return "\n" + text
+        }
+    }
+
     fun printlnWith(printer: ColourPrinter) {
         if (overlayIndices.isEmpty()) {
             printer.println(baseColour, text)

@@ -16,14 +16,7 @@ class ScreenTest {
         assertEquals("", s.toString())
     }
 
-    @Test
-    fun canShowQuestion() {
-        val q = TranslationQuestion("2*2", "4")
 
-        s.showTranslationQuestion(q)
-
-        assertEquals("Translate \"2*2\"", s.toString())
-    }
 
     @Test(timeout = 700)
     fun canAwaitAnswer() {
@@ -37,66 +30,6 @@ class ScreenTest {
         s.input = BufferedReader(StringReader("\n\n\n4"))
 
         assertEquals("4", s.awaitAnswer().toString())
-    }
-
-    @Test
-    fun canAppendAnswerText() {
-        val q = TranslationQuestion("thanks", "გმადლობ")
-
-        s.showTranslationQuestion(q)
-        s.showAnswer("გმადლომ")
-
-        assertEquals("Translate \"thanks\"\nგმადლომ", s.toString())
-    }
-
-    @Test
-    fun correctAnswerCanBeTurnedGreen() {
-        val q = TranslationQuestion("thanks", "გმადლობ")
-
-        s.showTranslationQuestion(q)
-        s.showAnswer("გმადლობ")
-        s.showAnswerCorrect()
-
-        assertEquals(Colour.W, s.lines[0].second.baseColour)
-        assertEquals(Colour.G, s.lines[1].second.baseColour)
-    }
-
-    @Test
-    fun incorrectAnswerCanBeTurnedRed() {
-        val q = TranslationQuestion("thanks", "გმადლობ")
-
-        s.showTranslationQuestion(q)
-        s.showAnswer("ayylmao")
-        s.showAnswerEntirelyIncorrect()
-
-        assertEquals(Colour.W, s.lines[0].second.baseColour)
-        assertEquals(Colour.R, s.lines[1].second.baseColour)
-    }
-
-    @Test
-    fun incorrectIndicesCanBeTurnedRed() {
-        val q = TranslationQuestion("thanks", "გმადლობ")
-
-        s.showTranslationQuestion(q)
-        s.showAnswer("გმადლომ")
-        s.showAnswerIncorrectIndices(mutableSetOf(6))
-
-        assertEquals(Colour.W, s.lines[0].second.baseColour)
-        assertEquals(Colour.G, s.lines[1].second.baseColour)
-        assertEquals(Colour.R, s.lines[1].second.overlayColour)
-        assertEquals(mutableSetOf(6), s.lines[1].second.overlayIndices)
-    }
-
-    @Test
-    fun canAnnotateAnswerWithCorrection() {
-        val q = TranslationQuestion("thanks", "გმადლობ")
-
-        s.showTranslationQuestion(q)
-        s.showAnswer("გმადლომ")
-        s.showAnswerIncorrectIndices(mutableSetOf(6))
-        s.showCorrection(q.answer, mutableSetOf(6))
-
-        assertEquals("Translate \"thanks\"\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", s.toString())
     }
 
     @Test(timeout = 700)
@@ -120,12 +53,11 @@ class ScreenTest {
 
     @Test
     fun canClearScreen() {
-        val q = TranslationQuestion("Translate \"thanks\"", "გმადლობ")
+        s.lines = mutableListOf(
+                Pair(LineLabel.I, Text("something")),
+                Pair(LineLabel.I, Text("somethingElse")),
+                Pair(LineLabel.I, Text("somethingAgain")))
 
-        s.showTranslationQuestion(q)
-        s.showAnswer("გმადლომ")
-        s.showAnswerIncorrectIndices(mutableSetOf(6))
-        s.showCorrection(q.answer, mutableSetOf(6))
         s.clear()
 
         assertEquals("", s.toString())
