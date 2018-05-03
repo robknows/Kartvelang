@@ -1,9 +1,9 @@
+/*Created on 03/05/18. */
 import Colour.G
 import Colour.R
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
-/*Created on 03/05/18. */
 class TranslationOverlayTest {
     val o = TranslationOverlay()
 

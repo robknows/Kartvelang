@@ -11,9 +11,9 @@ class Lesson(val s: Screen, val qs: Questions) {
         while (!qs.empty()) {
             val q = qs.pop()
 
-            val correct = q.complete(s, translationOverlay)
+            val mark = q.complete(s, translationOverlay)
 
-            if (!correct) {
+            if (!mark.correct) {
                 s.awaitCorrection(q.answer)
                 qs.insertDelayed(q)
                 mistakes++

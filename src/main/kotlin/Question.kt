@@ -1,7 +1,6 @@
 /*Created on 02/05/18. */
-interface Question<MarkType, OverlayType> {
+interface Question<Mark, Overlay> {
     val answer: String
 
-    fun markAnswer(attempt: String): MarkType
-    fun complete(s: Screen, o: OverlayType): Boolean
+    fun complete(s: Screen, o: Overlay): Mark
 }
