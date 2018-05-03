@@ -3,6 +3,8 @@ import Colour.G
 import Colour.R
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
+import org.mockito.Matchers.anyString
+import org.mockito.Mockito.*
 
 class TranslationOverlayTest {
     val o = TranslationOverlay()
@@ -68,5 +70,16 @@ class TranslationOverlayTest {
         o.showMarkedAnswer(mark)
 
         assertEquals("Translate \"thanks\"\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", o.toString())
+    }
+
+    @Test
+    fun canPrintLines() {
+        val spyPrinter = spy(ColourPrinter())
+        val q = TranslationQuestion("hello", "გამარჯობა")
+
+        o.showQuestion(q)
+        o.printWith(spyPrinter)
+
+        verify(spyPrinter, times(1)).printlnWhite(anyString())
     }
 }

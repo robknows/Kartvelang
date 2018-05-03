@@ -1,5 +1,5 @@
 /*Created on 03/05/18. */
-class TranslationOverlay : Overlay {
+open class TranslationOverlay : Overlay {
     var questionLine = Text("")
     var answerLine = Text("")
     var correctionLines = Pair(Text(""), Text(""))
@@ -49,5 +49,11 @@ class TranslationOverlay : Overlay {
         fullCorrection.overlayIndices = (0..15).toMutableSet()
 
         correctionLines = Pair(corrections, fullCorrection)
+    }
+
+    override fun maxLineLength(): Int {
+        return listOf(questionLine, answerLine, correctionLines.first, correctionLines.second)
+                .map({ line -> line.toString().length })
+                .max() ?: 0
     }
 }

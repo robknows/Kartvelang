@@ -19,17 +19,19 @@ open class Text(private val text: String) {
     }
 
     fun printlnWith(printer: ColourPrinter) {
-        if (overlayIndices.isEmpty()) {
-            printer.println(baseColour, text)
-        } else {
-            for (i in 0..(text.length - 1)) {
-                if (i in overlayIndices) {
-                    printer.print(overlayColour, text[i].toString())
-                } else {
-                    printer.print(baseColour, text[i].toString())
+        if (!text.isEmpty()) {
+            if (overlayIndices.isEmpty()) {
+                printer.println(baseColour, text)
+            } else {
+                for (i in 0..(text.length - 1)) {
+                    if (i in overlayIndices) {
+                        printer.print(overlayColour, text[i].toString())
+                    } else {
+                        printer.print(baseColour, text[i].toString())
+                    }
                 }
+                println()
             }
-            println()
         }
     }
 

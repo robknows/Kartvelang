@@ -39,7 +39,7 @@ open class ColourPrinter {
         println()
     }
 
-    fun printlnBlue(s: String) {
+    open fun printlnBlue(s: String) {
         printBlue(s)
         println()
     }

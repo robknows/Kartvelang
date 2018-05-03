@@ -8,8 +8,8 @@ import java.io.StringReader
 class ScreenTest {
     private val mockKeyWaiter = mock(KeyWaiter::class.java)
     private val mockBufferedReader = mock(BufferedReader::class.java)
-    private val mockPrinter = mock(ColourPrinter::class.java)
-    private val s = Screen(mockPrinter, mockKeyWaiter, mockBufferedReader)
+    private val spyPrinter = spy(ColourPrinter())
+    private val s = Screen(spyPrinter, mockKeyWaiter, mockBufferedReader)
 
     @Test
     fun initialisedBlank() {
@@ -40,7 +40,7 @@ class ScreenTest {
         s.awaitCorrection(q.answer)
 
         verify(mockBufferedReader).readLine()
-        verify(mockPrinter).printlnWhite("Type out the correct answer:")
+        verify(spyPrinter).printlnWhite("Type out the correct answer:")
     }
 
     @Test(timeout = 50)
@@ -70,5 +70,43 @@ class ScreenTest {
 
         assertEquals("Accuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
         assertEquals(3, s.lines.count())
+    }
+
+    @Test
+    fun screenIsCorrectSize() {
+        val overlay = object : Overlay {
+            override fun showQuestion(q: TranslationQuestion) {
+                TODO("not needed")
+            }
+
+            override fun showAnswer(a: String) {
+                TODO("not needed")
+            }
+
+            override fun showMarkedAnswer(translationMark: TranslationMark) {
+                TODO("not needed")
+            }
+
+            override fun maxLineLength(): Int {
+                return 17
+            }
+
+            override fun printWith(printer: ColourPrinter) {
+                printer.printlnWhite("A question!")
+                printer.printlnGreen("A correct answer!")
+                printer.printlnBlue("Some blue stuff")
+            }
+
+        }
+        val inOrder = inOrder(spyPrinter)
+        s.overlay = overlay
+
+        s.print()
+
+        inOrder.verify(spyPrinter).printlnWhite("-----------------")
+        inOrder.verify(spyPrinter).printlnWhite("A question!")
+        inOrder.verify(spyPrinter).printlnGreen("A correct answer!")
+        inOrder.verify(spyPrinter).printlnBlue("Some blue stuff")
+        inOrder.verify(spyPrinter).printlnWhite("-----------------")
     }
 }

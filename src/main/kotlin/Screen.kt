@@ -2,6 +2,7 @@
 import LineLabel.C
 import LineLabel.I
 import java.io.BufferedReader
+import kotlin.math.max
 
 open class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter, var input: BufferedReader) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
@@ -20,11 +21,21 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
     open fun close() { input.close() }
 
     open fun print() {
-        val maxLengthLine = lines.map({ (_, txt) -> txt.toString().length }).max() ?: 0
+        val maxLengthLine = max(maxLineLength(), overlay.maxLineLength())
         printer.printlnWhite("-".repeat(maxLengthLine))
         overlay.printWith(printer)
-        lines.forEach({(_, txt) -> txt.printlnWith(printer) })
+        printLines()
         printer.printlnWhite("-".repeat(maxLengthLine))
+    }
+
+    private fun maxLineLength(): Int {
+        return lines.map({ (_, txt) -> txt.toString().length }).max() ?: 0
+    }
+
+    private fun printLines() {
+        if (lines.count() != 0) {
+            lines.forEach({ (_, txt) -> txt.printlnWith(printer) })
+        }
     }
 
     private fun prompt(s: String) {
