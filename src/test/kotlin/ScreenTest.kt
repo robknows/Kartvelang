@@ -1,6 +1,7 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
+import org.mockito.Matchers
 import org.mockito.Mockito.*
 import java.io.BufferedReader
 import java.io.StringReader
@@ -10,6 +11,68 @@ class ScreenTest {
     private val mockBufferedReader = mock(BufferedReader::class.java)
     private val spyPrinter = spy(ColourPrinter())
     private val s = Screen(spyPrinter, mockKeyWaiter, mockBufferedReader)
+
+    val realisticExampleOverlay = object : Overlay {
+        var line1 = Text("A question!")
+        var line2 = Text("A correct answer!")
+        var line3 = Text("Some blue stuff")
+
+        override fun showQuestion(q: TranslationQuestion) {
+            TODO("not needed")
+        }
+
+        override fun showAnswer(a: String) {
+            TODO("not needed")
+        }
+
+        override fun showMarkedAnswer(translationMark: TranslationMark) {
+            TODO("not needed")
+        }
+
+        override fun clear() {
+            line1 = Text("")
+            line2 = Text("")
+            line3 = Text("")
+        }
+
+        override fun maxLineLength(): Int {
+            return line2.toString().length
+        }
+
+        override fun printWith(printer: ColourPrinter) {
+            line1.printlnWith(printer)
+            line2.printlnWith(printer)
+            line3.printlnWith(printer)
+        }
+    }
+
+    val tackyExampleOverlay = object : Overlay {
+        override fun showQuestion(q: TranslationQuestion) {
+            TODO("not needed")
+        }
+
+        override fun showAnswer(a: String) {
+            TODO("not needed")
+        }
+
+        override fun showMarkedAnswer(translationMark: TranslationMark) {
+            TODO("not needed")
+        }
+
+        override fun clear() {
+            TODO("not needed")
+        }
+
+        override fun maxLineLength(): Int {
+            return 17
+        }
+
+        override fun printWith(printer: ColourPrinter) {
+            printer.printlnWhite("A question!")
+            printer.printlnGreen("A correct answer!")
+            printer.printlnBlue("Some blue stuff")
+        }
+    }
 
     @Test
     fun initialisedBlank() {
@@ -43,7 +106,7 @@ class ScreenTest {
         verify(spyPrinter).printlnWhite("Type out the correct answer:")
     }
 
-    @Test(timeout = 50)
+    @Test(timeout = 120)
     fun canAwaitCorrectionAfterMultipleAttempts() {
         s.input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
         val q = TranslationQuestion("thanks", "გმადლობ")
@@ -74,32 +137,8 @@ class ScreenTest {
 
     @Test
     fun screenIsCorrectSize() {
-        val overlay = object : Overlay {
-            override fun showQuestion(q: TranslationQuestion) {
-                TODO("not needed")
-            }
-
-            override fun showAnswer(a: String) {
-                TODO("not needed")
-            }
-
-            override fun showMarkedAnswer(translationMark: TranslationMark) {
-                TODO("not needed")
-            }
-
-            override fun maxLineLength(): Int {
-                return 17
-            }
-
-            override fun printWith(printer: ColourPrinter) {
-                printer.printlnWhite("A question!")
-                printer.printlnGreen("A correct answer!")
-                printer.printlnBlue("Some blue stuff")
-            }
-
-        }
         val inOrder = inOrder(spyPrinter)
-        s.overlay = overlay
+        s.overlay = tackyExampleOverlay
 
         s.print()
 
@@ -108,5 +147,21 @@ class ScreenTest {
         inOrder.verify(spyPrinter).printlnGreen("A correct answer!")
         inOrder.verify(spyPrinter).printlnBlue("Some blue stuff")
         inOrder.verify(spyPrinter).printlnWhite("-----------------")
+    }
+
+    @Test
+    fun clearScreenAlsoClearsOverlay() {
+        s.lines = mutableListOf(
+                Pair(LineLabel.I, Text("something")),
+                Pair(LineLabel.I, Text("somethingElse")),
+                Pair(LineLabel.I, Text("somethingAgain")))
+        s.overlay = realisticExampleOverlay
+
+        s.clear()
+        s.print()
+
+        verify(spyPrinter, times(2)).printlnWhite("")
+        verify(spyPrinter, never()).printlnGreen(Matchers.anyString())
+        verify(spyPrinter, never()).printlnBlue(Matchers.anyString())
     }
 }

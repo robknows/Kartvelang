@@ -3,6 +3,7 @@ interface Overlay {
     fun showQuestion(q: TranslationQuestion)
     fun showAnswer(a: String)
     fun showMarkedAnswer(translationMark: TranslationMark)
+    fun clear()
     fun maxLineLength(): Int
 }
 
@@ -22,6 +23,8 @@ object BaseOverlay : Overlay {
     override fun showAnswer(a: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun clear() {}
 
     override fun maxLineLength(): Int {
         return 0

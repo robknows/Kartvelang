@@ -51,6 +51,12 @@ open class TranslationOverlay : Overlay {
         correctionLines = Pair(corrections, fullCorrection)
     }
 
+    override fun clear() {
+        questionLine = Text("")
+        answerLine = Text("")
+        correctionLines = Pair(Text(""), Text(""))
+    }
+
     override fun maxLineLength(): Int {
         return listOf(questionLine, answerLine, correctionLines.first, correctionLines.second)
                 .map({ line -> line.toString().length })

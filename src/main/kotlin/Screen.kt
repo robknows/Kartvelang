@@ -16,7 +16,10 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         }
     }
 
-    open fun clear() { lines.clear() }
+    open fun clear() {
+        overlay.clear()
+        lines.clear()
+    }
 
     open fun close() { input.close() }
 
