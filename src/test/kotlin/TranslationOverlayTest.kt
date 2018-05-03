@@ -69,7 +69,7 @@ class TranslationOverlayTest {
         o.showAnswer("გმადლომ")
         o.showMarkedAnswer(mark)
 
-        assertEquals("Translate \"thanks\"\nგმადლომ\n      ბ\ncorrect answer: გმადლობ", o.toString())
+        assertEquals("Translate \"thanks\"\nგმადლომ\n      ბ\nCorrect answer: გმადლობ", o.toString())
     }
 
     @Test

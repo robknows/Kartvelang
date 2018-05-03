@@ -2,7 +2,6 @@
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
-import org.mockito.Matchers
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 import java.io.BufferedReader
@@ -34,7 +33,9 @@ class LessonTest {
         verify(spyScreen, times(3)).clear()
         verify(spyScreen).close()
 
-        verify(spyScreen, never()).awaitCorrection(Matchers.anyString())
+        verify(spyScreen, never()).awaitCorrection(q1)
+        verify(spyScreen, never()).awaitCorrection(q2)
+        verify(spyScreen, never()).awaitCorrection(q3)
     }
 
     @Test(timeout = 3000)
@@ -73,7 +74,7 @@ class LessonTest {
 
         inOrder.verify(q1).complete(spyScreen, lesson.translationOverlay)
         inOrder.verify(q2).complete(spyScreen, lesson.translationOverlay)
-        inOrder.verify(spyScreen).awaitCorrection("doremi")
+        inOrder.verify(spyScreen).awaitCorrection(q2)
         inOrder.verify(q3).complete(spyScreen, lesson.translationOverlay)
         inOrder.verify(q2).complete(spyScreen, lesson.translationOverlay)
 

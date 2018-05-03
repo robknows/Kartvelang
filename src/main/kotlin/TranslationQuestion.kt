@@ -26,6 +26,10 @@ open class TranslationQuestion(val given: String, override val answer: String) :
         return TranslationMark(correct, diff, answer)
     }
 
+    override fun verifyAnswer(attempt: String): Boolean {
+        return markAnswer(attempt).correct
+    }
+
     // Assumption: answer.length == attempt.length
     private fun diffWord(answer: String, attempt: String): Set<Int> {
         val indices = mutableSetOf<Int>()

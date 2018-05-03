@@ -43,7 +43,7 @@ open class TranslationOverlay : Overlay {
         }).joinToString(separator = ""))
         corrections.baseColour = Colour.B
 
-        val fullCorrection = Text("correct answer: $correctAnswer")
+        val fullCorrection = Text("Correct answer: $correctAnswer")
         fullCorrection.baseColour = Colour.W
         fullCorrection.overlayColour = Colour.B
         fullCorrection.overlayIndices = (0..15).toMutableSet()

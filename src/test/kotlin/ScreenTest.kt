@@ -100,10 +100,20 @@ class ScreenTest {
         doReturn("გმადლობ").`when`(mockBufferedReader).readLine()
         val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.awaitCorrection(q.answer)
+        s.awaitCorrection(q)
 
         verify(mockBufferedReader).readLine()
         verify(spyPrinter).printlnWhite("Type out the correct answer:")
+    }
+
+    @Test(timeout = 700)
+    fun canAwaitCorrectionEvenWhenAnswerDoesntMatchExactly() {
+        s.input = spy(BufferedReader(StringReader("junk1\njunk2\nგმადლობ\nbut I kept typing anywayyyy")))
+
+        s.awaitCorrection(TranslationQuestion("thanks", "გმადლობ.")) // Note the full stop
+
+        verify(spyPrinter).printlnWhite("Type out the correct answer:")
+        verify(s.input, times(3)).readLine()
     }
 
     @Test(timeout = 120)
@@ -111,7 +121,7 @@ class ScreenTest {
         s.input = BufferedReader(StringReader("junk1\njunk2\nგმადლობ"))
         val q = TranslationQuestion("thanks", "გმადლობ")
 
-        s.awaitCorrection(q.answer)
+        s.awaitCorrection(q)
     }
 
     @Test

@@ -27,6 +27,6 @@ object BaseOverlay : Overlay {
     override fun clear() {}
 
     override fun maxLineLength(): Int {
-        return 0
+        return 12
     }
 }

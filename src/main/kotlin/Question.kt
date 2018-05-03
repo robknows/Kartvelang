@@ -3,4 +3,5 @@ interface Question<Mark, Overlay> {
     val answer: String
 
     fun complete(s: Screen, o: Overlay): Mark
+    fun verifyAnswer(attempt: String): Boolean
 }
