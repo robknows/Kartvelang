@@ -1,8 +1,8 @@
 interface Overlay {
     fun printWith(printer: ColourPrinter)
-    open fun showQuestion(q: TranslationQuestion)
-    open fun showAnswer(a: String)
-    open fun showMarkedAnswer(translationMark: TranslationMark)
+    fun showQuestion(q: TranslationQuestion)
+    fun showAnswer(a: String)
+    fun showMarkedAnswer(translationMark: TranslationMark)
 }
 
 object BaseOverlay : Overlay {
