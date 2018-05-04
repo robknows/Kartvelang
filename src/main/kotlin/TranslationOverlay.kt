@@ -1,5 +1,5 @@
 /*Created on 03/05/18. */
-open class TranslationOverlay : Overlay {
+open class TranslationOverlay : Overlay<TranslationQuestion, TranslationMark> {
     var questionLine = Text("")
     var answerLine = Text("")
     var correctionLines = Pair(Text(""), Text(""))
@@ -34,13 +34,13 @@ open class TranslationOverlay : Overlay {
         answerLine = Text(a)
     }
 
-    override fun showMarkedAnswer(translationMark: TranslationMark) {
-        if (translationMark.correct) {
+    override fun showMarkedAnswer(m: TranslationMark) {
+        if (m.correct) {
             answerLine.setAllGreen()
         } else {
             answerLine.setAllGreen()
-            answerLine.setRed(translationMark.errorIndices)
-            showCorrection(translationMark.correctAnswer, translationMark.errorIndices)
+            answerLine.setRed(m.errorIndices)
+            showCorrection(m.correctAnswer, m.errorIndices)
         }
     }
 

@@ -6,7 +6,7 @@ import kotlin.math.max
 
 open class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter, var input: BufferedReader) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
-    var overlay: Overlay = BaseOverlay
+    var overlay: Overlay<*, *> = BaseOverlay
 
     override fun toString(): String {
         return if (lines.isEmpty()) {

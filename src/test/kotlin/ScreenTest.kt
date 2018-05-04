@@ -12,7 +12,7 @@ class ScreenTest {
     private val spyPrinter = spy(ColourPrinter())
     private val s = Screen(spyPrinter, mockKeyWaiter, mockBufferedReader)
 
-    val realisticExampleOverlay = object : Overlay {
+    val realisticExampleOverlay = object : Overlay<TranslationQuestion, TranslationMark> {
         var line1 = Text("A question!")
         var line2 = Text("A correct answer!")
         var line3 = Text("Some blue stuff")
@@ -25,7 +25,7 @@ class ScreenTest {
             TODO("not needed")
         }
 
-        override fun showMarkedAnswer(translationMark: TranslationMark) {
+        override fun showMarkedAnswer(m: TranslationMark) {
             TODO("not needed")
         }
 
@@ -50,7 +50,7 @@ class ScreenTest {
         }
     }
 
-    val tackyExampleOverlay = object : Overlay {
+    val tackyExampleOverlay = object : Overlay<TranslationQuestion, TranslationMark> {
         override fun showQuestion(q: TranslationQuestion) {
             TODO("not needed")
         }
@@ -59,7 +59,7 @@ class ScreenTest {
             TODO("not needed")
         }
 
-        override fun showMarkedAnswer(translationMark: TranslationMark) {
+        override fun showMarkedAnswer(m: TranslationMark) {
             TODO("not needed")
         }
 
