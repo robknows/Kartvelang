@@ -10,6 +10,7 @@ class LessonTest {
     val q1 = TranslationQuestion("Type \"abc\"", "abc")
     val q2 = TranslationQuestion("Type \"doremi\"", "doremi")
     val q3 = TranslationQuestion("Type \"onetwothree\"", "onetwothree")
+    val spyOverlay = spy(TranslationOverlay())
 
     @Test(timeout = 3000)
     fun canCompleteSimpleLessonWithAllCorrectAnswers() {
@@ -17,7 +18,6 @@ class LessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
-        val spyOverlay = spy(TranslationOverlay())
         val inOrder = inOrder(spyOverlay)
         val lesson = Lesson(spyScreen, Questions(listOf(q1, q2, q3)), spyOverlay)
 
@@ -43,13 +43,12 @@ class LessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
-        val spyOverlay = spy(TranslationOverlay())
         val inOrder = inOrder(spyOverlay, spyScreen)
         val lesson = Lesson(spyScreen, Questions(listOf(q1)), spyOverlay)
 
         lesson.complete()
 
-        inOrder.verify(lesson.translationOverlay).runQuestion(spyScreen, q1)
+        inOrder.verify(spyOverlay).runQuestion(spyScreen, q1)
         inOrder.verify(spyScreen).awaitKeyPress(Key.ENTER)
         inOrder.verify(spyScreen).clear()
         inOrder.verify(spyScreen).close()
@@ -63,17 +62,16 @@ class LessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
-        val spyOverlay = spy(TranslationOverlay())
         val inOrder = inOrder(spyOverlay, spyScreen)
         val lesson = Lesson(spyScreen, Questions(listOf(q1, q2, q3)), spyOverlay)
 
         lesson.complete()
 
-        inOrder.verify(lesson.translationOverlay).runQuestion(spyScreen, q1)
-        inOrder.verify(lesson.translationOverlay).runQuestion(spyScreen, q2)
+        inOrder.verify(spyOverlay).runQuestion(spyScreen, q1)
+        inOrder.verify(spyOverlay).runQuestion(spyScreen, q2)
         inOrder.verify(spyScreen).awaitCorrection(q2)
-        inOrder.verify(lesson.translationOverlay).runQuestion(spyScreen, q3)
-        inOrder.verify(lesson.translationOverlay).runQuestion(spyScreen, q2)
+        inOrder.verify(spyOverlay).runQuestion(spyScreen, q3)
+        inOrder.verify(spyOverlay).runQuestion(spyScreen, q2)
 
         verify(spyScreen, times(4)).awaitKeyPress(Key.ENTER)
         verify(spyScreen, times(9)).print()
@@ -87,7 +85,7 @@ class LessonTest {
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
 
-        val lesson = Lesson(Screen(mockPrinter, mockKeyWaiter, input), Questions(listOf(q1, q2, q3)), TranslationOverlay())
+        val lesson = Lesson(Screen(mockPrinter, mockKeyWaiter, input), Questions(listOf(q1, q2, q3)), spyOverlay)
 
         val lessonResults = lesson.complete()
 
