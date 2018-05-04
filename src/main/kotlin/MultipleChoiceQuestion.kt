@@ -1,4 +1,4 @@
-class MultipleChoiceQuestion(question: String, override val answer: String, incorrect: Triple<String, String, String>) : Question {
+class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>) : Question {
     override fun verifyAnswer(attempt: String): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
