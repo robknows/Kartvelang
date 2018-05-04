@@ -44,6 +44,10 @@ class ScreenTest {
             line2.printlnWith(printer)
             line3.printlnWith(printer)
         }
+
+        override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
+            TODO("not needed")
+        }
     }
 
     val tackyExampleOverlay = object : Overlay {
@@ -71,6 +75,10 @@ class ScreenTest {
             printer.printlnWhite("A question!")
             printer.printlnGreen("A correct answer!")
             printer.printlnBlue("Some blue stuff")
+        }
+
+        override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
+            TODO("not needed")
         }
     }
 

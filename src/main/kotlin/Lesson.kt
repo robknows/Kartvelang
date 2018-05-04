@@ -1,9 +1,7 @@
 /*Created on 30/04/18. */
 import java.util.*
 
-class Lesson(val s: Screen, val qs: Questions) {
-    val translationOverlay = TranslationOverlay()
-
+class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay) {
     fun complete(): LessonResults {
         var mistakes = 0
         var answered = 0
@@ -11,7 +9,7 @@ class Lesson(val s: Screen, val qs: Questions) {
         while (!qs.empty()) {
             val q = qs.pop()
 
-            val mark = q.complete(s, translationOverlay)
+            val mark = translationOverlay.runQuestion(s, q)
 
             if (!mark.correct) {
                 s.awaitCorrection(q)

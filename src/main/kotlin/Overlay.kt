@@ -6,9 +6,14 @@ interface Overlay {
     fun showMarkedAnswer(translationMark: TranslationMark)
     fun clear()
     fun maxLineLength(): Int
+    fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark
 }
 
 object BaseOverlay : Overlay {
+    override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun printWith(printer: ColourPrinter) {
         printer.printlnWhite("BASE-OVERLAY")
     }

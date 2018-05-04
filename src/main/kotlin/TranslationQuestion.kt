@@ -1,18 +1,7 @@
 /*Created on 29/04/18. */
 import kotlin.math.max
 
-open class TranslationQuestion(val given: String, override val answer: String) : Question<TranslationMark, TranslationOverlay> {
-    override fun complete(s: Screen, o: TranslationOverlay): TranslationMark {
-        s.overlay = o
-        o.showQuestion(this)
-        s.print()
-        val a = s.awaitAnswer().toString()
-        o.showAnswer(a)
-        val mark = markAnswer(a)
-        o.showMarkedAnswer(mark)
-        return mark
-    }
-
+open class TranslationQuestion(val given: String, override val answer: String) : Question {
     fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)

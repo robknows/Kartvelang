@@ -4,6 +4,17 @@ open class TranslationOverlay : Overlay {
     var answerLine = Text("")
     var correctionLines = Pair(Text(""), Text(""))
 
+    override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
+        s.overlay = this
+        showQuestion(q)
+        s.print()
+        val a = s.awaitAnswer().toString()
+        showAnswer(a)
+        val mark = q.markAnswer(a)
+        showMarkedAnswer(mark)
+        return mark
+    }
+
     override fun toString(): String {
         return questionLine.toString() + answerLine.toLine() + correctionLines.first.toLine() + correctionLines.second.toLine()
     }

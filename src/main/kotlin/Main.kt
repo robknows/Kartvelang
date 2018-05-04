@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
 
     val small = Questions(Productions().introductionQuestions(listOf(greeting_hello), listOf(farewell_seeyousoon), listOf(name_Keti), listOf()))
 
-    val lesson = Lesson(s, small)
+    val lesson = Lesson(s, small, TranslationOverlay())
 
     val results = lesson.complete()
 
