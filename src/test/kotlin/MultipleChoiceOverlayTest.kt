@@ -1,5 +1,7 @@
 /*Created on 04/05/18. */
-import junit.framework.TestCase
+import Colour.R
+import Colour.W
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
 class MultipleChoiceOverlayTest {
@@ -11,6 +13,16 @@ class MultipleChoiceOverlayTest {
 
         o.showQuestion(q)
 
-        TestCase.assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  მ    გ\n  ლ    ო", o.toString())
+        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  მ    გ\n  ლ    ო", o.toString())
+    }
+
+    @Test
+    fun showingAnswerDoesntAddAnyNewText() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+
+        o.showQuestion(q)
+        o.showAnswer("გ")
+
+        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  მ    გ\n  ლ    ო", o.toString())
     }
 }
