@@ -8,4 +8,4 @@ class MultipleChoiceQuestion(question: String, override val answer: String, inco
     }
 }
 
-class MultipleChoiceMark(val correct: Boolean)
+data class MultipleChoiceMark(override val correct: Boolean) : Mark
