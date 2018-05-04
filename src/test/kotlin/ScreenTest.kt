@@ -87,8 +87,6 @@ class ScreenTest {
         assertEquals("", s.toString())
     }
 
-
-
     @Test(timeout = 700)
     fun canAwaitAnswer() {
         doReturn("4").`when`(mockBufferedReader).readLine()
