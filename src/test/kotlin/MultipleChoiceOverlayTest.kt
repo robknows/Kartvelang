@@ -35,4 +35,16 @@ class MultipleChoiceOverlayTest {
         assertEquals(Colour.W, o.choice3.baseColour)
         assertEquals(Colour.W, o.choice4.baseColour)
     }
+
+    @Test
+    fun showingIncorrectMarkedAnswerGoesRedAndCorrectOneGoesBlue() {
+        val m = MultipleChoiceMark(false, MultipleChoiceChoice.C)
+
+        o.showMarkedAnswer(m)
+
+        assertEquals(Colour.B, o.choice1.baseColour)
+        assertEquals(Colour.W, o.choice2.baseColour)
+        assertEquals(Colour.R, o.choice3.baseColour)
+        assertEquals(Colour.W, o.choice4.baseColour)
+    }
 }

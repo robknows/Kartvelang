@@ -30,6 +30,7 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
                 MultipleChoiceChoice.D -> choice4.setAllRed()
                 MultipleChoiceChoice.A -> TODO("This shouldn't happen")
             }
+            choice1.setAllBlue()
         }
     }
 

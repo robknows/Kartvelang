@@ -11,10 +11,10 @@ open class Text(private val text: String) {
     }
 
     fun toLine(): String {
-        if (text.isEmpty()) {
-            return ""
+        return if (text.isEmpty()) {
+            ""
         } else {
-            return "\n" + text
+            "\n" + text
         }
     }
 
@@ -41,6 +41,10 @@ open class Text(private val text: String) {
 
     fun setAllRed() {
         baseColour = R
+    }
+
+    fun setAllBlue() {
+        baseColour = B
     }
 
     fun setRed(indices: Set<Int>) {
