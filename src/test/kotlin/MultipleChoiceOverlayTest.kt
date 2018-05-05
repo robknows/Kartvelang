@@ -1,6 +1,9 @@
 /*Created on 04/05/18. */
+import Colour.*
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
+import org.mockito.Mockito.inOrder
+import org.mockito.Mockito.spy
 
 class MultipleChoiceOverlayTest {
     val o = MultipleChoiceOverlay()
@@ -30,10 +33,10 @@ class MultipleChoiceOverlayTest {
 
         o.showMarkedAnswer(m)
 
-        assertEquals(Colour.G, o.choice1.baseColour)
-        assertEquals(Colour.W, o.choice2.baseColour)
-        assertEquals(Colour.W, o.choice3.baseColour)
-        assertEquals(Colour.W, o.choice4.baseColour)
+        assertEquals(G, o.choice1.baseColour)
+        assertEquals(W, o.choice2.baseColour)
+        assertEquals(W, o.choice3.baseColour)
+        assertEquals(W, o.choice4.baseColour)
     }
 
     @Test
@@ -42,10 +45,10 @@ class MultipleChoiceOverlayTest {
 
         o.showMarkedAnswer(m)
 
-        assertEquals(Colour.B, o.choice1.baseColour)
-        assertEquals(Colour.W, o.choice2.baseColour)
-        assertEquals(Colour.R, o.choice3.baseColour)
-        assertEquals(Colour.W, o.choice4.baseColour)
+        assertEquals(B, o.choice1.baseColour)
+        assertEquals(W, o.choice2.baseColour)
+        assertEquals(R, o.choice3.baseColour)
+        assertEquals(W, o.choice4.baseColour)
     }
 
     @Test
@@ -55,5 +58,25 @@ class MultipleChoiceOverlayTest {
         o.showQuestion(q)
 
         assertEquals(50, o.maxLineLength())
+    }
+
+    @Test
+    fun canPrintOverlay() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val spyPrinter = spy(ColourPrinter())
+        val inOrder = inOrder(spyPrinter)
+
+        o.showQuestion(q)
+        o.printWith(spyPrinter)
+
+        inOrder.verify(spyPrinter).printlnWhite("Which of these makes a sound like \"m\" in \"monkey\"?")
+        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).print(W, "მ")
+        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).println(W, "გ")
+        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).print(W, "ლ")
+        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).print(W, "ო")
     }
 }

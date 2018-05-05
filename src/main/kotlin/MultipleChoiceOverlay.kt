@@ -18,7 +18,16 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
     }
 
     override fun printWith(printer: ColourPrinter) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        questionLine.printlnWith(printer)
+        printer.printWhite("  ")
+        printer.print(choice1.baseColour, choice1.toString())
+        printer.printWhite("    ")
+        printer.println(choice2.baseColour, choice2.toString())
+        printer.printWhite("  ")
+        printer.print(choice3.baseColour, choice3.toString())
+        printer.printWhite("    ")
+        printer.print(choice4.baseColour, choice4.toString())
+
     }
 
     override fun showAnswer(a: String) {}

@@ -12,7 +12,7 @@ open class ColourPrinter {
         print(readLine)
     }
 
-    fun printWhite(s: String) {
+    open fun printWhite(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;255m$s'").start()
         val readLine = proc.inputStream.bufferedReader().readLine()
         print(readLine)
@@ -44,7 +44,7 @@ open class ColourPrinter {
         println()
     }
 
-    fun print(c: Colour, s: String) {
+    open fun print(c: Colour, s: String) {
         when(c) {
             Colour.W -> printWhite(s)
             Colour.G -> printGreen(s)
@@ -53,7 +53,7 @@ open class ColourPrinter {
         }
     }
 
-    fun println(c: Colour, s: String) {
+    open fun println(c: Colour, s: String) {
         when(c) {
             Colour.W -> printlnWhite(s)
             Colour.G -> printlnGreen(s)
