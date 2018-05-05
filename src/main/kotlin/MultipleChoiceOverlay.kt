@@ -5,7 +5,7 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
     var choice3 = Text("")
     var choice4 = Text("")
 
-    override fun printWith(printer: ColourPrinter) {
+    override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -17,8 +17,11 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
         choice4 = Text(q.incorrect.third)
     }
 
-    override fun showAnswer(a: String) {
+    override fun printWith(printer: ColourPrinter) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+    override fun showAnswer(a: String) {}
 
     override fun showMarkedAnswer(m: MultipleChoiceMark) {
         if (m.correct) {
@@ -34,21 +37,21 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
         }
     }
 
+    override fun toString(): String {
+        return "$questionLine\n  $choice1    $choice2\n  $choice3    $choice4"
+    }
+
     override fun clear() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        questionLine = Text("")
+        choice1 = Text("")
+        choice2 = Text("")
+        choice3 = Text("")
+        choice4 = Text("")
     }
 
     override fun maxLineLength(): Int {
         return listOf(questionLine.toString().length,
                 6 + choice1.toString().length + choice2.toString().length,
                 6 + choice3.toString().length + choice4.toString().length).max() ?: 0
-    }
-
-    override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun toString(): String {
-        return "$questionLine\n  $choice1    $choice2\n  $choice3    $choice4"
     }
 }
