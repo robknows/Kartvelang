@@ -47,4 +47,13 @@ class MultipleChoiceOverlayTest {
         assertEquals(Colour.R, o.choice3.baseColour)
         assertEquals(Colour.W, o.choice4.baseColour)
     }
+
+    @Test
+    fun canGetMaxLengthLine() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+
+        o.showQuestion(q)
+
+        assertEquals(50, o.maxLineLength())
+    }
 }

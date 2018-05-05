@@ -39,7 +39,9 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
     }
 
     override fun maxLineLength(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return listOf(questionLine.toString().length,
+                6 + choice1.toString().length + choice2.toString().length,
+                6 + choice3.toString().length + choice4.toString().length).max() ?: 0
     }
 
     override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
