@@ -1,8 +1,10 @@
 import MultipleChoiceChoice.*
 
-class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>) : Question {
+open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>) : Question {
+    override val fullCorrections: Boolean = false
+
     override fun verifyAnswer(attempt: String): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("should not be called")
     }
 
     fun markAnswer(attempt: String): MultipleChoiceMark {

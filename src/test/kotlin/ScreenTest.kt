@@ -130,6 +130,16 @@ class ScreenTest {
         s.awaitCorrection(q)
     }
 
+    @Test(timeout = 80)
+    fun awaitsCorrectionOnlyIfRequired() {
+        doReturn("jibber jabber").`when`(mockBufferedReader).readLine()
+        val spyQ = spy(MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო")))
+
+        s.awaitCorrection(spyQ)
+
+        verify(spyQ, never()).verifyAnswer(Matchers.anyString())
+    }
+
     @Test
     fun canClearScreen() {
         s.lines = mutableListOf(

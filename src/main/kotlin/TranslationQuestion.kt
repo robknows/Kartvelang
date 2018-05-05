@@ -2,6 +2,8 @@
 import kotlin.math.max
 
 open class TranslationQuestion(val given: String, override val answer: String) : Question {
+    override val fullCorrections: Boolean = true
+
     fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)
