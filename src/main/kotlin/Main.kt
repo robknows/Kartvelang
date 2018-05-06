@@ -15,9 +15,14 @@ fun main(args: Array<String>) {
     val input = BufferedReader(InputStreamReader(System.`in`))
     val s = Screen(printer, KeyWaiter(), input)
 
-    val small = Questions(Productions().introductionQuestions(listOf(greeting_hello), listOf(farewell_seeyousoon), listOf(name_Keti), listOf()))
-    val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
-    small.add(q)
+    //val small = Questions(Productions().introductionQuestions(listOf(greeting_hello), listOf(farewell_seeyousoon), listOf(name_Keti), listOf()))
+
+    val small = Questions()
+
+    val q1 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+    val q2 = MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"))
+    small.add(q1)
+    small.add(q2)
 
     val lesson = Lesson(s, small, TranslationOverlay(), MultipleChoiceOverlay())
 

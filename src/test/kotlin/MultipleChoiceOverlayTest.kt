@@ -77,6 +77,6 @@ class MultipleChoiceOverlayTest {
         inOrder.verify(spyPrinter).printWhite("  ")
         inOrder.verify(spyPrinter).print(W, "ლ")
         inOrder.verify(spyPrinter).printWhite("    ")
-        inOrder.verify(spyPrinter).print(W, "ო")
+        inOrder.verify(spyPrinter).println(W, "ო")
     }
 }

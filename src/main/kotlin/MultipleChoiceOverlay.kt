@@ -33,7 +33,7 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
         printer.printWhite("  ")
         printer.print(choice3.baseColour, choice3.toString())
         printer.printWhite("    ")
-        printer.print(choice4.baseColour, choice4.toString())
+        printer.println(choice4.baseColour, choice4.toString())
 
     }
 
