@@ -26,6 +26,10 @@ class Questions {
         translationQuestions.add(question)
     }
 
+    fun add(question: MultipleChoiceQuestion) {
+        multipleChoiceQuestions.add(question)
+    }
+
     fun pop(): TranslationQuestion {
         return if (count() < 1) {
             NullTranslationQuestion

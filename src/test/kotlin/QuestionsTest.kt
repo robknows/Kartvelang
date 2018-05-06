@@ -153,4 +153,15 @@ class QuestionsTest {
 
         assertFalse(qs.empty())
     }
+
+    @Test
+    fun canAddMultipleChoiceQuestions() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val qs = Questions()
+
+        qs.add(q)
+
+        assertEquals(1, qs.count())
+        assertFalse(qs.empty())
+    }
 }
