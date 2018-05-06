@@ -9,7 +9,12 @@ class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Translati
         while (!qs.empty()) {
             val q = qs.pop()
 
-            val mark = translationOverlay.runQuestion(s, q)
+            val mark = when (q) {
+                is TranslationQuestion -> translationOverlay.runQuestion(s, q)
+                else -> {
+                    TODO("Shouldn't happen")
+                }
+            }
 
             if (!mark.correct) {
                 s.awaitCorrection(q)
