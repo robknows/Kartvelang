@@ -16,8 +16,10 @@ fun main(args: Array<String>) {
     val s = Screen(printer, KeyWaiter(), input)
 
     val small = Questions(Productions().introductionQuestions(listOf(greeting_hello), listOf(farewell_seeyousoon), listOf(name_Keti), listOf()))
+    val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+    small.add(q)
 
-    val lesson = Lesson(s, small, TranslationOverlay())
+    val lesson = Lesson(s, small, TranslationOverlay(), MultipleChoiceOverlay())
 
     val results = lesson.complete()
 

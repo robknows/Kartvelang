@@ -1,7 +1,7 @@
 /*Created on 30/04/18. */
 import java.util.*
 
-class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay) {
+class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {
     fun complete(): LessonResults {
         var mistakes = 0
         var answered = 0
@@ -11,6 +11,7 @@ class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Translati
 
             val mark = when (q) {
                 is TranslationQuestion -> translationOverlay.runQuestion(s, q)
+                is MultipleChoiceQuestion -> multipleChoiceOverlay.runQuestion(s, q)
                 else -> {
                     TODO("Shouldn't happen")
                 }

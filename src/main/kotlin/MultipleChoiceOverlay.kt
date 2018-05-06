@@ -1,4 +1,4 @@
-class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark> {
+open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark> {
     var questionLine = Text("")
     var choice1 = Text("")
     var choice2 = Text("")
@@ -6,7 +6,14 @@ class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark
     var choice4 = Text("")
 
     override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        s.overlay = this
+        showQuestion(q)
+        s.print()
+        val a = s.awaitAnswer().toString()
+        showAnswer(a)
+        val mark = q.markAnswer(a)
+        showMarkedAnswer(mark)
+        return mark
     }
 
     override fun showQuestion(q: MultipleChoiceQuestion) {
