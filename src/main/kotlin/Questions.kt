@@ -2,18 +2,28 @@
 
 class Questions {
     val translationQuestions: MutableList<TranslationQuestion> = mutableListOf()
+    val multipleChoiceQuestions: MutableList<MultipleChoiceQuestion> = mutableListOf()
 
     constructor()
     constructor(qs: Collection<TranslationQuestion>) {
         translationQuestions.addAll(qs)
     }
 
-    fun add(question: TranslationQuestion) {
-        translationQuestions.add(question)
+    constructor(translationQs: Collection<TranslationQuestion>, mcQs: Collection<MultipleChoiceQuestion>) {
+        translationQuestions.addAll(translationQs)
+        multipleChoiceQuestions.addAll(mcQs)
     }
 
     fun count(): Int {
-        return translationQuestions.count()
+        return translationQuestions.count() + multipleChoiceQuestions.count()
+    }
+
+    fun empty(): Boolean {
+        return translationQuestions.isEmpty() && multipleChoiceQuestions.isEmpty()
+    }
+
+    fun add(question: TranslationQuestion) {
+        translationQuestions.add(question)
     }
 
     fun pop(): TranslationQuestion {
@@ -24,10 +34,6 @@ class Questions {
         }
     }
 
-    fun empty(): Boolean {
-        return translationQuestions.isEmpty()
-    }
-
     fun insertDelayed(q: TranslationQuestion) {
         if (translationQuestions.count() < 4) {
             add(q)
@@ -35,13 +41,4 @@ class Questions {
             translationQuestions.add(3, q)
         }
     }
-}
-
-fun elevator_smalltalk(): Questions {
-    val p = Productions()
-    return Questions(p.introductionQuestions(
-            listOf(greeting_hello, greeting_nicetomeetyou),
-            listOf(farewell_seeyousoon),
-            listOf(name_Keti),
-            listOf(phrase_whatareyoucalled, phrase_howareyou, mood_alright, mood_notbad)))
 }

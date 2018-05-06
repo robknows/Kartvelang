@@ -1,6 +1,5 @@
 /*Created on 29/04/18. */
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
+import junit.framework.TestCase.*
 import org.junit.Test
 
 class QuestionsTest {
@@ -134,5 +133,24 @@ class QuestionsTest {
         val qs = Questions(questions)
 
         assertEquals(questions, qs.translationQuestions)
+    }
+
+    @Test
+    fun canInitialiseWithMultipleQuestionTypes() {
+        val q1 = TranslationQuestion("What is 2+1?", "3")
+        val q2 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+
+        val qs = Questions(listOf(q1), listOf(q2))
+
+        assertEquals(2, qs.count())
+    }
+
+    @Test
+    fun isEmptyOnlyIfAllQuestionTypeSetsAreEmpty() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+
+        val qs = Questions(mutableListOf(), listOf(q))
+
+        assertFalse(qs.empty())
     }
 }
