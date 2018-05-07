@@ -65,15 +65,10 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
 
     override fun showMarkedAnswer(m: MultipleChoiceMark) {
         if (m.correct) {
-            choice1.setAllGreen()
+            correspondingText(m.answer).setAllGreen()
         } else {
-            when (m.choice) {
-                B -> choice2.setAllRed()
-                C -> choice3.setAllRed()
-                D -> choice4.setAllRed()
-                A -> TODO("This shouldn't happen")
-            }
-            choice1.setAllBlue()
+            correspondingText(m.choice).setAllRed()
+            correspondingText(m.answer).setAllBlue()
         }
     }
 
@@ -93,5 +88,14 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
         return listOf(questionLine.toString().length,
                 6 + choice1.toString().length + choice2.toString().length,
                 6 + choice3.toString().length + choice4.toString().length).max() ?: 0
+    }
+
+    private fun correspondingText(c: MultipleChoiceChoice): Text {
+        return when (c) {
+            A -> choice1
+            B -> choice2
+            C -> choice3
+            D -> choice4
+        }
     }
 }

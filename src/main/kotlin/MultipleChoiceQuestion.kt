@@ -9,7 +9,7 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
 
     fun markAnswer(attempt: String): MultipleChoiceMark {
         val choice = attempt.first().toLowerCase().toChoice()
-        return MultipleChoiceMark(choice == answerChoice, choice)
+        return MultipleChoiceMark(choice == answerChoice, choice, answerChoice)
     }
 }
 
@@ -25,7 +25,7 @@ private fun Char.toChoice(): MultipleChoiceChoice {
     }
 }
 
-data class MultipleChoiceMark(override val correct: Boolean, val choice: MultipleChoiceChoice) : Mark
+data class MultipleChoiceMark(override val correct: Boolean, val choice: MultipleChoiceChoice, val answer: MultipleChoiceChoice) : Mark
 
 enum class MultipleChoiceChoice {
     A, B, C, D

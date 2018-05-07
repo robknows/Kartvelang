@@ -31,7 +31,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun showingCorrectMarkedAnswerGoesGreen() {
-        val m = MultipleChoiceMark(true, A)
+        val m = MultipleChoiceMark(true, A, A)
 
         o.showMarkedAnswer(m)
 
@@ -43,7 +43,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun showingIncorrectMarkedAnswerGoesRedAndCorrectOneGoesBlue() {
-        val m = MultipleChoiceMark(false, C)
+        val m = MultipleChoiceMark(false, C, A)
 
         o.showMarkedAnswer(m)
 
@@ -89,5 +89,38 @@ class MultipleChoiceOverlayTest {
         o.showQuestion(q)
 
         assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  გ    ლ\n  ო    მ", o.toString())
+    }
+
+    @Test
+    fun showingIncorrectMarkedAnswerGoesRedAndCorrectOneGoesBlueWithAnswerNotA() {
+        val m = MultipleChoiceMark(false, C, MultipleChoiceChoice.B)
+
+        o.showMarkedAnswer(m)
+
+        assertEquals(W, o.choice1.baseColour)
+        assertEquals(B, o.choice2.baseColour)
+        assertEquals(R, o.choice3.baseColour)
+        assertEquals(W, o.choice4.baseColour)
+    }
+
+    @Test
+    fun canPrintCorrectMarkedOverlayWithAnswerNotA() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), C)
+        val spyPrinter = spy(ColourPrinter())
+        val inOrder = inOrder(spyPrinter)
+
+        o.showQuestion(q)
+        o.showMarkedAnswer(MultipleChoiceMark(true, C, C))
+        o.printWith(spyPrinter)
+
+        inOrder.verify(spyPrinter).printlnWhite("Which of these makes a sound like \"m\" in \"monkey\"?")
+        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).print(W, "გ")
+        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).println(W, "ლ")
+        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).print(G, "მ")
+        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).println(W, "ო")
     }
 }
