@@ -1,3 +1,5 @@
+import MultipleChoiceChoice.*
+
 open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark> {
     var questionLine = Text("")
     var choice1 = Text("")
@@ -18,10 +20,32 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
 
     override fun showQuestion(q: MultipleChoiceQuestion) {
         questionLine = Text("Which of these ${q.question}?")
-        choice1 = Text(q.answer)
-        choice2 = Text(q.incorrect.first)
-        choice3 = Text(q.incorrect.second)
-        choice4 = Text(q.incorrect.third)
+        when (q.answerChoice) {
+            A -> {
+                choice1 = Text(q.answer)
+                choice2 = Text(q.incorrect.first)
+                choice3 = Text(q.incorrect.second)
+                choice4 = Text(q.incorrect.third)
+            }
+            B -> {
+                choice1 = Text(q.incorrect.first)
+                choice2 = Text(q.answer)
+                choice3 = Text(q.incorrect.second)
+                choice4 = Text(q.incorrect.third)
+            }
+            C -> {
+                choice1 = Text(q.incorrect.first)
+                choice2 = Text(q.incorrect.second)
+                choice3 = Text(q.answer)
+                choice4 = Text(q.incorrect.third)
+            }
+            D -> {
+                choice1 = Text(q.incorrect.first)
+                choice2 = Text(q.incorrect.second)
+                choice3 = Text(q.incorrect.third)
+                choice4 = Text(q.answer)
+            }
+        }
     }
 
     override fun printWith(printer: ColourPrinter) {
@@ -44,10 +68,10 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
             choice1.setAllGreen()
         } else {
             when (m.choice) {
-                MultipleChoiceChoice.B -> choice2.setAllRed()
-                MultipleChoiceChoice.C -> choice3.setAllRed()
-                MultipleChoiceChoice.D -> choice4.setAllRed()
-                MultipleChoiceChoice.A -> TODO("This shouldn't happen")
+                B -> choice2.setAllRed()
+                C -> choice3.setAllRed()
+                D -> choice4.setAllRed()
+                A -> TODO("This shouldn't happen")
             }
             choice1.setAllBlue()
         }

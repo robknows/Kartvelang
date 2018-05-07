@@ -1,7 +1,7 @@
 /*Created on 04/05/18. */
 import Colour.*
-import MultipleChoiceChoice.A
-import MultipleChoiceChoice.C
+import Colour.B
+import MultipleChoiceChoice.*
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Mockito.inOrder
@@ -80,5 +80,14 @@ class MultipleChoiceOverlayTest {
         inOrder.verify(spyPrinter).print(W, "ლ")
         inOrder.verify(spyPrinter).printWhite("    ")
         inOrder.verify(spyPrinter).println(W, "ო")
+    }
+
+    @Test
+    fun canShowQuestionWithAnswerChoiceNotA() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), D)
+
+        o.showQuestion(q)
+
+        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  გ    ლ\n  ო    მ", o.toString())
     }
 }
