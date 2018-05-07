@@ -20,4 +20,13 @@ class MultipleChoiceQuestionTest {
 
         TestCase.assertTrue(mark.correct)
     }
+
+    @Test
+    fun lowerCaseAnswerOkay() {
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+
+        val mark = q.markAnswer("a")
+
+        TestCase.assertTrue(mark.correct)
+    }
 }
