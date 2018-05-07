@@ -1,5 +1,7 @@
 /*Created on 04/05/18. */
 import Colour.*
+import MultipleChoiceChoice.A
+import MultipleChoiceChoice.C
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Mockito.inOrder
@@ -10,7 +12,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun canShowQuestion() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
 
         o.showQuestion(q)
 
@@ -19,7 +21,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun showingJustTheAnswerDoesntDoAnything() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
 
         o.showQuestion(q)
         o.showAnswer("გ")
@@ -29,7 +31,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun showingCorrectMarkedAnswerGoesGreen() {
-        val m = MultipleChoiceMark(true, MultipleChoiceChoice.A)
+        val m = MultipleChoiceMark(true, A)
 
         o.showMarkedAnswer(m)
 
@@ -41,7 +43,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun showingIncorrectMarkedAnswerGoesRedAndCorrectOneGoesBlue() {
-        val m = MultipleChoiceMark(false, MultipleChoiceChoice.C)
+        val m = MultipleChoiceMark(false, C)
 
         o.showMarkedAnswer(m)
 
@@ -53,7 +55,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun canGetMaxLengthLine() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
 
         o.showQuestion(q)
 
@@ -62,7 +64,7 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun canPrintOverlay() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
         val spyPrinter = spy(ColourPrinter())
         val inOrder = inOrder(spyPrinter)
 

@@ -1,4 +1,5 @@
 /*Created on 30/04/18. */
+import MultipleChoiceChoice.A
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
@@ -10,7 +11,7 @@ class LessonTest {
     val q1 = TranslationQuestion("Type \"abc\"", "abc")
     val q2 = TranslationQuestion("Type \"doremi\"", "doremi")
     val q3 = TranslationQuestion("Type \"onetwothree\"", "onetwothree")
-    val q4 = MultipleChoiceQuestion("is \"m\"", "m", Triple("a", "b", "c"))
+    val q4 = MultipleChoiceQuestion("is \"m\"", "m", Triple("a", "b", "c"), A)
     val spyTranslationOverlay = spy(TranslationOverlay())
     val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
 
@@ -98,7 +99,7 @@ class LessonTest {
 
     @Test(timeout = 3000)
     fun canCompleteLessonWithMultipleChoiceQuestion() {
-        val input = BufferedReader(StringReader("abc\n\nm\n\nonetwothree\n\n"))
+        val input = BufferedReader(StringReader("abc\n\nA\n\nonetwothree\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))

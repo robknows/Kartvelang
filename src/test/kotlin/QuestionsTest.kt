@@ -1,4 +1,5 @@
 /*Created on 29/04/18. */
+import MultipleChoiceChoice.A
 import junit.framework.TestCase.*
 import org.junit.Test
 
@@ -138,7 +139,7 @@ class QuestionsTest {
     @Test
     fun canInitialiseWithMultipleQuestionTypes() {
         val q1 = TranslationQuestion("What is 2+1?", "3")
-        val q2 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q2 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
 
         val qs = Questions(listOf(q1, q2))
 
@@ -147,7 +148,7 @@ class QuestionsTest {
 
     @Test
     fun canAddMultipleChoiceQuestions() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
         val qs = Questions()
 
         qs.add(q)

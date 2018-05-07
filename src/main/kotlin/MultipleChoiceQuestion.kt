@@ -1,23 +1,27 @@
 import MultipleChoiceChoice.*
 
-open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>) : Question {
+open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>, val answerChoice: MultipleChoiceChoice) : Question {
     override val fullCorrections: Boolean = false
 
     override fun verifyAnswer(attempt: String): Boolean {
-        TODO("should not be called")
+        TODO("not implemented")
     }
 
     fun markAnswer(attempt: String): MultipleChoiceMark {
-        val choice = when (attempt.first().toLowerCase()) {
-            'a' -> A
-            'b' -> B
-            'c' -> C
-            'd' -> D
-            else -> {
-                TODO("This shouldn't happen")
-            }
+        val choice = attempt.first().toLowerCase().toChoice()
+        return MultipleChoiceMark(choice == answerChoice, choice)
+    }
+}
+
+private fun Char.toChoice(): MultipleChoiceChoice {
+    return when (this) {
+        'a' -> A
+        'b' -> B
+        'c' -> C
+        'd' -> D
+        else -> {
+            TODO("Cannot get choice which isn't in {a, b, c, d}")
         }
-        return MultipleChoiceMark(choice == A, choice)
     }
 }
 

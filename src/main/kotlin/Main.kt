@@ -1,6 +1,7 @@
 /*Created on 29/04/18. */
 @file:JvmName("MainClass")
 
+import MultipleChoiceChoice.A
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
@@ -17,9 +18,9 @@ fun main(args: Array<String>) {
 
     val p = Productions()
 
-    val q1 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"))
+    val q1 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
     val q2 = p.dictionary(greeting_hello)
-    val q3 = MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"))
+    val q3 = MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"), A)
     val q4 = p.introduction(greeting_nicetomeetyou, name_Keti)
 
     val qs = Questions(listOf(q1, q2, q3, q4))

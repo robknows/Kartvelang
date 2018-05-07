@@ -1,4 +1,5 @@
 /*Created on 29/04/18. */
+import MultipleChoiceChoice.A
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import org.mockito.Matchers
@@ -130,10 +131,10 @@ class ScreenTest {
         s.awaitCorrection(q)
     }
 
-    @Test(timeout = 80)
+    @Test(timeout = 260)
     fun awaitsCorrectionOnlyIfRequired() {
         doReturn("jibber jabber").`when`(mockBufferedReader).readLine()
-        val spyQ = spy(MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო")))
+        val spyQ = spy(MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A))
 
         s.awaitCorrection(spyQ)
 
