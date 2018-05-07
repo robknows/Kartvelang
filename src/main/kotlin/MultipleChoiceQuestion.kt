@@ -8,16 +8,16 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
     }
 
     fun markAnswer(attempt: String): MultipleChoiceMark {
-        val choice = when (attempt) {
-            answer -> A
-            incorrect.first -> B
-            incorrect.second -> C
-            incorrect.third -> D
+        val choice = when (attempt.first().toLowerCase()) {
+            'a' -> A
+            'b' -> B
+            'c' -> C
+            'd' -> D
             else -> {
                 TODO("This shouldn't happen")
             }
         }
-        return MultipleChoiceMark(attempt == answer, choice)
+        return MultipleChoiceMark(choice == A, choice)
     }
 }
 
