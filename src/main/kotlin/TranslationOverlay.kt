@@ -8,7 +8,7 @@ open class TranslationOverlay : Overlay<TranslationQuestion, TranslationMark> {
         s.overlay = this
         showQuestion(q)
         s.print()
-        val a = s.awaitAnswer().toString()
+        val a = s.awaitLine().toString()
         showAnswer(a)
         val mark = q.markAnswer(a)
         showMarkedAnswer(mark)
@@ -26,15 +26,15 @@ open class TranslationOverlay : Overlay<TranslationQuestion, TranslationMark> {
         correctionLines.second.printlnWith(printer)
     }
 
-    override fun showQuestion(q: TranslationQuestion) {
+    fun showQuestion(q: TranslationQuestion) {
         questionLine = Text("Translate \"${q.given}\"")
     }
 
-    override fun showAnswer(a: String) {
+    fun showAnswer(a: String) {
         answerLine = Text(a)
     }
 
-    override fun showMarkedAnswer(m: TranslationMark) {
+    fun showMarkedAnswer(m: TranslationMark) {
         if (m.correct) {
             answerLine.setAllGreen()
         } else {

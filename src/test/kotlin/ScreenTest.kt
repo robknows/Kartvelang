@@ -18,18 +18,6 @@ class ScreenTest {
         var line2 = Text("A correct answer!")
         var line3 = Text("Some blue stuff")
 
-        override fun showQuestion(q: TranslationQuestion) {
-            TODO("not needed")
-        }
-
-        override fun showAnswer(a: String) {
-            TODO("not needed")
-        }
-
-        override fun showMarkedAnswer(m: TranslationMark) {
-            TODO("not needed")
-        }
-
         override fun clear() {
             line1 = Text("")
             line2 = Text("")
@@ -56,22 +44,6 @@ class ScreenTest {
             return "Tacky overlay string"
         }
 
-        override fun showQuestion(q: TranslationQuestion) {
-            TODO("not needed")
-        }
-
-        override fun showAnswer(a: String) {
-            TODO("not needed")
-        }
-
-        override fun showMarkedAnswer(m: TranslationMark) {
-            TODO("not needed")
-        }
-
-        override fun clear() {
-            TODO("not needed")
-        }
-
         override fun maxLineLength(): Int {
             return 17
         }
@@ -80,6 +52,10 @@ class ScreenTest {
             printer.printlnWhite("A question!")
             printer.printlnGreen("A correct answer!")
             printer.printlnBlue("Some blue stuff")
+        }
+
+        override fun clear() {
+            TODO("not needed")
         }
 
         override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
@@ -96,14 +72,14 @@ class ScreenTest {
     fun canAwaitAnswer() {
         doReturn("4").`when`(mockBufferedReader).readLine()
 
-        assertEquals("4", s.awaitAnswer().toString())
+        assertEquals("4", s.awaitLine().toString())
     }
 
     @Test(timeout = 700)
     fun canAwaitAnswerIgnoringWhitespace() {
         s.input = BufferedReader(StringReader("\n\n\n4"))
 
-        assertEquals("4", s.awaitAnswer().toString())
+        assertEquals("4", s.awaitLine().toString())
     }
 
     @Test(timeout = 700)

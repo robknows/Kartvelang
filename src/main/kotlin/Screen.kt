@@ -46,28 +46,20 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         }
     }
 
-    private fun prompt(s: String) {
-        val prompt = Pair(C, Text(s))
-        lines.add(prompt)
-        print()
-        lines.remove(prompt)
-    }
-
-    open fun awaitAnswer(): Text {
+    open fun awaitLine(): Text {
         val readLine = input.readLine()
         return if (readLine == null || readLine.isEmpty()) {
-            awaitAnswer()
+            awaitLine()
         } else {
             Text(readLine)
         }
     }
 
-    open fun awaitCorrection(q: Question) {
-        if (q.fullCorrections) {
-            prompt("Type out the correct answer:")
-            while (!q.verifyAnswer(input.readLine()!!)) {
-            }
-        }
+    private fun prompt(s: String) {
+        val prompt = Pair(C, Text(s))
+        lines.add(prompt)
+        print()
+        lines.remove(prompt)
     }
 
     open fun awaitKeyPress(key: Key) {
@@ -76,6 +68,14 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
             input.readLine()
         } else {
             keyWaiter.await(key.keyCode)
+        }
+    }
+
+    open fun awaitCorrection(q: Question) {
+        if (q.fullCorrections) {
+            prompt("Type out the correct answer:")
+            while (!q.verifyAnswer(input.readLine()!!)) {
+            }
         }
     }
 

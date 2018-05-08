@@ -11,14 +11,26 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
         s.overlay = this
         showQuestion(q)
         s.print()
-        val a = s.awaitAnswer().toString()
-        showAnswer(a)
+        val a = s.awaitLine().toString()
         val mark = q.markAnswer(a)
         showMarkedAnswer(mark)
         return mark
     }
 
-    override fun showQuestion(q: MultipleChoiceQuestion) {
+    override fun printWith(printer: ColourPrinter) {
+        questionLine.printlnWith(printer)
+        printer.printWhite("  ")
+        printer.print(choice1.baseColour, choice1.toString())
+        printer.printWhite("    ")
+        printer.println(choice2.baseColour, choice2.toString())
+        printer.printWhite("  ")
+        printer.print(choice3.baseColour, choice3.toString())
+        printer.printWhite("    ")
+        printer.println(choice4.baseColour, choice4.toString())
+
+    }
+
+    fun showQuestion(q: MultipleChoiceQuestion) {
         questionLine = Text("Which of these ${q.question}?")
         when (q.answerChoice) {
             A -> {
@@ -48,22 +60,7 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
         }
     }
 
-    override fun printWith(printer: ColourPrinter) {
-        questionLine.printlnWith(printer)
-        printer.printWhite("  ")
-        printer.print(choice1.baseColour, choice1.toString())
-        printer.printWhite("    ")
-        printer.println(choice2.baseColour, choice2.toString())
-        printer.printWhite("  ")
-        printer.print(choice3.baseColour, choice3.toString())
-        printer.printWhite("    ")
-        printer.println(choice4.baseColour, choice4.toString())
-
-    }
-
-    override fun showAnswer(a: String) {}
-
-    override fun showMarkedAnswer(m: MultipleChoiceMark) {
+    fun showMarkedAnswer(m: MultipleChoiceMark) {
         if (m.correct) {
             correspondingText(m.answer).setAllGreen()
         } else {
