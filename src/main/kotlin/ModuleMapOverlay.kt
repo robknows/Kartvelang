@@ -1,11 +1,14 @@
+/*Created on 08/05/18. */
 import kotlin.math.max
 
-/*Created on 08/05/18. */
 class ModuleMapOverlay : Overlay {
     private val topLine = Text("Available Modules:")
 
     override fun printWith(printer: ColourPrinter) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        topLine.printlnWith(printer)
+        for (m in modules) {
+            printer.printlnWhite("\t-${m.name}")
+        }
     }
 
     override fun clear() {
