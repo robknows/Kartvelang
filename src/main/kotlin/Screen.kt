@@ -46,12 +46,12 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         }
     }
 
-    open fun awaitLine(): Text {
+    open fun awaitLine(): String {
         val readLine = input.readLine()
         return if (readLine == null || readLine.isEmpty()) {
             awaitLine()
         } else {
-            Text(readLine)
+            readLine
         }
     }
 
@@ -60,6 +60,11 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         lines.add(prompt)
         print()
         lines.remove(prompt)
+    }
+
+    fun awaitPromptedLine(prompt: String): String {
+        prompt(prompt)
+        return awaitLine()
     }
 
     open fun awaitKeyPress(key: Key) {

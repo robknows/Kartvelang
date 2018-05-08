@@ -72,14 +72,14 @@ class ScreenTest {
     fun canAwaitAnswer() {
         doReturn("4").`when`(mockBufferedReader).readLine()
 
-        assertEquals("4", s.awaitLine().toString())
+        assertEquals("4", s.awaitLine())
     }
 
     @Test(timeout = 700)
     fun canAwaitAnswerIgnoringWhitespace() {
         s.input = BufferedReader(StringReader("\n\n\n4"))
 
-        assertEquals("4", s.awaitLine().toString())
+        assertEquals("4", s.awaitLine())
     }
 
     @Test(timeout = 700)

@@ -11,10 +11,17 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
         s.overlay = this
         showQuestion(q)
         s.print()
-        val a = s.awaitLine().toString()
-        val mark = q.markAnswer(a)
+        var input = s.awaitLine()
+        while (!isValidChoice(input)) {
+            input = s.awaitPromptedLine("Pick an answer among a, b, c, d (case-insensitive)")
+        }
+        val mark = q.markAnswer(input)
         showMarkedAnswer(mark)
         return mark
+    }
+
+    private fun isValidChoice(input: String): Boolean {
+        return listOf('a', 'b', 'c', 'd').contains(input.first().toLowerCase()) && input.trim().count() == 1
     }
 
     override fun printWith(printer: ColourPrinter) {

@@ -4,8 +4,8 @@ import Colour.B
 import MultipleChoiceChoice.*
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
-import org.mockito.Mockito.inOrder
-import org.mockito.Mockito.spy
+import org.mockito.Mockito.*
+import java.io.BufferedReader
 
 class MultipleChoiceOverlayTest {
     val o = MultipleChoiceOverlay()
@@ -112,5 +112,41 @@ class MultipleChoiceOverlayTest {
         inOrder.verify(spyPrinter).print(G, "მ")
         inOrder.verify(spyPrinter).printWhite("    ")
         inOrder.verify(spyPrinter).println(W, "ო")
+    }
+
+    @Test
+    fun canRunQuestion() {
+        val mockBufferedReader = mock(BufferedReader::class.java)
+        `when`(mockBufferedReader.readLine()).thenReturn("c")
+        val spyScreen = spy(Screen(ColourPrinter(), mock(KeyWaiter::class.java), mockBufferedReader))
+        val inOrder = inOrder(spyScreen)
+
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), C)
+
+        val mark = o.runQuestion(spyScreen, q)
+
+        inOrder.verify(spyScreen).print()
+        inOrder.verify(spyScreen).awaitLine()
+        //inOrder.verify(spyScreen).awaitPromptedLine("Pick an answer among a, b, c, d (case-insensitive)")
+
+        assertEquals(MultipleChoiceMark(true, C, C), mark)
+    }
+
+    @Test
+    fun canRunQuestionWithReprompts() {
+        val mockBufferedReader = mock(BufferedReader::class.java)
+        `when`(mockBufferedReader.readLine()).thenReturn("მ").thenReturn("მ").thenReturn("c")
+        val spyScreen = spy(Screen(ColourPrinter(), mock(KeyWaiter::class.java), mockBufferedReader))
+        val inOrder = inOrder(spyScreen)
+
+        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), C)
+
+        val mark = o.runQuestion(spyScreen, q)
+
+        inOrder.verify(spyScreen).print()
+        inOrder.verify(spyScreen).awaitLine()
+        inOrder.verify(spyScreen).awaitPromptedLine("Pick an answer among a, b, c, d (case-insensitive)")
+
+        assertEquals(MultipleChoiceMark(true, C, C), mark)
     }
 }

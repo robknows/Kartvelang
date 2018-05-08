@@ -8,7 +8,7 @@ open class TranslationOverlay : QuestionOverlay<TranslationQuestion, Translation
         s.overlay = this
         showQuestion(q)
         s.print()
-        val a = s.awaitLine().toString()
+        val a = s.awaitLine()
         showAnswer(a)
         val mark = q.markAnswer(a)
         showMarkedAnswer(mark)
