@@ -13,4 +13,17 @@ class ModuleMapOverlayTest {
 
         assertEquals("Available Modules:\n\t-greetings", o.toString())
     }
+
+    @Test
+    fun canShowMultipleModules() {
+        val m1 = Module("greetings")
+        val m2 = Module("introductions")
+        val m3 = Module("farewells")
+
+        o.showModule(m1)
+        o.showModule(m2)
+        o.showModule(m3)
+
+        assertEquals("Available Modules:\n\t-greetings\n\t-introductions\n\t-farewells", o.toString())
+    }
 }
