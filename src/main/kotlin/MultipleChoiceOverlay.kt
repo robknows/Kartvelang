@@ -8,7 +8,7 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
     var choice4 = Text("")
 
     override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
-        s.questionOverlay = this
+        s.overlay = this
         showQuestion(q)
         s.print()
         val a = s.awaitLine().toString()

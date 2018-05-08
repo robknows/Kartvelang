@@ -41,7 +41,7 @@ class ScreenTest {
 
     val tackyExampleOverlay = object : QuestionOverlay<TranslationQuestion, TranslationMark> {
         override fun toString(): String {
-            return "Tacky questionOverlay string"
+            return "Tacky overlay string"
         }
 
         override fun maxLineLength(): Int {
@@ -145,7 +145,7 @@ class ScreenTest {
     @Test
     fun screenIsCorrectSize() {
         val inOrder = inOrder(spyPrinter)
-        s.questionOverlay = tackyExampleOverlay
+        s.overlay = tackyExampleOverlay
 
         s.print()
 
@@ -162,7 +162,7 @@ class ScreenTest {
                 Pair(LineLabel.I, Text("something")),
                 Pair(LineLabel.I, Text("somethingElse")),
                 Pair(LineLabel.I, Text("somethingAgain")))
-        s.questionOverlay = realisticExampleOverlay
+        s.overlay = realisticExampleOverlay
 
         s.clear()
         s.print()
@@ -174,9 +174,9 @@ class ScreenTest {
 
     @Test
     fun convertingToStringTakesOverlayIntoAccount() {
-        s.questionOverlay = tackyExampleOverlay
+        s.overlay = tackyExampleOverlay
         s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
 
-        assertEquals("Tacky questionOverlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+        assertEquals("Tacky overlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
     }
 }

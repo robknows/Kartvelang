@@ -1,16 +1,15 @@
 /*Created on 03/05/18. */
-interface QuestionOverlay<in Q : Question, out M : Mark> {
+interface Overlay {
     fun printWith(printer: ColourPrinter)
     fun clear()
     fun maxLineLength(): Int
+}
+
+interface QuestionOverlay<in Q : Question, out M : Mark> : Overlay {
     fun runQuestion(s: Screen, q: Q): M
 }
 
-object BaseOverlay : QuestionOverlay<Question, Mark> {
-    override fun runQuestion(s: Screen, q: Question): Mark {
-        TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
-    }
-
+object BaseOverlay : Overlay {
     override fun toString(): String {
         return ""
     }
