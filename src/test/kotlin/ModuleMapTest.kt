@@ -9,4 +9,14 @@ class ModuleMapTest {
 
         assertEquals(m.name, "greetings")
     }
+
+    @Test
+    fun canAddDependencies() {
+        val m1 = Module("greetings")
+        val m2 = Module("advanced greetings")
+
+        m2.addDependency(m1)
+
+        assertEquals(m2.dependencies, listOf(m1))
+    }
 }
