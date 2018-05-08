@@ -1,3 +1,4 @@
+/*Created on 04/05/18. */
 import MultipleChoiceChoice.*
 
 open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>, val answerChoice: MultipleChoiceChoice) : Question {
