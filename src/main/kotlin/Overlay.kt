@@ -11,19 +11,19 @@ interface Overlay<Q : Question, M : Mark> {
 
 object BaseOverlay : Overlay<Question, Mark> {
     override fun showQuestion(q: Question) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showAnswer(a: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showMarkedAnswer(m: Mark) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun runQuestion(s: Screen, q: Question): Mark {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun printWith(printer: ColourPrinter) {

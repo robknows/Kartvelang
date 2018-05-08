@@ -4,7 +4,7 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
     override val fullCorrections: Boolean = false
 
     override fun verifyAnswer(attempt: String): Boolean {
-        TODO("not implemented")
+        TODO("not implemented for multiple choice questions")
     }
 
     fun markAnswer(attempt: String): MultipleChoiceMark {
