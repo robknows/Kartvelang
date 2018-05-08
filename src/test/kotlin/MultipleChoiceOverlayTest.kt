@@ -127,7 +127,6 @@ class MultipleChoiceOverlayTest {
 
         inOrder.verify(spyScreen).print()
         inOrder.verify(spyScreen).awaitLine()
-        //inOrder.verify(spyScreen).awaitPromptedLine("Pick an answer among a, b, c, d (case-insensitive)")
 
         assertEquals(MultipleChoiceMark(true, C, C), mark)
     }
