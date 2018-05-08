@@ -1,5 +1,6 @@
 /*Created on 04/05/18. */
 import MultipleChoiceChoice.*
+import java.util.*
 
 open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>, val answerChoice: MultipleChoiceChoice) : Question {
     override val fullCorrections: Boolean = false
@@ -29,5 +30,9 @@ private fun Char.toChoice(): MultipleChoiceChoice {
 data class MultipleChoiceMark(override val correct: Boolean, val choice: MultipleChoiceChoice, val answer: MultipleChoiceChoice) : Mark
 
 enum class MultipleChoiceChoice {
-    A, B, C, D
+    A, B, C, D;
+}
+
+fun randomChoice(): MultipleChoiceChoice {
+    return MultipleChoiceChoice.values().get(Random().nextInt(4))
 }

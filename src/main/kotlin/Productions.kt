@@ -1,5 +1,4 @@
 /*Created on 01/05/18. */
-import java.util.*
 
 class Productions {
     fun introductionQuestions(greetings: List<Word>, farewells: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslationQuestion> {
@@ -31,8 +30,7 @@ class Productions {
     }
 
     fun alphabetSound(eng: Char, inWord: String, kar: Char, incorrect: Triple<Char, Char, Char>): MultipleChoiceQuestion {
-        val randomChoice = MultipleChoiceChoice.values().randomChoice()
-        return MultipleChoiceQuestion("makes a sound like \"$eng\" in \"$inWord\"", kar.toString(), incorrect.toStrings(), randomChoice)
+        return MultipleChoiceQuestion("makes a sound like \"$eng\" in \"$inWord\"", kar.toString(), incorrect.toStrings(), randomChoice())
     }
 }
 
@@ -43,10 +41,6 @@ private fun <E> MutableList<E>.concatList(phrases: Collection<E>): MutableList<E
 
 private fun <E> concat(vararg c: List<E>): List<E> {
     return c.map({ l -> l.toMutableList() }).reduce({ acc, nxt -> acc.concatList(nxt) }).toList()
-}
-
-private fun <T> Array<T>.randomChoice(): T {
-    return get(Random().nextInt(size))
 }
 
 private fun <A, B, C> Triple<A, B, C>.toStrings(): Triple<String, String, String> {
