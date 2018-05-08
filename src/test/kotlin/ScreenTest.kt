@@ -13,7 +13,7 @@ class ScreenTest {
     private val spyPrinter = spy(ColourPrinter())
     private val s = Screen(spyPrinter, mockKeyWaiter, mockBufferedReader)
 
-    val realisticExampleOverlay = object : Overlay<TranslationQuestion, TranslationMark> {
+    val realisticExampleOverlay = object : QuestionOverlay<TranslationQuestion, TranslationMark> {
         var line1 = Text("A question!")
         var line2 = Text("A correct answer!")
         var line3 = Text("Some blue stuff")
@@ -39,9 +39,9 @@ class ScreenTest {
         }
     }
 
-    val tackyExampleOverlay = object : Overlay<TranslationQuestion, TranslationMark> {
+    val tackyExampleOverlay = object : QuestionOverlay<TranslationQuestion, TranslationMark> {
         override fun toString(): String {
-            return "Tacky overlay string"
+            return "Tacky questionOverlay string"
         }
 
         override fun maxLineLength(): Int {
@@ -145,7 +145,7 @@ class ScreenTest {
     @Test
     fun screenIsCorrectSize() {
         val inOrder = inOrder(spyPrinter)
-        s.overlay = tackyExampleOverlay
+        s.questionOverlay = tackyExampleOverlay
 
         s.print()
 
@@ -162,7 +162,7 @@ class ScreenTest {
                 Pair(LineLabel.I, Text("something")),
                 Pair(LineLabel.I, Text("somethingElse")),
                 Pair(LineLabel.I, Text("somethingAgain")))
-        s.overlay = realisticExampleOverlay
+        s.questionOverlay = realisticExampleOverlay
 
         s.clear()
         s.print()
@@ -174,9 +174,9 @@ class ScreenTest {
 
     @Test
     fun convertingToStringTakesOverlayIntoAccount() {
-        s.overlay = tackyExampleOverlay
+        s.questionOverlay = tackyExampleOverlay
         s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
 
-        assertEquals("Tacky overlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+        assertEquals("Tacky questionOverlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
     }
 }

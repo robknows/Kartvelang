@@ -1,6 +1,6 @@
 import MultipleChoiceChoice.*
 
-open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoiceMark> {
+open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, MultipleChoiceMark> {
     var questionLine = Text("")
     var choice1 = Text("")
     var choice2 = Text("")
@@ -8,7 +8,7 @@ open class MultipleChoiceOverlay : Overlay<MultipleChoiceQuestion, MultipleChoic
     var choice4 = Text("")
 
     override fun runQuestion(s: Screen, q: MultipleChoiceQuestion): MultipleChoiceMark {
-        s.overlay = this
+        s.questionOverlay = this
         showQuestion(q)
         s.print()
         val a = s.awaitLine().toString()

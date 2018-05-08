@@ -6,7 +6,7 @@ import kotlin.math.max
 
 open class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter, var input: BufferedReader) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
-    var overlay: Overlay<*, *> = BaseOverlay
+    var questionOverlay: QuestionOverlay<*, *> = BaseOverlay
 
     override fun toString(): String {
         val linesString = if (lines.isEmpty()) {
@@ -14,24 +14,24 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         } else {
             lines.map({ (_, txt) -> txt.toString() }).reduce({ acc, nxt -> acc + "\n" + nxt })
         }
-        if (overlay.toString().isEmpty()) {
+        if (questionOverlay.toString().isEmpty()) {
             return linesString
         } else {
-            return "$overlay\n$linesString"
+            return "$questionOverlay\n$linesString"
         }
     }
 
     open fun clear() {
-        overlay.clear()
+        questionOverlay.clear()
         lines.clear()
     }
 
     open fun close() { input.close() }
 
     open fun print() {
-        val maxLengthLine = max(maxLineLength(), overlay.maxLineLength())
+        val maxLengthLine = max(maxLineLength(), questionOverlay.maxLineLength())
         printer.printlnWhite("-".repeat(maxLengthLine))
-        overlay.printWith(printer)
+        questionOverlay.printWith(printer)
         printLines()
         printer.printlnWhite("-".repeat(maxLengthLine))
     }

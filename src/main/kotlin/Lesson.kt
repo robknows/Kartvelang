@@ -13,7 +13,7 @@ class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Translati
                 is TranslationQuestion -> translationOverlay.runQuestion(s, q)
                 is MultipleChoiceQuestion -> multipleChoiceOverlay.runQuestion(s, q)
                 else -> {
-                    TODO("No overlay available for that question type")
+                    TODO("No questionOverlay available for that question type")
                 }
             }
 

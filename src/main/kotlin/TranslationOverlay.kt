@@ -1,11 +1,11 @@
 /*Created on 03/05/18. */
-open class TranslationOverlay : Overlay<TranslationQuestion, TranslationMark> {
+open class TranslationOverlay : QuestionOverlay<TranslationQuestion, TranslationMark> {
     var questionLine = Text("")
     var answerLine = Text("")
     var correctionLines = Pair(Text(""), Text(""))
 
     override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
-        s.overlay = this
+        s.questionOverlay = this
         showQuestion(q)
         s.print()
         val a = s.awaitLine().toString()
