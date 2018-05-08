@@ -40,4 +40,30 @@ class ModuleMapOverlayTest {
 
         assertEquals("Available Modules:\n", o.toString())
     }
+
+    @Test
+    fun canGetMaxLineLengthForShorterCourseNames() {
+        val m1 = Module("greetings")
+        val m2 = Module("introductions")
+        val m3 = Module("farewells")
+
+        o.showModule(m1)
+        o.showModule(m2)
+        o.showModule(m3)
+
+        assertEquals(18, o.maxLineLength())
+    }
+
+    @Test
+    fun canGetMaxLineLengthForLongerCourseNames() {
+        val m1 = Module("greetings")
+        val m2 = Module("introductions_and_memes_too")
+        val m3 = Module("farewells")
+
+        o.showModule(m1)
+        o.showModule(m2)
+        o.showModule(m3)
+
+        assertEquals(32, o.maxLineLength())
+    }
 }

@@ -1,3 +1,5 @@
+import kotlin.math.max
+
 /*Created on 08/05/18. */
 class ModuleMapOverlay : Overlay {
     private val topLine = Text("Available Modules:")
@@ -11,7 +13,8 @@ class ModuleMapOverlay : Overlay {
     }
 
     override fun maxLineLength(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val indentSize = 5
+        return max(topLine.toString().count(), modules.map({ m -> m.name.count() + indentSize }).max() ?: 0)
     }
 
     val modules = mutableListOf<Module>()
