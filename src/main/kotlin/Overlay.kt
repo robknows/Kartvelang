@@ -10,6 +10,10 @@ interface Overlay<Q : Question, M : Mark> {
 }
 
 object BaseOverlay : Overlay<Question, Mark> {
+    override fun toString(): String {
+        return ""
+    }
+
     override fun showQuestion(q: Question) {
         TODO("not implemented for BaseOverlay") //To change body of created functions use File | Settings | File Templates.
     }

@@ -52,6 +52,10 @@ class ScreenTest {
     }
 
     val tackyExampleOverlay = object : Overlay<TranslationQuestion, TranslationMark> {
+        override fun toString(): String {
+            return "Tacky overlay string"
+        }
+
         override fun showQuestion(q: TranslationQuestion) {
             TODO("not needed")
         }
@@ -190,5 +194,13 @@ class ScreenTest {
         verify(spyPrinter, times(2)).printlnWhite("")
         verify(spyPrinter, never()).printlnGreen(Matchers.anyString())
         verify(spyPrinter, never()).printlnBlue(Matchers.anyString())
+    }
+
+    @Test
+    fun convertingToStringTakesOverlayIntoAccount() {
+        s.overlay = tackyExampleOverlay
+        s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
+
+        assertEquals("Tacky overlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
     }
 }

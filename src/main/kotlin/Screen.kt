@@ -8,12 +8,16 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
     var overlay: Overlay<*, *> = BaseOverlay
 
-    // Beware: This doesn't currently take overlay into account at all
     override fun toString(): String {
-        return if (lines.isEmpty()) {
+        val linesString = if (lines.isEmpty()) {
             ""
         } else {
             lines.map({ (_, txt) -> txt.toString() }).reduce({ acc, nxt -> acc + "\n" + nxt })
+        }
+        if (overlay.toString().isEmpty()) {
+            return linesString
+        } else {
+            return "$overlay\n$linesString"
         }
     }
 
