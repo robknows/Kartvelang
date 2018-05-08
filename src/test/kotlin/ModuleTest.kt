@@ -2,7 +2,7 @@
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
-class ModuleMapTest {
+class ModuleTest {
     @Test
     fun canGetName() {
         val m = Module("greetings")
