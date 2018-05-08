@@ -64,4 +64,13 @@ class ProductionsTest {
         }
         assertEquals(7, qs.count())
     }
+
+    @Test
+    fun canProduceAlphabetSounding() {
+        val q = p.alphabetSound('m', "monkey", 'მ', Triple('გ', 'ლ', 'ო'))
+
+        assertEquals("makes a sound like \"m\" in \"monkey\"", q.question)
+        assertEquals("მ", q.answer)
+        assertEquals(Triple("გ", "ლ", "ო"), q.incorrect)
+    }
 }
