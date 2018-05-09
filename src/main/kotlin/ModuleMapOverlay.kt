@@ -3,6 +3,7 @@ import kotlin.math.max
 
 class ModuleMapOverlay : Overlay {
     private val topLine = Text("Available Modules:")
+    val modules = mutableListOf<Module>()
 
     override fun printWith(printer: ColourPrinter) {
         topLine.printlnWith(printer)
@@ -19,8 +20,6 @@ class ModuleMapOverlay : Overlay {
         val indentSize = 5
         return max(topLine.toString().count(), modules.map({ m -> m.name.count() + indentSize }).max() ?: 0)
     }
-
-    val modules = mutableListOf<Module>()
 
     override fun toString(): String {
         val header = topLine.toString() + "\n"
