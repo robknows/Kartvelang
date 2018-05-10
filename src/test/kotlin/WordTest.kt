@@ -4,16 +4,6 @@ import org.junit.Test
 import java.nio.file.Paths
 
 class WordTest {
-    private fun fp(relativeToRootDir: String): String {
-        val projectPath = Paths.get("").toAbsolutePath().toString()
-        val fileRelativePath = if (projectPath.endsWith("modules")) {
-            "../../$relativeToRootDir"
-        } else {
-            relativeToRootDir
-        }
-        return Paths.get(projectPath, fileRelativePath).toString()
-    }
-
     @Test
     fun canLoadQuestionsFromFile() {
         val wl = WordLoader()
@@ -40,4 +30,14 @@ class WordTest {
         assertEquals("Keti", names[0].english)
         assertEquals("ქეთი", names[0].georgian)
     }
+}
+
+fun fp(relativeToRootDir: String): String {
+    val projectPath = Paths.get("").toAbsolutePath().toString()
+    val fileRelativePath = if (projectPath.endsWith("modules")) {
+        "../../$relativeToRootDir"
+    } else {
+        relativeToRootDir
+    }
+    return Paths.get(projectPath, fileRelativePath).toString()
 }

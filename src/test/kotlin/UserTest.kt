@@ -1,9 +1,11 @@
 /*Created on 10/05/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import org.json.JSONObject
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import java.io.File
 import java.util.*
 
 class UserTest {
@@ -47,21 +49,40 @@ class UserTest {
     }
 
     @Test
-    fun canSaveAndLoadUserToJSONFile() {
+    fun canSaveUserToJSONFile() {
         val uSaved = User()
+        val t = Calendar.getInstance().time.time
         uSaved.totalLessonCompletions = 1
         uSaved.dailyLessonCompletions = 1
         uSaved.meanDailyAccuracy = 50.0
         uSaved.lessonTime = 100.0
-        uSaved.lastCompletion = Calendar.getInstance().time.time
+        uSaved.lastCompletion = t
 
         uSaved.saveProfile("user.json")
-        val uLoaded = User("user.json")
 
-        assertEquals(uSaved.totalLessonCompletions, uLoaded.totalLessonCompletions)
-        assertEquals(uSaved.dailyLessonCompletions, uLoaded.dailyLessonCompletions)
-        assertEquals(uSaved.meanDailyAccuracy, uLoaded.meanDailyAccuracy)
-        assertEquals(uSaved.lessonTime, uLoaded.lessonTime)
-        assertEquals(uSaved.lastCompletion, uLoaded.lastCompletion)
+        val o = JSONObject()
+        o.put("totalLessonCompletions", 1)
+        o.put("dailyLessonCompletions", 1)
+        o.put("meanDailyAccuracy", 50.0)
+        o.put("lessonTime", 100.0)
+        o.put("lastCompletion", t)
+
+        val bufferedReader = File("user.json").inputStream().reader().buffered()
+        val text = bufferedReader.readText()
+        bufferedReader.close()
+
+        assertEquals("{\"meanDailyAccuracy\":50,\"lastCompletion\":$t,\"dailyLessonCompletions\":1,\"lessonTime\":100,\"totalLessonCompletions\":1}", text)
+    }
+
+    @Test
+    fun canLoadUserToJSONFile() {
+        val path = fp("src/test/resources/user.json")
+        val uLoaded = User(path)
+
+        assertEquals(1, uLoaded.totalLessonCompletions)
+        assertEquals(1, uLoaded.dailyLessonCompletions)
+        assertEquals(50.0, uLoaded.meanDailyAccuracy)
+        assertEquals(100.0, uLoaded.lessonTime)
+        assertEquals(1525986991184, uLoaded.lastCompletion)
     }
 }
