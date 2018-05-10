@@ -45,4 +45,23 @@ class UserTest {
         assertEquals(180.0, u.lessonTime)
         assertTrue(t - u.lastCompletion < 50)
     }
+
+    @Test
+    fun canSaveAndLoadUserToJSONFile() {
+        val uSaved = User()
+        uSaved.totalLessonCompletions = 1
+        uSaved.dailyLessonCompletions = 1
+        uSaved.meanDailyAccuracy = 50.0
+        uSaved.lessonTime = 100.0
+        uSaved.lastCompletion = Calendar.getInstance().time.time
+
+        uSaved.saveProfile("user.json")
+        val uLoaded = User("user.json")
+
+        assertEquals(uSaved.totalLessonCompletions, uLoaded.totalLessonCompletions)
+        assertEquals(uSaved.dailyLessonCompletions, uLoaded.dailyLessonCompletions)
+        assertEquals(uSaved.meanDailyAccuracy, uLoaded.meanDailyAccuracy)
+        assertEquals(uSaved.lessonTime, uLoaded.lessonTime)
+        assertEquals(uSaved.lastCompletion, uLoaded.lastCompletion)
+    }
 }

@@ -1,7 +1,24 @@
 /*Created on 10/05/18. */
+import org.json.JSONObject
+import java.io.File
+import java.io.FileWriter
 import java.util.*
 
 class User {
+    constructor()
+    constructor(filename: String) {
+        val bufferedReader = File(filename).inputStream().reader().buffered()
+        val text = bufferedReader.readText()
+        bufferedReader.close()
+
+        val uJSON = JSONObject(text)
+        totalLessonCompletions = uJSON.getInt("totalLessonCompletions")
+        dailyLessonCompletions = uJSON.getInt("dailyLessonCompletions")
+        meanDailyAccuracy = uJSON.getDouble("meanDailyAccuracy")
+        lessonTime = uJSON.getDouble("lessonTime")
+        lastCompletion = uJSON.getLong("lastCompletion")
+    }
+
     var totalLessonCompletions: Int = 0
     var dailyLessonCompletions: Int = 0
     var meanDailyAccuracy: Double = 0.0
@@ -15,5 +32,18 @@ class User {
         dailyLessonCompletions++
         totalLessonCompletions++
         lessonTime += results.timeSeconds
+    }
+
+    fun saveProfile(filename: String) {
+        val o = JSONObject()
+        o.put("totalLessonCompletions", totalLessonCompletions)
+        o.put("dailyLessonCompletions", dailyLessonCompletions)
+        o.put("meanDailyAccuracy", meanDailyAccuracy)
+        o.put("lessonTime", lessonTime)
+        o.put("lastCompletion", lastCompletion)
+
+        FileWriter(filename).use { file ->
+            file.write(o.toString())
+        }
     }
 }
