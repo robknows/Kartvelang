@@ -34,7 +34,7 @@ class LessonTest {
         verify(spyScreen, times(3)).awaitKeyPress(Key.ENTER)
         verify(spyScreen, times(7)).print()
         verify(spyScreen, times(4)).clear()
-        verify(spyScreen).close()
+        verify(spyScreen).closeInput()
         verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, never()).awaitCorrection(q1)
@@ -56,7 +56,7 @@ class LessonTest {
         inOrder.verify(spyTranslationOverlay).runQuestion(spyScreen, q1)
         inOrder.verify(spyScreen).awaitKeyPress(Key.ENTER)
         inOrder.verify(spyScreen).clear()
-        inOrder.verify(spyScreen).close()
+        inOrder.verify(spyScreen).closeInput()
         inOrder.verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, times(3)).print()
@@ -82,7 +82,7 @@ class LessonTest {
         verify(spyScreen, times(4)).awaitKeyPress(Key.ENTER)
         verify(spyScreen, times(10)).print()
         verify(spyScreen, times(5)).clear()
-        verify(spyScreen).close()
+        verify(spyScreen).closeInput()
         verify(spyScreen).showPostLessonInfo(eq(75.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, never()).awaitCorrection(q1)
@@ -122,7 +122,7 @@ class LessonTest {
         verify(spyScreen, times(3)).awaitKeyPress(Key.ENTER)
         verify(spyScreen, times(7)).print()
         verify(spyScreen, times(4)).clear()
-        verify(spyScreen).close()
+        verify(spyScreen).closeInput()
         verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, never()).awaitCorrection(q1)

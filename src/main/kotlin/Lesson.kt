@@ -28,7 +28,7 @@ open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Tran
             answered++
         }
         val endTime = Calendar.getInstance().time.time
-        s.close()
+        s.closeInput()
         val results = LessonResults(
                 100 * (answered - mistakes).toDouble() / answered, // accuracyPc
                 (endTime - startTime).toDouble() / 1000)           // timeSeconds

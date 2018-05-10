@@ -26,7 +26,9 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         lines.clear()
     }
 
-    open fun close() { input.close() }
+    open fun closeInput() {
+        input.close()
+    }
 
     open fun print() {
         val maxLengthLine = max(maxLineLength(), overlay.maxLineLength())
@@ -93,8 +95,6 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
 }
 
 enum class LineLabel {
-    Q, // TranslationQuestion
-    A, // Answer
     C, // Correction
     I, // Information
 }
