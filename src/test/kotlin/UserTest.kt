@@ -6,6 +6,8 @@ import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.*
 
 class UserTest {
@@ -70,6 +72,7 @@ class UserTest {
         val bufferedReader = File("user.json").inputStream().reader().buffered()
         val text = bufferedReader.readText()
         bufferedReader.close()
+        Files.delete(Paths.get("user.json"))
 
         assertEquals("{\"meanDailyAccuracy\":50,\"lastCompletion\":$t,\"dailyLessonCompletions\":1,\"lessonTime\":100,\"totalLessonCompletions\":1}", text)
     }

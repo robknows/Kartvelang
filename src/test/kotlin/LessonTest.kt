@@ -3,6 +3,7 @@ import MultipleChoiceChoice.B
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
+import org.mockito.Matchers
 import org.mockito.Mockito.*
 import java.io.BufferedReader
 import java.io.StringReader
@@ -31,9 +32,10 @@ class LessonTest {
         inOrder.verify(spyTranslationOverlay).runQuestion(spyScreen, q3)
 
         verify(spyScreen, times(3)).awaitKeyPress(Key.ENTER)
-        verify(spyScreen, times(6)).print()
-        verify(spyScreen, times(3)).clear()
+        verify(spyScreen, times(7)).print()
+        verify(spyScreen, times(4)).clear()
         verify(spyScreen).close()
+        verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, never()).awaitCorrection(q1)
         verify(spyScreen, never()).awaitCorrection(q2)
@@ -55,8 +57,9 @@ class LessonTest {
         inOrder.verify(spyScreen).awaitKeyPress(Key.ENTER)
         inOrder.verify(spyScreen).clear()
         inOrder.verify(spyScreen).close()
+        inOrder.verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
-        verify(spyScreen, times(2)).print()
+        verify(spyScreen, times(3)).print()
     }
 
     @Test(timeout = 3000)
@@ -77,9 +80,13 @@ class LessonTest {
         inOrder.verify(spyTranslationOverlay).runQuestion(spyScreen, q2)
 
         verify(spyScreen, times(4)).awaitKeyPress(Key.ENTER)
-        verify(spyScreen, times(9)).print()
-        verify(spyScreen, times(4)).clear()
+        verify(spyScreen, times(10)).print()
+        verify(spyScreen, times(5)).clear()
         verify(spyScreen).close()
+        verify(spyScreen).showPostLessonInfo(eq(75.0), Matchers.anyDouble(), Matchers.anyString())
+
+        verify(spyScreen, never()).awaitCorrection(q1)
+        verify(spyScreen, never()).awaitCorrection(q3)
     }
 
     @Test(timeout = 3000)
@@ -113,9 +120,10 @@ class LessonTest {
         inOrder.verify(spyTranslationOverlay).runQuestion(spyScreen, q3)
 
         verify(spyScreen, times(3)).awaitKeyPress(Key.ENTER)
-        verify(spyScreen, times(6)).print()
-        verify(spyScreen, times(3)).clear()
+        verify(spyScreen, times(7)).print()
+        verify(spyScreen, times(4)).clear()
         verify(spyScreen).close()
+        verify(spyScreen).showPostLessonInfo(eq(100.0), Matchers.anyDouble(), Matchers.anyString())
 
         verify(spyScreen, never()).awaitCorrection(q1)
         verify(spyScreen, never()).awaitCorrection(q2)
