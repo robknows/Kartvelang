@@ -1,8 +1,8 @@
 /*Created on 30/04/18. */
 import java.util.*
 
-class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {
-    fun complete(): LessonResults {
+open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {
+    open fun complete(): LessonResults {
         var mistakes = 0
         var answered = 0
         val startTime = Calendar.getInstance().time.time
