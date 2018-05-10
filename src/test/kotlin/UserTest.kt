@@ -8,7 +8,7 @@ import java.util.*
 
 class UserTest {
     @Test
-    fun completedLessonDataSavesToUserProfile() {
+    fun completedLessonDataSavesToEmptyUserProfile() {
         val u = User()
 
         val mockLesson = mock(Lesson::class.java)
@@ -21,6 +21,28 @@ class UserTest {
         assertEquals(1, u.dailyLessonCompletions)
         assertEquals(50.0, u.meanDailyAccuracy)
         assertEquals(100.0, u.lessonTime)
+        assertTrue(t - u.lastCompletion < 50)
+    }
+
+    @Test
+    fun completedLessonDataSavesToArbitraryUserProfile() {
+        val u = User()
+        u.totalLessonCompletions = 1
+        u.dailyLessonCompletions = 1
+        u.meanDailyAccuracy = 50.0
+        u.lessonTime = 100.0
+        u.lastCompletion = Calendar.getInstance().time.time - 100
+
+        val mockLesson = mock(Lesson::class.java)
+        `when`(mockLesson.complete()).thenReturn(Lesson.LessonResults(100.0, 80.0))
+
+        val t = Calendar.getInstance().time.time
+        u.complete(mockLesson)
+
+        assertEquals(2, u.totalLessonCompletions)
+        assertEquals(2, u.dailyLessonCompletions)
+        assertEquals(75.0, u.meanDailyAccuracy)
+        assertEquals(180.0, u.lessonTime)
         assertTrue(t - u.lastCompletion < 50)
     }
 }
