@@ -8,10 +8,10 @@ class WordLoader {
         val text = bufferedReader.readText()
         bufferedReader.close()
 
-        val greetings = mutableListOf<Word>()
-        val farewells = mutableListOf<Word>()
-        val names = mutableListOf<Word>()
-        val phrases = mutableListOf<Word>()
+        val greetings = mutableListOf<Translation>()
+        val farewells = mutableListOf<Translation>()
+        val names = mutableListOf<Translation>()
+        val phrases = mutableListOf<Translation>()
 
         val jsonWords = JSONArray(text)
         for (i in 0..(jsonWords.length() - 1)) {
@@ -19,14 +19,14 @@ class WordLoader {
             val english = w.getString("english")
             val georgian = w.getString("georgian")
             when(w.getString("tag")) {
-                "greeting" -> greetings.add(Word(english, georgian))
-                "farewell" -> farewells.add(Word(english, georgian))
-                "name"     -> names.add(Word(english, georgian))
-                "phrase"   -> phrases.add(Word(english, georgian))
+                "greeting" -> greetings.add(Translation(english, georgian))
+                "farewell" -> farewells.add(Translation(english, georgian))
+                "name" -> names.add(Translation(english, georgian))
+                "phrase" -> phrases.add(Translation(english, georgian))
             }
         }
         return LoadedWords(greetings, farewells, names, phrases)
     }
 
-    data class LoadedWords(val greetings: List<Word>, val farewells: List<Word>, val names: List<Word>, val phrases: List<Word>)
+    data class LoadedWords(val greetings: List<Translation>, val farewells: List<Translation>, val names: List<Translation>, val phrases: List<Translation>)
 }

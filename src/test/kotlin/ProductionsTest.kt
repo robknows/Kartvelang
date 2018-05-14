@@ -6,14 +6,14 @@ import org.junit.Test
 class ProductionsTest {
     val p = Productions()
 
-    val greeting_hello = Word("hello", "გამარჯობა")
-    val greeting_nicetomeetyou = Word("nice to meet you", "სასიამოვნოა")
+    val greeting_hello = Translation("hello", "გამარჯობა")
+    val greeting_nicetomeetyou = Translation("nice to meet you", "სასიამოვნოა")
 
-    val farewell_seeyousoon = Word("see you soon", "ნახვამდის")
+    val farewell_seeyousoon = Translation("see you soon", "ნახვამდის")
 
-    val name_Keti = Word("Keti", "ქეთი")
+    val name_Keti = Translation("Keti", "ქეთი")
 
-    val phrase_whatareyoucalled = Word("what are you called", "შენ რა გქვია")
+    val phrase_whatareyoucalled = Translation("what are you called", "შენ რა გქვია")
 
 
     @Test

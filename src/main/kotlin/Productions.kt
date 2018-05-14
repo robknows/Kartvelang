@@ -1,7 +1,7 @@
 /*Created on 01/05/18. */
 
 class Productions {
-    fun introductionQuestions(greetings: List<Word>, farewells: List<Word>, names: List<Word>, phrases: List<Word>): List<TranslationQuestion> {
+    fun introductionQuestions(greetings: List<Translation>, farewells: List<Translation>, names: List<Translation>, phrases: List<Translation>): List<TranslationQuestion> {
         val directTranslations = concat(greetings, phrases, farewells).map(this::dictionary)
 
         val greetingsTranslations = mutableListOf<TranslationQuestion>()
@@ -17,15 +17,15 @@ class Productions {
         return concat(directTranslations, greetingsTranslations, farewellsTranslations)
     }
 
-    fun dictionary(w: Word): TranslationQuestion {
+    fun dictionary(w: Translation): TranslationQuestion {
         return TranslationQuestion(w.english, w.georgian)
     }
 
-    fun introduction(greeting: Word, name: Word): TranslationQuestion {
+    fun introduction(greeting: Translation, name: Translation): TranslationQuestion {
         return TranslationQuestion("${greeting.english}, I am called ${name.english}", "${greeting.georgian}, მე მქვია ${name.georgian}")
     }
 
-    fun farewell(farewell: Word, name: Word): TranslationQuestion {
+    fun farewell(farewell: Translation, name: Translation): TranslationQuestion {
         return TranslationQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
     }
 

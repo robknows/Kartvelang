@@ -3,7 +3,7 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import java.nio.file.Paths
 
-class WordTest {
+class TranslationTest {
     @Test
     fun canLoadQuestionsFromFile() {
         val wl = WordLoader()
