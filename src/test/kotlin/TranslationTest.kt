@@ -5,14 +5,14 @@ import java.nio.file.Paths
 
 class TranslationTest {
     @Test
-    fun canLoadQuestionsFromFile() {
-        val wl = WordLoader()
+    fun canLoadTranslationsFromFile() {
+        val tl = TranslationLoader()
         val path = fp("src/test/resources/elevator_smalltalk_words.json")
-        val words: WordLoader.LoadedWords = wl.load(path)
-        val greetings = words.greetings
-        val farewells = words.farewells
-        val phrases = words.phrases
-        val names = words.names
+        val translations: TranslationLoader.LoadedTranslations = tl.load(path)
+        val greetings = translations.greetings
+        val farewells = translations.farewells
+        val phrases = translations.phrases
+        val names = translations.names
 
         assertEquals("hello", greetings[0].english)
         assertEquals("გამარჯობა", greetings[0].georgian)

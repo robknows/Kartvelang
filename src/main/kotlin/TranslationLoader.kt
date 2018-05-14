@@ -2,8 +2,8 @@
 import org.json.JSONArray
 import java.io.File
 
-class WordLoader {
-    fun load(filename: String): LoadedWords {
+class TranslationLoader {
+    fun load(filename: String): LoadedTranslations {
         val bufferedReader = File(filename).inputStream().reader().buffered()
         val text = bufferedReader.readText()
         bufferedReader.close()
@@ -18,15 +18,15 @@ class WordLoader {
             val w = jsonWords.getJSONObject(i)!!
             val english = w.getString("english")
             val georgian = w.getString("georgian")
-            when(w.getString("tag")) {
+            when (w.getString("tag")) {
                 "greeting" -> greetings.add(Translation(english, georgian))
                 "farewell" -> farewells.add(Translation(english, georgian))
                 "name" -> names.add(Translation(english, georgian))
                 "phrase" -> phrases.add(Translation(english, georgian))
             }
         }
-        return LoadedWords(greetings, farewells, names, phrases)
+        return LoadedTranslations(greetings, farewells, names, phrases)
     }
 
-    data class LoadedWords(val greetings: List<Translation>, val farewells: List<Translation>, val names: List<Translation>, val phrases: List<Translation>)
+    data class LoadedTranslations(val greetings: List<Translation>, val farewells: List<Translation>, val names: List<Translation>, val phrases: List<Translation>)
 }
