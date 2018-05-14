@@ -1,4 +1,5 @@
 /*Created on 29/04/18. */
+package logic
 
 class Questions {
     val set: MutableList<Question> = mutableListOf()

@@ -1,4 +1,6 @@
 /*Created on 30/04/18. */
+package logic
+
 import org.jnativehook.GlobalScreen
 import org.jnativehook.keyboard.NativeKeyEvent
 import org.jnativehook.keyboard.NativeKeyListener

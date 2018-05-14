@@ -1,8 +1,10 @@
 /*Created on 29/04/18. */
 @file:JvmName("MainClass")
 
-import MultipleChoiceChoice.B
-import MultipleChoiceChoice.C
+package logic
+
+import logic.MultipleChoiceChoice.B
+import logic.MultipleChoiceChoice.C
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader

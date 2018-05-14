@@ -1,5 +1,6 @@
 /*Created on 08/05/18. */
 import junit.framework.TestCase.assertEquals
+import logic.Module
 import org.junit.Test
 
 class ModuleTest {

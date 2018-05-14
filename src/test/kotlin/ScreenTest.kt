@@ -1,6 +1,7 @@
 /*Created on 29/04/18. */
-import MultipleChoiceChoice.A
 import junit.framework.TestCase.assertEquals
+import logic.*
+import logic.MultipleChoiceChoice.A
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito.*
@@ -138,7 +139,7 @@ class ScreenTest {
     fun canShowPostLessonInfo() {
         s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
 
-        assertEquals("Accuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+        assertEquals("Accuracy:    100%%\nlogic.Lesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
         assertEquals(3, s.lines.count())
     }
 
@@ -177,6 +178,6 @@ class ScreenTest {
         s.overlay = tackyExampleOverlay
         s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
 
-        assertEquals("Tacky overlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+        assertEquals("Tacky overlay string\nAccuracy:    100%%\nlogic.Lesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
     }
 }

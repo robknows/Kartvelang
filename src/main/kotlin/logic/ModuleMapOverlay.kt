@@ -1,4 +1,6 @@
 /*Created on 08/05/18. */
+package logic
+
 import kotlin.math.max
 
 class ModuleMapOverlay : Overlay {

@@ -1,6 +1,8 @@
 /*Created on 10/05/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import logic.Lesson
+import logic.User
 import org.json.JSONObject
 import org.junit.Test
 import org.mockito.Mockito.`when`

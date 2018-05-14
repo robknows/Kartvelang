@@ -1,6 +1,7 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase
 import junit.framework.TestCase.*
+import logic.TranslationQuestion
 import org.junit.Test
 
 class TranslationQuestionTest {

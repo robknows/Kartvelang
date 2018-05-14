@@ -1,4 +1,6 @@
 /*Created on 03/05/18. */
+package logic
+
 open class TranslationOverlay : QuestionOverlay<TranslationQuestion, TranslationMark> {
     var questionLine = Text("")
     var answerLine = Text("")

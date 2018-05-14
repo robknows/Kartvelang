@@ -1,6 +1,9 @@
 /*Created on 01/05/18. */
 import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
+import logic.Productions
+import logic.Translation
+import logic.TranslationQuestion
 import org.junit.Test
 
 class ProductionsTest {

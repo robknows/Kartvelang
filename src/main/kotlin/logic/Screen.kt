@@ -1,6 +1,8 @@
 /*Created on 29/04/18. */
-import LineLabel.C
-import LineLabel.I
+package logic
+
+import logic.LineLabel.C
+import logic.LineLabel.I
 import java.io.BufferedReader
 import kotlin.math.max
 
@@ -87,9 +89,13 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
     }
 
     open fun showPostLessonInfo(accuracyPc: Double, seconds: Double, hint: String) {
-        val acc = if (accuracyPc == 100.0) { "100" } else { accuracyPc.toString() }
+        val acc = if (accuracyPc == 100.0) {
+            "100"
+        } else {
+            accuracyPc.toString()
+        }
         lines.add(Pair(I, Text("Accuracy:    $acc%%")))
-        lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
+        lines.add(Pair(I, Text("logic.Lesson time: " + seconds.toString() + " seconds")))
         lines.add(Pair(I, Text("Hint: $hint")))
     }
 }

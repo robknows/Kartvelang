@@ -1,6 +1,7 @@
 /*Created on 04/05/18. */
-import MultipleChoiceChoice.A
 import junit.framework.TestCase
+import logic.MultipleChoiceChoice.A
+import logic.MultipleChoiceQuestion
 import org.junit.Test
 
 class MultipleChoiceQuestionTest {

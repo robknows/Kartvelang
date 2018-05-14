@@ -1,4 +1,6 @@
 /*Created on 29/04/18. */
+package logic
+
 import kotlin.math.max
 
 open class TranslationQuestion(val given: String, override val answer: String) : Question {
@@ -7,7 +9,7 @@ open class TranslationQuestion(val given: String, override val answer: String) :
     fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
         val attempt = prepareForMarking(attempt)
-        val answer  = prepareForMarking(answer)
+        val answer = prepareForMarking(answer)
         val correct = answer == attempt
         val diff = if (answer.length == attempt.length) {
             diffWord(answer, attempt)

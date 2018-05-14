@@ -1,5 +1,7 @@
 /*Created on 04/05/18. */
-import MultipleChoiceChoice.*
+package logic
+
+import logic.MultipleChoiceChoice.*
 import java.util.*
 
 open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>, val answerChoice: MultipleChoiceChoice) : Question {
@@ -34,5 +36,5 @@ enum class MultipleChoiceChoice {
 }
 
 fun randomChoice(): MultipleChoiceChoice {
-    return MultipleChoiceChoice.values().get(Random().nextInt(4))
+    return values().get(Random().nextInt(4))
 }

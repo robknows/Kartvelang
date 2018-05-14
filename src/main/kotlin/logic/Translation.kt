@@ -1,4 +1,6 @@
 /*Created on 01/05/18. */
+package logic
+
 data class Translation(val english: String, val georgian: String)
 
 // General

@@ -1,4 +1,5 @@
 /*Created on 01/05/18. */
+package logic
 
 class Productions {
     fun introductionQuestions(greetings: List<Translation>, farewells: List<Translation>, names: List<Translation>, phrases: List<Translation>): List<TranslationQuestion> {

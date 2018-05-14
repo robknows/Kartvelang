@@ -1,4 +1,6 @@
 /*Created on 30/04/18. */
+package logic
+
 import java.util.*
 
 open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {

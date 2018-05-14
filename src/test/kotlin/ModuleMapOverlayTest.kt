@@ -1,5 +1,8 @@
 /*Created on 08/05/18. */
 import junit.framework.TestCase.assertEquals
+import logic.ColourPrinter
+import logic.Module
+import logic.ModuleMapOverlay
 import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.inOrder

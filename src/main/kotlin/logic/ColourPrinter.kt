@@ -1,4 +1,6 @@
 /*Created on 29/04/18. */
+package logic
+
 open class ColourPrinter {
     fun printRed(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;196m$s'").start()
@@ -45,7 +47,7 @@ open class ColourPrinter {
     }
 
     open fun print(c: Colour, s: String) {
-        when(c) {
+        when (c) {
             Colour.W -> printWhite(s)
             Colour.G -> printGreen(s)
             Colour.R -> printRed(s)
@@ -54,7 +56,7 @@ open class ColourPrinter {
     }
 
     open fun println(c: Colour, s: String) {
-        when(c) {
+        when (c) {
             Colour.W -> printlnWhite(s)
             Colour.G -> printlnGreen(s)
             Colour.R -> printlnRed(s)

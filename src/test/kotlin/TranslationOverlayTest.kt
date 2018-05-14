@@ -1,7 +1,11 @@
 /*Created on 03/05/18. */
-import Colour.G
-import Colour.R
 import junit.framework.TestCase.assertEquals
+import logic.Colour.G
+import logic.Colour.R
+import logic.ColourPrinter
+import logic.TranslationMark
+import logic.TranslationOverlay
+import logic.TranslationQuestion
 import org.junit.Test
 import org.mockito.Matchers.anyString
 import org.mockito.Mockito.*

@@ -1,8 +1,9 @@
 /*Created on 04/05/18. */
-import Colour.*
-import Colour.B
-import MultipleChoiceChoice.*
 import junit.framework.TestCase.assertEquals
+import logic.*
+import logic.Colour.*
+import logic.Colour.B
+import logic.MultipleChoiceChoice.*
 import org.junit.Test
 import org.mockito.Mockito.*
 import java.io.BufferedReader

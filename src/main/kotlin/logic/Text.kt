@@ -1,5 +1,7 @@
 /*Created on 29/04/18. */
-import Colour.*
+package logic
+
+import logic.Colour.*
 
 open class Text(private val text: String) {
     var baseColour = W

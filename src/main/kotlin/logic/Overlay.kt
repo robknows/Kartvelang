@@ -1,4 +1,6 @@
 /*Created on 03/05/18. */
+package logic
+
 interface Overlay {
     fun printWith(printer: ColourPrinter)
     fun clear()

@@ -1,5 +1,7 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
+import logic.Colour
+import logic.Text
 import org.junit.Test
 
 class TextTest {

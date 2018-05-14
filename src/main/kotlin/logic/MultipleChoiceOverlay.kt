@@ -1,5 +1,7 @@
 /*Created on 04/05/18. */
-import MultipleChoiceChoice.*
+package logic
+
+import logic.MultipleChoiceChoice.*
 
 open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, MultipleChoiceMark> {
     var questionLine = Text("")

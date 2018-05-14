@@ -1,7 +1,8 @@
 /*Created on 30/04/18. */
-import MultipleChoiceChoice.B
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
+import logic.*
+import logic.MultipleChoiceChoice.B
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito.*
