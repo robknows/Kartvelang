@@ -1,7 +1,7 @@
 /*Created on 29/04/18. */
 package logic
 
-class Questions {
+open class Questions {
     val set: MutableList<Question> = mutableListOf()
 
     constructor()
@@ -35,5 +35,9 @@ class Questions {
         } else {
             set.add(3, q)
         }
+    }
+
+    fun addAll(otherQuestions: Questions) {
+        set.addAll(otherQuestions.set)
     }
 }
