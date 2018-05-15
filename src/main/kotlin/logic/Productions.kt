@@ -1,9 +1,9 @@
 /*Created on 01/05/18. */
 package logic
 
-class Productions {
+open class Productions {
     fun introductionQuestions(greetings: List<Translation>, farewells: List<Translation>, names: List<Translation>, phrases: List<Translation>): List<TranslationQuestion> {
-        val directTranslations = concat(greetings, phrases, farewells).map(this::dictionary)
+        val directTranslations = concat(greetings, phrases, farewells).map(this::englishToGeorgian)
 
         val greetingsTranslations = mutableListOf<TranslationQuestion>()
         val farewellsTranslations = mutableListOf<TranslationQuestion>()
@@ -18,8 +18,12 @@ class Productions {
         return concat(directTranslations, greetingsTranslations, farewellsTranslations)
     }
 
-    fun dictionary(w: Translation): TranslationQuestion {
+    open fun englishToGeorgian(w: Translation): TranslationQuestion {
         return TranslationQuestion(w.english, w.georgian)
+    }
+
+    open fun georgianToEnglish(w: Translation): TranslationQuestion {
+        return TranslationQuestion(w.georgian, w.english)
     }
 
     fun introduction(greeting: Translation, name: Translation): TranslationQuestion {
@@ -30,7 +34,7 @@ class Productions {
         return TranslationQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
     }
 
-    fun alphabetSound(eng: Char, inWord: String, kar: Char, incorrect: Triple<Char, Char, Char>): MultipleChoiceQuestion {
+    open fun alphabetSound(eng: Char, inWord: String, kar: Char, incorrect: Triple<Char, Char, Char>): MultipleChoiceQuestion {
         return MultipleChoiceQuestion("makes a sound like \"$eng\" in \"$inWord\"", kar.toString(), incorrect.toStrings(), randomChoice())
     }
 }

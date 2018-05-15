@@ -21,7 +21,7 @@ class ProductionsTest {
 
     @Test
     fun canProduceDirectTranslation() {
-        val q = p.dictionary(greeting_hello)
+        val q = p.englishToGeorgian(greeting_hello)
 
         assertEquals("hello", q.given)
         assertEquals("გამარჯობა", q.answer)
