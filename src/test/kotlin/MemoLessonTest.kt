@@ -1,24 +1,34 @@
 /*Created on 15/05/18. */
-import logic.MemoLesson
-import logic.Productions
-import logic.Translation
+import logic.*
 import org.junit.Test
-import org.mockito.Mockito.inOrder
-import org.mockito.Mockito.spy
+import org.mockito.Matchers
+import org.mockito.Mockito
+import org.mockito.Mockito.*
 
 class MemoLessonTest {
+    val mockScreen = Mockito.mock(Screen::class.java)
+    val spyTranslationOverlay = spy(TranslationOverlay())
+    val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
+
+    // Mockito wasn't working
+    class MockMemoLesson(p: Productions, memo: List<Translation>) : MemoLesson(p, memo) {
+        override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
+            return Triple(10.0, 5, 0)
+        }
+    }
+
     @Test
-    fun memoLessonCreatesAllRequiredQuestions() {
+    fun memoLessonRunsStagesInOrder() {
         val spyProductions = spy(Productions())
-        val inOrder = inOrder(spyProductions)
+        val inOrder = inOrder(spyProductions, mockScreen)
         val t1 = Translation("a", "ა")
         val t2 = Translation("b", "ბ")
         val t3 = Translation("g", "გ")
         val memo = listOf(t1, t2, t3)
 
-        val lesson = MemoLesson(spyProductions, memo)
+        val memoLesson = MockMemoLesson(spyProductions, memo)
 
-        lesson.complete()
+        memoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         // verify that a MCQ was made for each
         inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
@@ -32,5 +42,10 @@ class MemoLessonTest {
         inOrder.verify(spyProductions).georgianToEnglish(t1)
         inOrder.verify(spyProductions).georgianToEnglish(t2)
         inOrder.verify(spyProductions).georgianToEnglish(t3)
+        // verify post completion actions
+        inOrder.verify(mockScreen).closeInput()
+        inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(30.0), Matchers.anyString())
+        inOrder.verify(mockScreen).print()
+        inOrder.verify(mockScreen).clear()
     }
 }
