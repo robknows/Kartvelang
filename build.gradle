@@ -37,7 +37,7 @@ compileTestKotlin {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'MainClass'
+        attributes 'Main-Class': 'logic.MainClass'
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
