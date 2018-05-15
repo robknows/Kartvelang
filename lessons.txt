@@ -1,4 +1,4 @@
-Single lesson algorithm:
+Generic lesson algorithm:
 
 1. Show question
 2. Await answer
@@ -9,11 +9,14 @@ Single lesson algorithm:
                 => Require user to type correct answer
                 => Allow user to proceed to next question
 
-5. If no more questions remain => Finish
+5. If no more questions remain => Show statistics
 6. If more questions remain    => Go to next question
 
-Three stage lesson algorithm:
+Memorisation lesson algorithm: Uses the generic lesson algorithm in 3 stages.
 
 1. Multiple choice [georgian -> english]
-2. Translation     [georgian -> english]
-3. Translation     [english  -> georgian]
+2. Intermission
+3. Translation     [georgian -> english]
+4. Intermission
+5. Translation     [english  -> georgian]
+6. Show post lesson statistics.
