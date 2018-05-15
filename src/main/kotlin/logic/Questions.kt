@@ -1,6 +1,8 @@
 /*Created on 29/04/18. */
 package logic
 
+import java.util.*
+
 open class Questions {
     val set: MutableList<Question> = mutableListOf()
 
@@ -39,5 +41,34 @@ open class Questions {
 
     fun addAll(otherQuestions: Questions) {
         set.addAll(otherQuestions.set)
+    }
+
+    fun run(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
+        var mistakes = 0
+        var answered = 0
+        val startTime = Calendar.getInstance().time.time
+        while (!empty()) {
+            val q = pop()
+
+            val mark = when (q) {
+                is TranslationQuestion -> translationOverlay.runQuestion(s, q)
+                is MultipleChoiceQuestion -> multipleChoiceOverlay.runQuestion(s, q)
+                else -> {
+                    TODO("No overlay available for that question type")
+                }
+            }
+
+            if (!mark.correct) {
+                s.awaitCorrection(q)
+                insertDelayed(q)
+                mistakes++
+            }
+
+            s.awaitKeyPress(Key.ENTER)
+            s.clear()
+            answered++
+        }
+        val endTime = Calendar.getInstance().time.time
+        return Triple((endTime - startTime).toDouble() / 1000, answered, mistakes)
     }
 }
