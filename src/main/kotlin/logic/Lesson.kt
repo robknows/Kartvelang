@@ -43,6 +43,10 @@ open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Tran
     data class LessonResults(val accuracyPc: Double, val timeSeconds: Double)
 }
 
+fun <E> List<E>.randomChoice(): E {
+    return get(Random().nextInt(size))
+}
+
 fun randomHint(): String {
     val hints = listOf(
             "All nominative nouns in Georgian end in a vowel",
@@ -50,8 +54,4 @@ fun randomHint(): String {
             "Nouns whose root ends in a consonant have \"ი\" added to the end in the nominative case",
             "Georgian uses postpositions rather than prepositions")
     return hints.randomChoice()
-}
-
-fun <E> List<E>.randomChoice(): E {
-    return get(Random().nextInt(size))
 }
