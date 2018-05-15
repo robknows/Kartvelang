@@ -1,4 +1,6 @@
 /*Created on 15/05/18. */
+import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import logic.*
 import org.junit.Test
 import org.mockito.Matchers
@@ -12,7 +14,27 @@ class MemoLessonTest {
 
     // Mockito wasn't working
     class MockMemoLesson(p: Productions, memo: List<Translation>) : MemoLesson(p, memo) {
+        var stageMarker: Int = 0
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
+            assertTrue(stageMarker < 4)
+            val firstQ = qs.first()
+            when (firstQ) {
+                is MultipleChoiceQuestion -> {
+                    assertEquals(0, stageMarker)
+                    stageMarker++
+                }
+                is TranslationQuestion -> {
+                    if (alphabet.english.contains(firstQ.given.first())) { // english -> georgian
+                        assertEquals(1, stageMarker)
+                        stageMarker++
+                    } else if (alphabet.georgian.contains(firstQ.given.first())) { // georgian -> english
+                        assertEquals(2, stageMarker)
+                        stageMarker++
+                    } else {
+                        assertTrue(false) // ...
+                    }
+                }
+            }
             return Triple(10.0, 5, 0)
         }
     }
@@ -30,6 +52,8 @@ class MemoLessonTest {
 
         memoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
+        // verify that completeStage was called thrice
+        assertEquals(3, memoLesson.stageMarker)
         // verify that a MCQ was made for each
         inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
         inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
