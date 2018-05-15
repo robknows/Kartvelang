@@ -3,8 +3,8 @@ package logic
 
 import java.util.*
 
-open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {
-    open fun complete(): LessonResults {
+open class Lesson(val qs: Questions) {
+    open fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (lessonTime, answered, mistakes) = runQuestions(s, qs, translationOverlay, multipleChoiceOverlay)
         s.closeInput()
         val results = LessonResults(

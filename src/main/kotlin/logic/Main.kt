@@ -27,11 +27,11 @@ fun main(args: Array<String>) {
 
     val qs = Questions(listOf(q1, q2, q3, q4))
 
-    val lesson = Lesson(s, qs, TranslationOverlay(), MultipleChoiceOverlay())
+    val lesson = Lesson(qs)
 
     val u = User()
 
-    u.complete(lesson)
+    u.complete(lesson, s, TranslationOverlay(), MultipleChoiceOverlay())
 
     u.saveProfile("/home/rob/kartvelang_user.json")
 

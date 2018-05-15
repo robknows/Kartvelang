@@ -1,27 +1,29 @@
 /*Created on 10/05/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import logic.Lesson
-import logic.User
+import logic.*
 import org.json.JSONObject
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
+import org.mockito.Mockito.*
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
 
 class UserTest {
+    val mockScreen = mock(Screen::class.java)
+    val spyTranslationOverlay = spy(TranslationOverlay())
+    val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
+
     @Test
     fun completedLessonDataSavesToEmptyUserProfile() {
         val u = User()
 
         val mockLesson = mock(Lesson::class.java)
-        `when`(mockLesson.complete()).thenReturn(Lesson.LessonResults(50.0, 100.0))
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(50.0, 100.0))
 
         val t = Calendar.getInstance().time.time
-        u.complete(mockLesson)
+        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         assertEquals(1, u.totalLessonCompletions)
         assertEquals(1, u.dailyLessonCompletions)
@@ -40,10 +42,10 @@ class UserTest {
         u.lastCompletion = Calendar.getInstance().time.time - 100
 
         val mockLesson = mock(Lesson::class.java)
-        `when`(mockLesson.complete()).thenReturn(Lesson.LessonResults(100.0, 80.0))
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(100.0, 80.0))
 
         val t = Calendar.getInstance().time.time
-        u.complete(mockLesson)
+        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         assertEquals(2, u.totalLessonCompletions)
         assertEquals(2, u.dailyLessonCompletions)
