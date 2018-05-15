@@ -1,3 +1,5 @@
+Single lesson algorithm:
+
 1. Show question
 2. Await answer
 3. Mark answer
@@ -9,3 +11,9 @@
 
 5. If no more questions remain => Finish
 6. If more questions remain    => Go to next question
+
+Three stage lesson algorithm:
+
+1. Multiple choice [georgian -> english]
+2. Translation     [georgian -> english]
+3. Translation     [english  -> georgian]
