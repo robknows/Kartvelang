@@ -5,6 +5,18 @@ import java.util.*
 
 open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: TranslationOverlay, val multipleChoiceOverlay: MultipleChoiceOverlay) {
     open fun complete(): LessonResults {
+        val (lessonTime, answered, mistakes) = runQuestions(s, qs, translationOverlay, multipleChoiceOverlay)
+        s.closeInput()
+        val results = LessonResults(
+                100 * (answered - mistakes).toDouble() / answered, // accuracyPc
+                lessonTime)                                        // timeSeconds
+        s.showPostLessonInfo(results.accuracyPc, results.timeSeconds, randomHint())
+        s.print()
+        s.clear()
+        return results
+    }
+
+    fun runQuestions(s: Screen, qs: Questions, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
         var mistakes = 0
         var answered = 0
         val startTime = Calendar.getInstance().time.time
@@ -30,14 +42,7 @@ open class Lesson(val s: Screen, val qs: Questions, val translationOverlay: Tran
             answered++
         }
         val endTime = Calendar.getInstance().time.time
-        s.closeInput()
-        val results = LessonResults(
-                100 * (answered - mistakes).toDouble() / answered, // accuracyPc
-                (endTime - startTime).toDouble() / 1000)           // timeSeconds
-        s.showPostLessonInfo(results.accuracyPc, results.timeSeconds, randomHint())
-        s.print()
-        s.clear()
-        return results
+        return Triple((endTime - startTime).toDouble() / 1000, answered, mistakes)
     }
 
     data class LessonResults(val accuracyPc: Double, val timeSeconds: Double)
