@@ -20,9 +20,9 @@ class MemoLessonTest {
         lesson.complete()
 
         // verify that a MCQ was made for each
-        inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('x', 'y', 'z'))
-        inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('x', 'y', 'z'))
-        inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('x', 'y', 'z'))
+        inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
+        inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
+        inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('მ', 'შ', 'კ'))
         // verify that a TQ was made for each
         inOrder.verify(spyProductions).englishToGeorgian(t1)
         inOrder.verify(spyProductions).englishToGeorgian(t2)
