@@ -1,4 +1,5 @@
 /*Created on 15/05/18. */
+import logic.MemoLesson
 import logic.Productions
 import logic.Translation
 import org.junit.Test

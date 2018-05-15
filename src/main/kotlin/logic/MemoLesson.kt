@@ -1,5 +1,4 @@
-import logic.Productions
-import logic.Translation
+package logic
 
 class MemoLesson(val p: Productions, val memo: List<Translation>) {
     fun complete() {
