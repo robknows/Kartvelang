@@ -1,3 +1,4 @@
+/*Created on 15/05/18. */
 package logic
 
 open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, val wordMemo: List<Translation>) {
