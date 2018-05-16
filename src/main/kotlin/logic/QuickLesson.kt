@@ -3,8 +3,8 @@ package logic
 
 import java.util.*
 
-open class QuickLesson(val qs: Questions) {
-    open fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
+open class QuickLesson(val qs: Questions) : Lesson {
+    override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (lessonTime, answered, mistakes) = qs.run(s, translationOverlay, multipleChoiceOverlay)
         s.closeInput()
         val results = LessonResults(

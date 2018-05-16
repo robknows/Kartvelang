@@ -16,6 +16,16 @@ class UserTest {
     val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
 
     @Test
+    fun initialisedWithEmptyStats() {
+        val u = User()
+        assertEquals(0, u.totalLessonCompletions)
+        assertEquals(0, u.dailyLessonCompletions)
+        assertEquals(0.0, u.meanDailyAccuracy)
+        assertEquals(0.0, u.lessonTime)
+        assertEquals(0L, u.lastCompletion)
+    }
+
+    @Test
     fun completedLessonDataSavesToEmptyUserProfile() {
         val u = User()
 

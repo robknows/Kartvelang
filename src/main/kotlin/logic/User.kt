@@ -27,8 +27,8 @@ class User {
     var lessonTime: Double = 0.0
     var lastCompletion: Long = 0L
 
-    fun complete(quickLesson: QuickLesson, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay) {
-        val results = quickLesson.complete(s, translationOverlay, multipleChoiceOverlay)
+    fun complete(lesson: Lesson, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay) {
+        val results = lesson.complete(s, translationOverlay, multipleChoiceOverlay)
         lastCompletion = Calendar.getInstance().time.time
         meanDailyAccuracy = (results.accuracyPc + (meanDailyAccuracy * dailyLessonCompletions)) / (dailyLessonCompletions + 1)
         dailyLessonCompletions++
@@ -47,14 +47,5 @@ class User {
         FileWriter(filename).use { file ->
             file.write(o.toString())
         }
-    }
-
-    fun complete(lesson: MemoLesson, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay) {
-        val results = lesson.complete(s, translationOverlay, multipleChoiceOverlay)
-        lastCompletion = Calendar.getInstance().time.time
-        meanDailyAccuracy = (results.accuracyPc + (meanDailyAccuracy * dailyLessonCompletions)) / (dailyLessonCompletions + 1)
-        dailyLessonCompletions++
-        totalLessonCompletions++
-        lessonTime += results.timeSeconds
     }
 }
