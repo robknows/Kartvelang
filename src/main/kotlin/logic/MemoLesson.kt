@@ -71,6 +71,10 @@ fun inWord(eng: Char): String {
         'a' -> "ant"
         'b' -> "bee"
         'g' -> "girl"
+        'm' -> "morning"
+        'r' -> "rock"
+        'j' -> "major"
+        'o' -> "court"
         else -> {
             ""
         }
@@ -82,6 +86,10 @@ fun similarLetters(kar: Char): Triple<Char, Char, Char> {
         'ა' -> Triple('ს', 'მ', 'ე')
         'ბ' -> Triple('გ', 'ფ', 'ა')
         'გ' -> Triple('მ', 'შ', 'კ')
+        'მ' -> Triple('წ', 'შ', 'ო')
+        'რ' -> Triple('ო', 'უ', 'დ')
+        'ჯ' -> Triple('ჩ', 'ყ', 'ლ')
+        'ო' -> Triple('რ', 'ე', 'თ')
         else -> {
             Triple('x', 'y', 'z')
         }
