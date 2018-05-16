@@ -48,4 +48,13 @@ class User {
             file.write(o.toString())
         }
     }
+
+    fun complete(lesson: MemoLesson, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay) {
+        val results = lesson.complete(s, translationOverlay, multipleChoiceOverlay)
+        lastCompletion = Calendar.getInstance().time.time
+        meanDailyAccuracy = (results.accuracyPc + (meanDailyAccuracy * dailyLessonCompletions)) / (dailyLessonCompletions + 1)
+        dailyLessonCompletions++
+        totalLessonCompletions++
+        lessonTime += results.timeSeconds
+    }
 }

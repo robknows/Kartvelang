@@ -1,7 +1,7 @@
 package logic
 
 open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, val wordMemo: List<Translation>) {
-    fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Lesson.LessonResults {
+    open fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Lesson.LessonResults {
         val (mcRuntime, mcAnswered, mcMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)
         val (gteRuntime, gteAnswered, gteMistakes) = completeGeorgianToEnglishStage(s, translationOverlay, multipleChoiceOverlay)

@@ -92,4 +92,21 @@ class UserTest {
         assertEquals(100.0, uLoaded.lessonTime)
         assertEquals(1525986991184, uLoaded.lastCompletion)
     }
+
+    @Test
+    fun canCompleteMemoLesson() {
+        val u = User()
+
+        val mockMemoLesson = mock(MemoLesson::class.java)
+        `when`(mockMemoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(50.0, 100.0))
+
+        val t = Calendar.getInstance().time.time
+        u.complete(mockMemoLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
+
+        assertEquals(1, u.totalLessonCompletions)
+        assertEquals(1, u.dailyLessonCompletions)
+        assertEquals(50.0, u.meanDailyAccuracy)
+        assertEquals(100.0, u.lessonTime)
+        assertTrue(t - u.lastCompletion < 50)
+    }
 }
