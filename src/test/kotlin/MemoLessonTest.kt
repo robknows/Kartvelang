@@ -15,7 +15,7 @@ class MemoLessonTest {
     // Mockito wasn't working so I got the axe out
     class MockMemoLesson(p: Productions, alphabetMemo: List<Translation>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
-        val noWordsP: Int = wordMemo.isNotEmpty().toInt()
+        val noWordsP: Int = if (wordMemo.isNotEmpty()) 1 else 0
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
             if (qs.isEmpty()) {
                 return QuestionsResults(0.0, 0, 0)
@@ -120,5 +120,3 @@ class MemoLessonTest {
         inOrder.verify(mockScreen).clear()
     }
 }
-
-fun Boolean.toInt() = if (this) 1 else 0
