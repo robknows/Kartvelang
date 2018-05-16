@@ -83,7 +83,14 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
     open fun awaitCorrection(q: Question) {
         if (q.fullCorrections) {
             prompt("Type out the correct answer:")
-            while (!q.verifyAnswer(input.readLine()!!)) {
+            var readLine: String
+            while (true) {
+                readLine = input.readLine()
+                if (readLine.isBlank() || readLine.isEmpty()) {
+                    continue
+                } else if (q.verifyAnswer(readLine)) {
+                    break
+                }
             }
         }
     }

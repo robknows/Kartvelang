@@ -1,5 +1,6 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import logic.*
 import logic.MultipleChoiceChoice.A
 import org.junit.Test
@@ -179,5 +180,22 @@ class ScreenTest {
         s.showPostLessonInfo(100.0, 5.12, "This is a great hint")
 
         assertEquals("Tacky overlay string\nAccuracy:    100%%\nLesson time: 5.12 seconds\nHint: This is a great hint", s.toString())
+    }
+
+    @Test
+    fun canAwaitTranslationCorrectionWithBlankAnswers() {
+        val mockQuestion = object : Question {
+            override val answer: String = "answer!"
+            override val fullCorrections: Boolean = true
+
+            override fun verifyAnswer(attempt: String): Boolean {
+                assertTrue(attempt.isNotEmpty() && attempt.isNotBlank())
+                return attempt == answer
+            }
+        }
+
+        s.input = BufferedReader(StringReader("\n  \n\n  junk\njunk2\n\n   \n\nanswer!"))
+
+        s.awaitCorrection(mockQuestion)
     }
 }
