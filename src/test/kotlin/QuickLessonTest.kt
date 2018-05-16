@@ -9,7 +9,7 @@ import org.mockito.Mockito.*
 import java.io.BufferedReader
 import java.io.StringReader
 
-class LessonTest {
+class QuickLessonTest {
     val q1 = TranslationQuestion("Type \"abc\"", "abc")
     val q2 = TranslationQuestion("Type \"doremi\"", "doremi")
     val q3 = TranslationQuestion("Type \"onetwothree\"", "onetwothree")
@@ -25,7 +25,7 @@ class LessonTest {
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
         val inOrder = inOrder(spyTranslationOverlay)
 
-        val lesson = Lesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -51,7 +51,7 @@ class LessonTest {
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
-        val lesson = Lesson(Questions(listOf(q1)))
+        val lesson = QuickLesson(Questions(listOf(q1)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -71,7 +71,7 @@ class LessonTest {
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
-        val lesson = Lesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -97,7 +97,7 @@ class LessonTest {
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
 
-        val lesson = Lesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
 
         val lessonResults = lesson.complete(Screen(mockPrinter, mockKeyWaiter, input), spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -114,7 +114,7 @@ class LessonTest {
         val mockKeyWaiter = mock(KeyWaiter::class.java)
         val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyMultipleChoiceOverlay)
-        val lesson = Lesson(Questions(listOf(q1, q4, q3)))
+        val lesson = QuickLesson(Questions(listOf(q1, q4, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 

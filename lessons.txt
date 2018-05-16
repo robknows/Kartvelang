@@ -1,4 +1,4 @@
-Generic lesson algorithm:
+Quick lesson algorithm:
 
 1. Show question
 2. Await answer
@@ -12,7 +12,7 @@ Generic lesson algorithm:
 5. If no more questions remain => Show statistics
 6. If more questions remain    => Go to next question
 
-Memorisation lesson algorithm: Uses the generic lesson algorithm in 3 stages.
+Memorisation lesson algorithm: Uses the quick lesson algorithm in 3 stages.
 
 1. Multiple choice [georgian -> english]
 2. Intermission

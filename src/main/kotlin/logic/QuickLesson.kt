@@ -3,7 +3,7 @@ package logic
 
 import java.util.*
 
-open class Lesson(val qs: Questions) {
+open class QuickLesson(val qs: Questions) {
     open fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (lessonTime, answered, mistakes) = qs.run(s, translationOverlay, multipleChoiceOverlay)
         s.closeInput()
@@ -15,9 +15,9 @@ open class Lesson(val qs: Questions) {
         s.clear()
         return results
     }
-
-    data class LessonResults(val accuracyPc: Double, val timeSeconds: Double)
 }
+
+data class LessonResults(val accuracyPc: Double, val timeSeconds: Double)
 
 fun <E> List<E>.randomChoice(): E {
     return get(Random().nextInt(size))

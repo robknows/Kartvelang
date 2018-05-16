@@ -19,8 +19,8 @@ class UserTest {
     fun completedLessonDataSavesToEmptyUserProfile() {
         val u = User()
 
-        val mockLesson = mock(Lesson::class.java)
-        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(50.0, 100.0))
+        val mockLesson = mock(QuickLesson::class.java)
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
 
         val t = Calendar.getInstance().time.time
         u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
@@ -41,8 +41,8 @@ class UserTest {
         u.lessonTime = 100.0
         u.lastCompletion = Calendar.getInstance().time.time - 100
 
-        val mockLesson = mock(Lesson::class.java)
-        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(100.0, 80.0))
+        val mockLesson = mock(QuickLesson::class.java)
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(100.0, 80.0))
 
         val t = Calendar.getInstance().time.time
         u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
@@ -98,7 +98,7 @@ class UserTest {
         val u = User()
 
         val mockMemoLesson = mock(MemoLesson::class.java)
-        `when`(mockMemoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(Lesson.LessonResults(50.0, 100.0))
+        `when`(mockMemoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
 
         val t = Calendar.getInstance().time.time
         u.complete(mockMemoLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)

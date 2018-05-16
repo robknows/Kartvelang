@@ -20,7 +20,7 @@ fun main(args: Array<String>) {
     val u = User()
     val p = Productions()
 
-    val lesson = Lesson(
+    val quickLesson = QuickLesson(
             Questions(
                     listOf(
                             MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), B),
