@@ -1,6 +1,8 @@
 /*Created on 14/05/18. */
 package course
 
+import logic.*
+
 /* Hello!
 
 Learns how to say "გამარჯობა" + letters
@@ -10,8 +12,11 @@ Vocab:
 გამარჯობა
 
  */
+val lesson_hello = MemoLesson(Productions(),
+        listOf(alphabet_g, alphabet_a, alphabet_m, alphabet_r, alphabet_j, alphabet_b),
+        listOf(greeting_hello))
 
-/* What's your name?
+/* What are you called?
 
 Learns how to say "შენ რა გქვია?" + "მე მქვია ქეთი" + letters
 

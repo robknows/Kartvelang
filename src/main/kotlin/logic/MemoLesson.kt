@@ -24,7 +24,7 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
 
     fun completeMultipleChoiceStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
         val alphabetMultipleChoiceQs = alphabetMemo.map({ t ->
-            val eng = t.english.first()
+            val eng = t.english
             val kar = t.georgian.first()
             p.alphabetSound(eng, inWord(eng), kar, similarLetters(kar))
         })
@@ -59,15 +59,19 @@ fun randomShortWords(): Triple<String, String, String> {
     return Triple("შენ", "ჩაი", "ათი")
 }
 
-fun inWord(eng: Char): String {
+fun inWord(eng: String): String {
     return when (eng) {
-        'a' -> "ant"
-        'b' -> "bee"
-        'g' -> "girl"
-        'm' -> "morning"
-        'r' -> "rock"
-        'j' -> "major"
-        'o' -> "court"
+        "a" -> "ant"
+        "b" -> "bee"
+        "g" -> "girl"
+        "m" -> "morning"
+        "r" -> "rock"
+        "j" -> "jam"
+        "o" -> "court"
+        "q" -> "racquetball"
+        "v" -> "voice"
+        "i" -> "marine"
+        "sh" -> "shower"
         else -> {
             ""
         }
@@ -83,6 +87,10 @@ fun similarLetters(kar: Char): Triple<Char, Char, Char> {
         'რ' -> Triple('ო', 'უ', 'დ')
         'ჯ' -> Triple('ჩ', 'ყ', 'ლ')
         'ო' -> Triple('რ', 'ე', 'თ')
+        'შ' -> Triple('მ', 'ნ', 'წ')
+        'ქ' -> Triple('ე', 'მ', 'გ')
+        'ვ' -> Triple('კ', 'პ', 'ჰ')
+        'ი' -> Triple('ა', 'ე', 'ო')
         else -> {
             Triple('x', 'y', 'z')
         }

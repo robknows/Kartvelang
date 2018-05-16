@@ -66,9 +66,9 @@ class MemoLessonTest {
         // verify that completeStage was called thrice
         assertEquals(1, memoLesson.stageMarker)
         // verify that a MCQ was made for each
-        inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
-        inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
-        inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('მ', 'შ', 'კ'))
+        inOrder.verify(spyProductions).alphabetSound("a", "ant", 'ა', Triple('ს', 'მ', 'ე'))
+        inOrder.verify(spyProductions).alphabetSound("b", "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
+        inOrder.verify(spyProductions).alphabetSound("g", "girl", 'გ', Triple('მ', 'შ', 'კ'))
         // verify that no TQs were made
         verify(spyProductions, never()).englishToGeorgian(t1)
         verify(spyProductions, never()).englishToGeorgian(t2)
@@ -103,9 +103,9 @@ class MemoLessonTest {
         // verify that completeStage was called thrice
         assertEquals(4, memoLesson.stageMarker)
         // verify that a MCQ was made for each
-        inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
-        inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
-        inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('მ', 'შ', 'კ'))
+        inOrder.verify(spyProductions).alphabetSound("a", "ant", 'ა', Triple('ს', 'მ', 'ე'))
+        inOrder.verify(spyProductions).alphabetSound("b", "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
+        inOrder.verify(spyProductions).alphabetSound("g", "girl", 'გ', Triple('მ', 'შ', 'კ'))
         inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("hello", "გამარჯობა", Triple("შენ", "ჩაი", "ათი"))
         // verify that a TQ was made for each word
         inOrder.verify(spyProductions).englishToGeorgian(t4)

@@ -3,6 +3,7 @@
 
 package logic
 
+import course.lesson_hello
 import logic.MultipleChoiceChoice.B
 import logic.MultipleChoiceChoice.C
 import org.jnativehook.GlobalScreen
@@ -27,9 +28,8 @@ fun main(args: Array<String>) {
                             p.englishToGeorgian(greeting_hello),
                             MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"), C),
                             p.introduction(greeting_nicetomeetyou, name_Keti))))
-    val memoLesson = MemoLesson(p, listOf(alphabet_g, alphabet_a, alphabet_m, alphabet_r, alphabet_j, alphabet_b), listOf(greeting_hello))
 
-    u.complete(memoLesson, s, TranslationOverlay(), MultipleChoiceOverlay())
+    u.complete(lesson_hello, s, TranslationOverlay(), MultipleChoiceOverlay())
 
     u.saveProfile("/home/rob/kartvelang_user.json")
 
