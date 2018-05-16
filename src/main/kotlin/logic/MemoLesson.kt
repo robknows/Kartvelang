@@ -3,18 +3,18 @@ package logic
 
 open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, val wordMemo: List<Translation>) : Lesson {
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
-        val (mcRuntime, mcAnswered, mcMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
+        val (mcqRuntime, mcqAnswered, mcqMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)
         val (gteRuntime, gteAnswered, gteMistakes) = completeGeorgianToEnglishStage(s, translationOverlay, multipleChoiceOverlay)
 
         s.closeInput()
 
-        val totalAnswered = mcAnswered + etgAnswered + gteAnswered
-        val totalMistakes = mcMistakes + etgMistakes + gteMistakes
+        val totalAnswered = mcqAnswered + etgAnswered + gteAnswered
+        val totalMistakes = mcqMistakes + etgMistakes + gteMistakes
 
         val results = LessonResults(
                 100 * (totalAnswered - totalMistakes).toDouble() / totalAnswered,
-                mcRuntime + etgRuntime + gteRuntime)
+                mcqRuntime + etgRuntime + gteRuntime)
 
         s.showPostLessonInfo(results.accuracyPc, results.timeSeconds, randomHint())
         s.print()
