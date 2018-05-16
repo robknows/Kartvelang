@@ -30,7 +30,7 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
         })
         val (aMcRuntime, aMcAnswered, aMcMistakes) = completeStage(alphabetMultipleChoiceQs, s, translationOverlay, multipleChoiceOverlay)
 
-        val wordMultipleChoiceQs = wordMemo.map({ t -> p.englishToGeorgianMultipleChoice(t.english, t.georgian, Triple("a", "b", "c")) })
+        val wordMultipleChoiceQs = wordMemo.map({ t -> p.englishToGeorgianMultipleChoice(t.english, t.georgian, randomShortWords()) })
         val (wMcRuntime, wMcAnswered, wMcMistakes) = completeStage(wordMultipleChoiceQs, s, translationOverlay, multipleChoiceOverlay)
 
         return QuestionsResults(aMcRuntime + wMcRuntime, aMcAnswered + wMcAnswered, aMcMistakes + wMcMistakes)
@@ -53,6 +53,10 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
             return Questions(qs).run(s, translationOverlay, multipleChoiceOverlay)
         }
     }
+}
+
+fun randomShortWords(): Triple<String, String, String> {
+    return Triple("შენ", "ჩაი", "ათი")
 }
 
 fun inWord(eng: Char): String {
