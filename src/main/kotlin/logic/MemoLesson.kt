@@ -39,7 +39,6 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
     fun completeEnglishToGeorgianStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
         val englishToGeorgianQs = wordMemo.map(p::englishToGeorgian)
         return completeStage(englishToGeorgianQs, s, translationOverlay, multipleChoiceOverlay)
-
     }
 
     fun completeGeorgianToEnglishStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
