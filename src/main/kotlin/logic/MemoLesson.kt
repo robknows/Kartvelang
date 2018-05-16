@@ -29,7 +29,7 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
         })
         val (aMcRuntime, aMcAnswered, aMcMistakes) = completeStage(alphabetMultipleChoiceQs, s, translationOverlay, multipleChoiceOverlay)
 
-        val wordMultipleChoiceQs = wordMemo.map({ t -> p.englishToGeorgianMultipleChoiceTranslation(t.english, t.georgian, Triple("a", "b", "c")) })
+        val wordMultipleChoiceQs = wordMemo.map({ t -> p.englishToGeorgianMultipleChoice(t.english, t.georgian, Triple("a", "b", "c")) })
         val (wMcRuntime, wMcAnswered, wMcMistakes) = completeStage(wordMultipleChoiceQs, s, translationOverlay, multipleChoiceOverlay)
 
         return Triple(aMcRuntime + wMcRuntime, aMcAnswered + wMcAnswered, aMcMistakes + wMcMistakes)

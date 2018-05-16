@@ -38,7 +38,7 @@ open class Productions {
         return MultipleChoiceQuestion("makes a sound like \"$eng\" in \"$inWord\"", kar.toString(), incorrect.toStrings(), randomChoice())
     }
 
-    open fun englishToGeorgianMultipleChoiceTranslation(eng: String, kar: String, incorrect: Triple<String, String, String>): MultipleChoiceQuestion {
+    open fun englishToGeorgianMultipleChoice(eng: String, kar: String, incorrect: Triple<String, String, String>): MultipleChoiceQuestion {
         return MultipleChoiceQuestion("means \"$eng\" in georgian", kar, incorrect, randomChoice())
     }
 }
