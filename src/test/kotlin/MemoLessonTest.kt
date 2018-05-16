@@ -16,9 +16,9 @@ class MemoLessonTest {
     class MockMemoLesson(p: Productions, alphabetMemo: List<Translation>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
         val noWordsP: Int = wordMemo.isNotEmpty().toInt()
-        override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
+        override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
             if (qs.isEmpty()) {
-                return Triple(0.0, 0, 0)
+                return QuestionsResults(0.0, 0, 0)
             } else {
                 val firstQ = qs.first()
                 when (firstQ) {
@@ -45,7 +45,7 @@ class MemoLessonTest {
                         }
                     }
                 }
-                return Triple(10.0, 5, 0)
+                return QuestionsResults(10.0, 5, 0)
             }
         }
     }

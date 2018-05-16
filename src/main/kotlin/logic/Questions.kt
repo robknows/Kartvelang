@@ -43,7 +43,7 @@ open class Questions {
         set.addAll(otherQuestions.set)
     }
 
-    fun run(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
+    fun run(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
         var mistakes = 0
         var answered = 0
         val startTime = Calendar.getInstance().time.time
@@ -69,6 +69,8 @@ open class Questions {
             answered++
         }
         val endTime = Calendar.getInstance().time.time
-        return Triple((endTime - startTime).toDouble() / 1000, answered, mistakes)
+        return QuestionsResults((endTime - startTime).toDouble() / 1000, answered, mistakes)
     }
 }
+
+data class QuestionsResults(val runtime: Double, val qsAnswered: Int, val mistakes: Int)
