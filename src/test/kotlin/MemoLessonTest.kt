@@ -40,7 +40,7 @@ class MemoLessonTest {
     }
 
     @Test
-    fun memoLessonRunsStagesInOrder() {
+    fun runsStagesInOrder() {
         val spyProductions = spy(Productions())
         val inOrder = inOrder(spyProductions, mockScreen)
         val t1 = Translation("a", "ა")
