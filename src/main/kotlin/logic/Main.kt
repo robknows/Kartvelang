@@ -12,26 +12,24 @@ import java.io.InputStreamReader
 
 fun main(args: Array<String>) {
     val printer = ColourPrinter()
-
-    printTitle(printer)
-
     val input = BufferedReader(InputStreamReader(System.`in`))
     val s = Screen(printer, KeyWaiter(), input)
 
-    val p = Productions()
-
-    val q1 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), B)
-    val q2 = p.englishToGeorgian(greeting_hello)
-    val q3 = MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"), C)
-    val q4 = p.introduction(greeting_nicetomeetyou, name_Keti)
-
-    val qs = Questions(listOf(q1, q2, q3, q4))
-
-    val lesson = Lesson(qs)
+    printTitle(printer)
 
     val u = User()
+    val p = Productions()
 
-    u.complete(lesson, s, TranslationOverlay(), MultipleChoiceOverlay())
+    val lesson = Lesson(
+            Questions(
+                    listOf(
+                            MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), B),
+                            p.englishToGeorgian(greeting_hello),
+                            MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"), C),
+                            p.introduction(greeting_nicetomeetyou, name_Keti))))
+    val memoLesson = MemoLesson(p, listOf(alphabet_g, alphabet_a, alphabet_m, alphabet_r, alphabet_j, alphabet_b), listOf(greeting_hello))
+
+    u.complete(memoLesson, s, TranslationOverlay(), MultipleChoiceOverlay())
 
     u.saveProfile("/home/rob/kartvelang_user.json")
 

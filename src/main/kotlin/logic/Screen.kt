@@ -95,7 +95,7 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
             accuracyPc.toString()
         }
         lines.add(Pair(I, Text("Accuracy:    $acc%%")))
-        lines.add(Pair(I, Text("logic.Lesson time: " + seconds.toString() + " seconds")))
+        lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
         lines.add(Pair(I, Text("Hint: $hint")))
     }
 }
