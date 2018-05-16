@@ -46,7 +46,6 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
         return completeStage(georgianToEnglishQs, s, translationOverlay, multipleChoiceOverlay)
     }
 
-    // Returns a triple of (Runtime, #answered, #mistakes)
     open fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
         if (qs.isEmpty()) {
             return QuestionsResults(0.0, 0, 0)
