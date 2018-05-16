@@ -37,23 +37,14 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
     }
 
     fun completeEnglishToGeorgianStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
-        val alphabetEnglishToGeorgianQs = alphabetMemo.map(p::englishToGeorgian)
-        val (aEtgRuntime, aEtgAnswered, aEtgMistakes) = completeStage(alphabetEnglishToGeorgianQs, s, translationOverlay, multipleChoiceOverlay)
+        val englishToGeorgianQs = wordMemo.map(p::englishToGeorgian)
+        return completeStage(englishToGeorgianQs, s, translationOverlay, multipleChoiceOverlay)
 
-        val wordEnglishToGeorgianQs = wordMemo.map(p::englishToGeorgian)
-        val (wEtgRuntime, wEtgAnswered, wEtgMistakes) = completeStage(wordEnglishToGeorgianQs, s, translationOverlay, multipleChoiceOverlay)
-
-        return Triple(aEtgRuntime + wEtgRuntime, aEtgAnswered + wEtgAnswered, aEtgMistakes + wEtgMistakes)
     }
 
     fun completeGeorgianToEnglishStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
-        val alphabetGeorgianToEnglishQs = alphabetMemo.map(p::georgianToEnglish)
-        val (aGteRuntime, aGteAnswered, aGteMistakes) = completeStage(alphabetGeorgianToEnglishQs, s, translationOverlay, multipleChoiceOverlay)
-
-        val wordGeorgianToEnglishQs = wordMemo.map(p::georgianToEnglish)
-        val (wGteRuntime, wGteAnswered, wGteMistakes) = completeStage(wordGeorgianToEnglishQs, s, translationOverlay, multipleChoiceOverlay)
-
-        return Triple(aGteRuntime + wGteRuntime, aGteAnswered + wGteAnswered, aGteMistakes + wGteMistakes)
+        val georgianToEnglishQs = wordMemo.map(p::georgianToEnglish)
+        return completeStage(georgianToEnglishQs, s, translationOverlay, multipleChoiceOverlay)
     }
 
     // Returns a triple of (Runtime, #answered, #mistakes)

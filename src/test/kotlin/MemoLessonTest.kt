@@ -15,42 +15,38 @@ class MemoLessonTest {
     // Mockito wasn't working so I got the axe out
     class MockMemoLesson(p: Productions, alphabetMemo: List<Translation>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
+        val noWordsP: Int = wordMemo.isNotEmpty().toInt()
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): Triple<Double, Int, Int> {
-            assertTrue(stageMarker < 6)
             if (qs.isEmpty()) {
                 return Triple(0.0, 0, 0)
-            }
-            val firstQ = qs.first()
-            when (firstQ) {
-                is MultipleChoiceQuestion -> {
-                    if (wordMemo.isEmpty()) {
-                        assertEquals(0, stageMarker)
-                    } else {
-                        assertTrue(stageMarker == 0 || stageMarker == 1)
+            } else {
+                val firstQ = qs.first()
+                when (firstQ) {
+                    is MultipleChoiceQuestion -> { // multiple choice
+                        assertTrue(stageMarker < 1 + noWordsP)
+                        stageMarker++
                     }
-                    stageMarker++
-                }
-                is TranslationQuestion -> {
-                    if (alphabet.english.contains(firstQ.given.first())) { // english -> georgian
-                        if (wordMemo.isEmpty()) {
-                            assertEquals(1, stageMarker)
-                        } else {
-                            assertTrue(stageMarker == 2 || stageMarker == 3)
+                    is TranslationQuestion -> {
+                        assertTrue(stageMarker > noWordsP)
+                        val letter = firstQ.given.first()
+                        when {
+                            alphabet.english.contains(letter) -> { // english -> georgian
+                                assertTrue(stageMarker < 2 + noWordsP)
+                                stageMarker++
+                            }
+                            alphabet.georgian.contains(letter) -> { // georgian -> english
+                                assertTrue(stageMarker > 1 + noWordsP)
+                                assertTrue(stageMarker < 3 + noWordsP)
+                                stageMarker++
+                            }
+                            else -> {
+                                assertTrue(false)
+                            }
                         }
-                        stageMarker++
-                    } else if (alphabet.georgian.contains(firstQ.given.first())) { // georgian -> english
-                        if (wordMemo.isEmpty()) {
-                            assertEquals(2, stageMarker)
-                        } else {
-                            assertTrue(stageMarker == 4 || stageMarker == 5)
-                        }
-                        stageMarker++
-                    } else {
-                        assertTrue(false) // ...
                     }
                 }
+                return Triple(10.0, 5, 0)
             }
-            return Triple(10.0, 5, 0)
         }
     }
 
@@ -68,22 +64,22 @@ class MemoLessonTest {
         memoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         // verify that completeStage was called thrice
-        assertEquals(3, memoLesson.stageMarker)
+        assertEquals(1, memoLesson.stageMarker)
         // verify that a MCQ was made for each
         inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
         inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
         inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('მ', 'შ', 'კ'))
-        // verify that a TQ was made for each
-        inOrder.verify(spyProductions).englishToGeorgian(t1)
-        inOrder.verify(spyProductions).englishToGeorgian(t2)
-        inOrder.verify(spyProductions).englishToGeorgian(t3)
-        // verify that a RTQ was made for each
-        inOrder.verify(spyProductions).georgianToEnglish(t1)
-        inOrder.verify(spyProductions).georgianToEnglish(t2)
-        inOrder.verify(spyProductions).georgianToEnglish(t3)
+        // verify that no TQs were made
+        verify(spyProductions, never()).englishToGeorgian(t1)
+        verify(spyProductions, never()).englishToGeorgian(t2)
+        verify(spyProductions, never()).englishToGeorgian(t3)
+        // verify that no RTQs was made
+        verify(spyProductions, never()).georgianToEnglish(t1)
+        verify(spyProductions, never()).georgianToEnglish(t2)
+        verify(spyProductions, never()).georgianToEnglish(t3)
         // verify post completion actions
         inOrder.verify(mockScreen).closeInput()
-        inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(30.0), Matchers.anyString())
+        inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(10.0), Matchers.anyString())
         inOrder.verify(mockScreen).print()
         inOrder.verify(mockScreen).clear()
     }
@@ -96,34 +92,33 @@ class MemoLessonTest {
         val t2 = Translation("b", "ბ")
         val t3 = Translation("g", "გ")
         val t4 = Translation("hello", "გამარჯობა")
+        val t5 = Translation("thanks", "გმადლობ")
         val alphabetMemo = listOf(t1, t2, t3)
-        val wordMemo = listOf(t4)
+        val wordMemo = listOf(t4, t5)
 
         val memoLesson = MockMemoLesson(spyProductions, alphabetMemo, wordMemo)
 
         memoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         // verify that completeStage was called thrice
-        assertEquals(6, memoLesson.stageMarker)
+        assertEquals(4, memoLesson.stageMarker)
         // verify that a MCQ was made for each
         inOrder.verify(spyProductions).alphabetSound('a', "ant", 'ა', Triple('ს', 'მ', 'ე'))
         inOrder.verify(spyProductions).alphabetSound('b', "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
         inOrder.verify(spyProductions).alphabetSound('g', "girl", 'გ', Triple('მ', 'შ', 'კ'))
         inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("hello", "გამარჯობა", Triple("a", "b", "c"))
-        // verify that a TQ was made for each
-        inOrder.verify(spyProductions).englishToGeorgian(t1)
-        inOrder.verify(spyProductions).englishToGeorgian(t2)
-        inOrder.verify(spyProductions).englishToGeorgian(t3)
+        // verify that a TQ was made for each word
         inOrder.verify(spyProductions).englishToGeorgian(t4)
-        // verify that a RTQ was made for each
-        inOrder.verify(spyProductions).georgianToEnglish(t1)
-        inOrder.verify(spyProductions).georgianToEnglish(t2)
-        inOrder.verify(spyProductions).georgianToEnglish(t3)
+        inOrder.verify(spyProductions).englishToGeorgian(t5)
+        // verify that a RTQ was made for each word
         inOrder.verify(spyProductions).georgianToEnglish(t4)
+        inOrder.verify(spyProductions).georgianToEnglish(t5)
         // verify post completion actions
         inOrder.verify(mockScreen).closeInput()
-        inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(60.0), Matchers.anyString())
+        inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(40.0), Matchers.anyString())
         inOrder.verify(mockScreen).print()
         inOrder.verify(mockScreen).clear()
     }
 }
+
+fun Boolean.toInt() = if (this) 1 else 0
