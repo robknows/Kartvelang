@@ -1,5 +1,5 @@
 /*Created on 01/05/18. */
-package logic
+package logic.language
 
 data class Translation(val english: String, val georgian: String)
 

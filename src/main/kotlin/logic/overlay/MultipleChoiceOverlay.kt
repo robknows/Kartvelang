@@ -1,7 +1,13 @@
 /*Created on 04/05/18. */
-package logic
+package logic.overlay
 
-import logic.MultipleChoiceChoice.*
+import logic.io.ColourPrinter
+import logic.io.Screen
+import logic.io.Text
+import logic.question.MultipleChoiceChoice
+import logic.question.MultipleChoiceChoice.*
+import logic.question.MultipleChoiceMark
+import logic.question.MultipleChoiceQuestion
 
 open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, MultipleChoiceMark> {
     var questionLine = Text("")

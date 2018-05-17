@@ -1,5 +1,10 @@
 /*Created on 16/05/18. */
-package logic
+package logic.lesson
+
+import logic.io.Screen
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.question.Question
 
 interface Lesson {
     fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults

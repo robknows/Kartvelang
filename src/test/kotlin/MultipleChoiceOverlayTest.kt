@@ -1,9 +1,14 @@
 /*Created on 04/05/18. */
 import junit.framework.TestCase.assertEquals
-import logic.*
-import logic.Colour.*
-import logic.Colour.B
-import logic.MultipleChoiceChoice.*
+import logic.io.Colour.*
+import logic.io.Colour.B
+import logic.io.ColourPrinter
+import logic.io.Screen
+import logic.overlay.MultipleChoiceOverlay
+import logic.question.MultipleChoiceChoice
+import logic.question.MultipleChoiceChoice.*
+import logic.question.MultipleChoiceMark
+import logic.question.MultipleChoiceQuestion
 import org.junit.Test
 import org.mockito.Mockito.*
 import java.io.BufferedReader
@@ -119,7 +124,7 @@ class MultipleChoiceOverlayTest {
     fun canRunQuestion() {
         val mockBufferedReader = mock(BufferedReader::class.java)
         `when`(mockBufferedReader.readLine()).thenReturn("c")
-        val spyScreen = spy(Screen(ColourPrinter(), mock(KeyWaiter::class.java), mockBufferedReader))
+        val spyScreen = spy(Screen(ColourPrinter(), mockBufferedReader))
         val inOrder = inOrder(spyScreen)
 
         val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), C)
@@ -136,7 +141,7 @@ class MultipleChoiceOverlayTest {
     fun canRunQuestionWithReprompts() {
         val mockBufferedReader = mock(BufferedReader::class.java)
         `when`(mockBufferedReader.readLine()).thenReturn("მ").thenReturn("მ").thenReturn("c")
-        val spyScreen = spy(Screen(ColourPrinter(), mock(KeyWaiter::class.java), mockBufferedReader))
+        val spyScreen = spy(Screen(ColourPrinter(), mockBufferedReader))
         val inOrder = inOrder(spyScreen)
 
         val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), C)

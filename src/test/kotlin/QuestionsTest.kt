@@ -1,10 +1,10 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.*
-import logic.MultipleChoiceChoice.A
-import logic.MultipleChoiceQuestion
-import logic.NullTranslationQuestion
-import logic.Questions
-import logic.TranslationQuestion
+import logic.lesson.Questions
+import logic.question.MultipleChoiceChoice.A
+import logic.question.MultipleChoiceQuestion
+import logic.question.NullTranslationQuestion
+import logic.question.TranslationQuestion
 import org.junit.Test
 
 class QuestionsTest {

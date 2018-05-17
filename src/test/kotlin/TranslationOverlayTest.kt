@@ -1,11 +1,11 @@
 /*Created on 03/05/18. */
 import junit.framework.TestCase.assertEquals
-import logic.Colour.G
-import logic.Colour.R
-import logic.ColourPrinter
-import logic.TranslationMark
-import logic.TranslationOverlay
-import logic.TranslationQuestion
+import logic.io.Colour.G
+import logic.io.Colour.R
+import logic.io.ColourPrinter
+import logic.overlay.TranslationOverlay
+import logic.question.TranslationMark
+import logic.question.TranslationQuestion
 import org.junit.Test
 import org.mockito.Matchers.anyString
 import org.mockito.Mockito.*

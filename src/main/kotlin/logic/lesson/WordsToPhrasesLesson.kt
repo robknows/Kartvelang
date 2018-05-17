@@ -1,5 +1,13 @@
 /*Created on 16/05/18. */
-package logic
+package logic.lesson
+
+import logic.io.Screen
+import logic.language.Letter
+import logic.language.Productions
+import logic.language.Translation
+import logic.language.concat
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
 
 open class WordsToPhrasesLesson(val p: Productions, val letters: List<Letter>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
     override fun countQuestions(): Int {

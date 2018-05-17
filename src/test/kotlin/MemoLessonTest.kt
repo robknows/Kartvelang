@@ -1,7 +1,15 @@
 /*Created on 15/05/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import logic.*
+import logic.io.Screen
+import logic.language.*
+import logic.lesson.MemoLesson
+import logic.lesson.QuestionsResults
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.question.MultipleChoiceQuestion
+import logic.question.Question
+import logic.question.TranslationQuestion
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito

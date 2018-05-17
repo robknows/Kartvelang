@@ -1,6 +1,9 @@
 /*Created on 30/04/18. */
-package logic
+package logic.lesson
 
+import logic.io.Screen
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
 import java.util.*
 
 open class QuickLesson(val qs: Questions) : Lesson {

@@ -1,7 +1,9 @@
 /*Created on 14/05/18. */
 package course
 
-import logic.*
+import logic.language.*
+import logic.lesson.MemoLesson
+import logic.lesson.WordsToPhrasesLesson
 
 /* Hello!
 

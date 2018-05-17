@@ -1,8 +1,16 @@
 /*Created on 30/04/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import logic.*
-import logic.MultipleChoiceChoice.B
+import logic.io.ColourPrinter
+import logic.io.Key
+import logic.io.Screen
+import logic.lesson.Questions
+import logic.lesson.QuickLesson
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.question.MultipleChoiceChoice.B
+import logic.question.MultipleChoiceQuestion
+import logic.question.TranslationQuestion
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito.*
@@ -21,8 +29,7 @@ class QuickLessonTest {
     fun canCompleteSimpleLessonWithAllCorrectAnswers() {
         val input = BufferedReader(StringReader("abc\n\ndoremi\n\nonetwothree\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
-        val mockKeyWaiter = mock(KeyWaiter::class.java)
-        val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
+        val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay)
 
         val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
@@ -48,8 +55,7 @@ class QuickLessonTest {
     fun lessonEventsOccurInCorrectOrder() {
         val input = BufferedReader(StringReader("abc\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
-        val mockKeyWaiter = mock(KeyWaiter::class.java)
-        val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
+        val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
         val lesson = QuickLesson(Questions(listOf(q1)))
 
@@ -68,8 +74,7 @@ class QuickLessonTest {
     fun canCompleteSimpleLessonWithAMistake() {
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
-        val mockKeyWaiter = mock(KeyWaiter::class.java)
-        val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
+        val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
         val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
 
@@ -94,12 +99,11 @@ class QuickLessonTest {
     @Test(timeout = 3000)
     fun canGetLessonResults() {
         val mockPrinter = mock(ColourPrinter::class.java)
-        val mockKeyWaiter = mock(KeyWaiter::class.java)
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
 
         val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
 
-        val lessonResults = lesson.complete(Screen(mockPrinter, mockKeyWaiter, input), spyTranslationOverlay, spyMultipleChoiceOverlay)
+        val lessonResults = lesson.complete(Screen(mockPrinter, input), spyTranslationOverlay, spyMultipleChoiceOverlay)
 
 
         assertEquals(75.0, lessonResults.accuracyPc)
@@ -111,8 +115,7 @@ class QuickLessonTest {
     fun canCompleteLessonWithMultipleChoiceQuestion() {
         val input = BufferedReader(StringReader("abc\n\nb\n\nonetwothree\n\n"))
         val mockPrinter = mock(ColourPrinter::class.java)
-        val mockKeyWaiter = mock(KeyWaiter::class.java)
-        val spyScreen = spy(Screen(mockPrinter, mockKeyWaiter, input))
+        val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyMultipleChoiceOverlay)
         val lesson = QuickLesson(Questions(listOf(q1, q4, q3)))
 

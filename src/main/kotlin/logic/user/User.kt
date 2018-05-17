@@ -1,6 +1,10 @@
 /*Created on 10/05/18. */
-package logic
+package logic.user
 
+import logic.io.Screen
+import logic.lesson.Lesson
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
 import org.json.JSONObject
 import java.io.File
 import java.io.FileWriter

@@ -1,5 +1,5 @@
 /*Created on 02/05/18. */
-package logic
+package logic.question
 
 interface Question {
     val answer: String

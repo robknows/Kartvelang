@@ -1,6 +1,13 @@
 /*Created on 16/05/18. */
 import junit.framework.TestCase.assertEquals
-import logic.*
+import logic.io.Screen
+import logic.language.*
+import logic.lesson.LessonResults
+import logic.lesson.QuestionsResults
+import logic.lesson.WordsToPhrasesLesson
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.question.Question
 import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.*

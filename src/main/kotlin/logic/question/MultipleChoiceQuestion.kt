@@ -1,7 +1,6 @@
 /*Created on 04/05/18. */
-package logic
+package logic.question
 
-import logic.MultipleChoiceChoice.*
 import java.util.*
 
 open class MultipleChoiceQuestion(val question: String, override val answer: String, val incorrect: Triple<String, String, String>, val answerChoice: MultipleChoiceChoice) : Question {
@@ -19,10 +18,10 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
 
 private fun Char.toChoice(): MultipleChoiceChoice {
     return when (this) {
-        'a' -> A
-        'b' -> B
-        'c' -> C
-        'd' -> D
+        'a' -> MultipleChoiceChoice.A
+        'b' -> MultipleChoiceChoice.B
+        'c' -> MultipleChoiceChoice.C
+        'd' -> MultipleChoiceChoice.D
         else -> {
             TODO("Cannot get choice which isn't in {a, b, c, d}")
         }
@@ -36,5 +35,5 @@ enum class MultipleChoiceChoice {
 }
 
 fun randomChoice(): MultipleChoiceChoice {
-    return values().get(Random().nextInt(4))
+    return MultipleChoiceChoice.values()[Random().nextInt(4)]
 }

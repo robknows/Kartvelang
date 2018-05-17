@@ -1,10 +1,10 @@
 /*Created on 01/05/18. */
 import junit.framework.TestCase
 import junit.framework.TestCase.assertEquals
-import logic.Productions
-import logic.Translation
-import logic.TranslationQuestion
-import logic.letter_m
+import logic.language.Productions
+import logic.language.Translation
+import logic.language.letter_m
+import logic.question.TranslationQuestion
 import org.junit.Test
 
 class ProductionsTest {

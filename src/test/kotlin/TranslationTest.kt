@@ -1,6 +1,6 @@
 /*Created on 01/05/18. */
 import junit.framework.TestCase.assertEquals
-import logic.TranslationLoader
+import logic.language.TranslationLoader
 import org.junit.Test
 import java.nio.file.Paths
 

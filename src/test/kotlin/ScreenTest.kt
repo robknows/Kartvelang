@@ -1,8 +1,16 @@
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import logic.*
-import logic.MultipleChoiceChoice.A
+import logic.io.ColourPrinter
+import logic.io.LineLabel
+import logic.io.Screen
+import logic.io.Text
+import logic.overlay.QuestionOverlay
+import logic.question.MultipleChoiceChoice.A
+import logic.question.MultipleChoiceQuestion
+import logic.question.Question
+import logic.question.TranslationMark
+import logic.question.TranslationQuestion
 import org.junit.Test
 import org.mockito.Matchers
 import org.mockito.Mockito.*
@@ -10,10 +18,9 @@ import java.io.BufferedReader
 import java.io.StringReader
 
 class ScreenTest {
-    private val mockKeyWaiter = mock(KeyWaiter::class.java)
     private val mockBufferedReader = mock(BufferedReader::class.java)
     private val spyPrinter = spy(ColourPrinter())
-    private val s = Screen(spyPrinter, mockKeyWaiter, mockBufferedReader)
+    private val s = Screen(spyPrinter, mockBufferedReader)
 
     val realisticExampleOverlay = object : QuestionOverlay<TranslationQuestion, TranslationMark> {
         var line1 = Text("A question!")

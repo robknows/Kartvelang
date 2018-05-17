@@ -1,6 +1,14 @@
 /*Created on 29/04/18. */
-package logic
+package logic.lesson
 
+import logic.io.Key
+import logic.io.Screen
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.question.MultipleChoiceQuestion
+import logic.question.NullTranslationQuestion
+import logic.question.Question
+import logic.question.TranslationQuestion
 import java.util.*
 
 open class Questions {
@@ -37,10 +45,6 @@ open class Questions {
         } else {
             set.add(3, q)
         }
-    }
-
-    fun addAll(otherQuestions: Questions) {
-        set.addAll(otherQuestions.set)
     }
 
     fun run(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {

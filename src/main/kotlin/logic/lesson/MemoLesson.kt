@@ -1,5 +1,12 @@
 /*Created on 15/05/18. */
-package logic
+package logic.lesson
+
+import logic.io.Screen
+import logic.language.Letter
+import logic.language.Productions
+import logic.language.Translation
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
 
 open class MemoLesson(val p: Productions, val alphabetMemo: List<Letter>, val wordMemo: List<Translation>) : Lesson {
     override fun countQuestions(): Int {

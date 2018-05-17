@@ -4,15 +4,18 @@
 package logic
 
 import course.lesson_whatareyoucalled
-import org.jnativehook.GlobalScreen
-import org.jnativehook.NativeHookException
+import logic.io.ColourPrinter
+import logic.io.Screen
+import logic.overlay.MultipleChoiceOverlay
+import logic.overlay.TranslationOverlay
+import logic.user.User
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 fun main(args: Array<String>) {
     val printer = ColourPrinter()
     val input = BufferedReader(InputStreamReader(System.`in`))
-    val s = Screen(printer, KeyWaiter(), input)
+    val s = Screen(printer, input)
 
     printTitle(printer)
 
@@ -31,13 +34,4 @@ fun printTitle(printer: ColourPrinter) {
     printer.printGreen("tve")
     printer.printWhite("lang")
     printer.printlnBlue(" ===")
-}
-
-fun registerKeyboardHook() {
-    try {
-        GlobalScreen.registerNativeHook()
-    } catch (ex: NativeHookException) {
-        println("Couldn't create keyboard hook")
-        System.exit(1)
-    }
 }

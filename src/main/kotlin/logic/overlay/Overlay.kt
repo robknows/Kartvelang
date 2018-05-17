@@ -1,5 +1,10 @@
 /*Created on 03/05/18. */
-package logic
+package logic.overlay
+
+import logic.io.ColourPrinter
+import logic.io.Screen
+import logic.question.Mark
+import logic.question.Question
 
 interface Overlay {
     fun printWith(printer: ColourPrinter)

@@ -1,12 +1,13 @@
 /*Created on 29/04/18. */
-package logic
+package logic.io
 
-import logic.LineLabel.C
-import logic.LineLabel.I
+import logic.overlay.BaseOverlay
+import logic.overlay.Overlay
+import logic.question.Question
 import java.io.BufferedReader
 import kotlin.math.max
 
-open class Screen(private val printer: ColourPrinter, private val keyWaiter: KeyWaiter, var input: BufferedReader) {
+open class Screen(private val printer: ColourPrinter, var input: BufferedReader) {
     var lines: MutableList<Pair<LineLabel, Text>> = mutableListOf()
     var overlay: Overlay = BaseOverlay
 
@@ -60,7 +61,7 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
     }
 
     private fun prompt(s: String) {
-        val prompt = Pair(C, Text(s))
+        val prompt = Pair(LineLabel.C, Text(s))
         lines.add(prompt)
         print()
         lines.remove(prompt)
@@ -76,7 +77,7 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         if (key == Key.ENTER) {
             input.readLine()
         } else {
-            keyWaiter.await(key.keyCode)
+            TODO("Can't wait for keys other than ENTER")
         }
     }
 
@@ -101,13 +102,17 @@ open class Screen(private val printer: ColourPrinter, private val keyWaiter: Key
         } else {
             accuracyPc.toString()
         }
-        lines.add(Pair(I, Text("Accuracy:    $acc%%")))
-        lines.add(Pair(I, Text("Lesson time: " + seconds.toString() + " seconds")))
-        lines.add(Pair(I, Text("Hint: $hint")))
+        lines.add(Pair(LineLabel.I, Text("Accuracy:    $acc%%")))
+        lines.add(Pair(LineLabel.I, Text("Lesson time: " + seconds.toString() + " seconds")))
+        lines.add(Pair(LineLabel.I, Text("Hint: $hint")))
     }
 }
 
 enum class LineLabel {
     C, // Correction
     I, // Information
+}
+
+enum class Key {
+    ENTER
 }

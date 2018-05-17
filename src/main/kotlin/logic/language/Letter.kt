@@ -1,8 +1,7 @@
 /*Created on 17/05/18. */
-package logic
+package logic.language
 
-class Letter(val engSound: String, val kar: Char, val inWord: String) {
-}
+class Letter(val engSound: String, val kar: Char, val inWord: String)
 
 val alphabet = Translation("abcdefghijklmnopqrstuvwxyz", "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ")
 

@@ -1,5 +1,12 @@
 /*Created on 03/05/18. */
-package logic
+package logic.overlay
+
+import logic.io.Colour
+import logic.io.ColourPrinter
+import logic.io.Screen
+import logic.io.Text
+import logic.question.TranslationMark
+import logic.question.TranslationQuestion
 
 open class TranslationOverlay : QuestionOverlay<TranslationQuestion, TranslationMark> {
     var questionLine = Text("")

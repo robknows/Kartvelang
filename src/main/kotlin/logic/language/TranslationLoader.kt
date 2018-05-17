@@ -1,5 +1,5 @@
 /*Created on 01/05/18. */
-package logic
+package logic.language
 
 import org.json.JSONArray
 import java.io.File

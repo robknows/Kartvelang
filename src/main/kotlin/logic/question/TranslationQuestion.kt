@@ -1,5 +1,5 @@
 /*Created on 29/04/18. */
-package logic
+package logic.question
 
 import kotlin.math.max
 
