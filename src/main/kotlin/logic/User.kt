@@ -11,7 +11,7 @@ import java.io.FileWriter
 import java.util.*
 import kotlin.collections.HashMap
 
-class User {
+open class User {
     var totalLessonCompletions: Int = 0
     var dailyLessonCompletions: Int = 0
     var meanDailyAccuracy: Double = 0.0
@@ -59,5 +59,9 @@ class User {
 
     fun strength(lesson: Lesson): Double {
         return strengths[lesson]!!
+    }
+
+    open fun hasAccessTo(lesson: Lesson): Boolean {
+        return strengths.containsKey(lesson)
     }
 }

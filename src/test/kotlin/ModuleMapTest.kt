@@ -2,7 +2,10 @@
 import course.lesson_hello
 import course.lesson_whatareyoucalled
 import junit.framework.TestCase.assertEquals
+import logic.User
 import org.junit.Test
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.spy
 
 class ModuleMapTest {
     @Test
@@ -10,5 +13,15 @@ class ModuleMapTest {
         val mm = ModuleMap(lesson_hello, lesson_whatareyoucalled)
 
         assertEquals(listOf(lesson_hello, lesson_whatareyoucalled), mm.lessons)
+    }
+
+    @Test
+    fun canGetListOfAvailableLessonsForUser() {
+        val mm = ModuleMap(lesson_hello, lesson_whatareyoucalled)
+        val u = spy(User())
+        `when`(u.hasAccessTo(lesson_hello)).thenReturn(true)
+        `when`(u.hasAccessTo(lesson_whatareyoucalled)).thenReturn(false)
+
+        assertEquals(listOf(lesson_hello), mm.availableLessons(u))
     }
 }
