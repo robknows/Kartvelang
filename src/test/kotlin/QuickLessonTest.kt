@@ -32,7 +32,7 @@ class QuickLessonTest {
         val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay)
 
-        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson("", Questions(listOf(q1, q2, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -57,7 +57,7 @@ class QuickLessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
-        val lesson = QuickLesson(Questions(listOf(q1)))
+        val lesson = QuickLesson("", Questions(listOf(q1)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -76,7 +76,7 @@ class QuickLessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyScreen)
-        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson("", Questions(listOf(q1, q2, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -101,7 +101,7 @@ class QuickLessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val input = BufferedReader(StringReader("abc\n\ndoremu\ndoremi\n\nonetwothree\n\ndoremi\n\n"))
 
-        val lesson = QuickLesson(Questions(listOf(q1, q2, q3)))
+        val lesson = QuickLesson("", Questions(listOf(q1, q2, q3)))
 
         val lessonResults = lesson.complete(Screen(mockPrinter, input), spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -117,7 +117,7 @@ class QuickLessonTest {
         val mockPrinter = mock(ColourPrinter::class.java)
         val spyScreen = spy(Screen(mockPrinter, input))
         val inOrder = inOrder(spyTranslationOverlay, spyMultipleChoiceOverlay)
-        val lesson = QuickLesson(Questions(listOf(q1, q4, q3)))
+        val lesson = QuickLesson("", Questions(listOf(q1, q4, q3)))
 
         lesson.complete(spyScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
@@ -138,6 +138,6 @@ class QuickLessonTest {
 
     @Test
     fun canCountQuestions() {
-        assertEquals(3, QuickLesson(Questions(listOf(q1, q4, q3))).countQuestions())
+        assertEquals(3, QuickLesson("", Questions(listOf(q1, q4, q3))).countQuestions())
     }
 }

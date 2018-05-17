@@ -2,6 +2,7 @@
 import course.lesson_hello
 import course.lesson_whatareyoucalled
 import junit.framework.TestCase.assertEquals
+import logic.ModuleMap
 import logic.User
 import org.junit.Test
 import org.mockito.Mockito.`when`

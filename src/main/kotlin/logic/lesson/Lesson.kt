@@ -7,6 +7,8 @@ import logic.overlay.TranslationOverlay
 import logic.question.Question
 
 interface Lesson {
+    val name: String
+
     fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults
 
     fun countQuestions(): Int

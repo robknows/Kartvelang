@@ -18,7 +18,7 @@ open class WordsToPhrasesLessonTest {
     val spyMultipleChoiceOverlay = Mockito.spy(MultipleChoiceOverlay())
 
     // Mockito wasn't working so I got the axe out
-    class MockWtpLesson(p: Productions, letters: List<Letter>, words: List<Translation>, phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : WordsToPhrasesLesson(p, letters, words, phraseProductions) {
+    class MockWtpLesson(p: Productions, letters: List<Letter>, words: List<Translation>, phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : WordsToPhrasesLesson("", p, letters, words, phraseProductions) {
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
             if (qs.isEmpty()) {
                 return QuestionsResults(0.0, 0, 0)
@@ -69,7 +69,7 @@ open class WordsToPhrasesLessonTest {
 
     @Test
     fun canCountQuestions() {
-        assertEquals(17, WordsToPhrasesLesson(
+        assertEquals(17, WordsToPhrasesLesson("",
                 Productions(),
                 listOf(letter_v, letter_e),
                 listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),

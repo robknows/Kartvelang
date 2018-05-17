@@ -1,4 +1,5 @@
-import logic.User
+package logic
+
 import logic.lesson.Lesson
 
 class ModuleMap(vararg lessons: Lesson) {

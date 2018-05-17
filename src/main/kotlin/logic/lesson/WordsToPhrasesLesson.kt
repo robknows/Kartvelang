@@ -9,7 +9,7 @@ import logic.language.concat
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
 
-open class WordsToPhrasesLesson(val p: Productions, val letters: List<Letter>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
+open class WordsToPhrasesLesson(override val name: String, val p: Productions, val letters: List<Letter>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
     override fun countQuestions(): Int {
         return letters.size + 3 * (words.size + phraseProductions.size)
     }

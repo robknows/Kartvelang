@@ -21,7 +21,7 @@ class MemoLessonTest {
     val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
 
     // Mockito wasn't working so I got the axe out
-    class MockMemoLesson(p: Productions, alphabetMemo: List<Letter>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
+    class MockMemoLesson(p: Productions, alphabetMemo: List<Letter>, wordMemo: List<Translation>) : MemoLesson("", p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
         val noWordsP: Int = if (wordMemo.isNotEmpty()) 1 else 0
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
@@ -116,7 +116,7 @@ class MemoLessonTest {
 
     @Test
     fun canCountQuestions() {
-        assertEquals(9, MemoLesson(Productions(),
+        assertEquals(9, MemoLesson("", Productions(),
                 listOf(letter_g, letter_a, letter_m, letter_r, letter_j, letter_b),
                 listOf(greeting_hello)).countQuestions())
     }

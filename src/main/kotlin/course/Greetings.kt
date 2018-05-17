@@ -14,7 +14,7 @@ Vocab:
 გამარჯობა
 
  */
-val lesson_hello = MemoLesson(Productions(),
+val lesson_hello = MemoLesson("hello", Productions(),
         listOf(letter_g, letter_a, letter_m, letter_r, letter_j, letter_b),
         listOf(greeting_hello))
 
@@ -35,7 +35,7 @@ Vocab:
 
  */
 
-val lesson_whatareyoucalled = WordsToPhrasesLesson(
+val lesson_whatareyoucalled = WordsToPhrasesLesson("what are you called?",
         Productions(),
         listOf(letter_sh, letter_e, letter_n, letter_q, letter_v, letter_i, letter_t),
         listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),
