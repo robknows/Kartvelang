@@ -40,12 +40,12 @@ open class WordsToPhrasesLessonTest {
         // verify alphabet MCQs
         inOrder.verify(spyProductions).alphabetSound("v", "voice", 'ვ', Triple('კ', 'პ', 'ჰ'))
         // verify word MCQs
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(question_what.english, question_what.georgian, Triple("შენ", "ჩაი", "ათი"))
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(pronoun_1st_s_nom.english, pronoun_1st_s_nom.georgian, Triple("შენ", "ჩაი", "ათი"))
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(pronoun_2nd_s_nom.english, pronoun_2nd_s_nom.georgian, Triple("შენ", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(question_what.english, question_what.georgian, Triple("ხე", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(pronoun_1st_s_nom.english, pronoun_1st_s_nom.georgian, Triple("ხე", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(pronoun_2nd_s_nom.english, pronoun_2nd_s_nom.georgian, Triple("ხე", "ჩაი", "ათი"))
         // verify phrase MCQs
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("What is your name?", "შენ რა გქვია?", Triple("შენ", "ჩაი", "ათი"))
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("My name is Keti", "მე ქეთი მქვია", Triple("შენ", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("What is your name?", "შენ რა გქვია?", Triple("ხე", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("My name is Keti", "მე ქეთი მქვია", Triple("ხე", "ჩაი", "ათი"))
         // verify english to georgian word + phrase translations
         verify(spyProductions).englishToGeorgian(question_what)
         verify(spyProductions).englishToGeorgian(pronoun_1st_s_nom)

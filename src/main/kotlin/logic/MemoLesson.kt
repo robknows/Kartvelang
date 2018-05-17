@@ -48,7 +48,7 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
 }
 
 fun randomShortWords(): Triple<String, String, String> {
-    return Triple("შენ", "ჩაი", "ათი")
+    return Triple("ხე", "ჩაი", "ათი")
 }
 
 fun inWord(eng: String): String {
@@ -64,6 +64,9 @@ fun inWord(eng: String): String {
         "v" -> "voice"
         "i" -> "marine"
         "sh" -> "shower"
+        "e" -> "elephant"
+        "n" -> "nut"
+        "t" -> "taste"
         else -> {
             ""
         }
@@ -83,8 +86,11 @@ fun similarLetters(kar: Char): Triple<Char, Char, Char> {
         'ქ' -> Triple('ე', 'მ', 'გ')
         'ვ' -> Triple('კ', 'პ', 'ჰ')
         'ი' -> Triple('ა', 'ე', 'ო')
+        'ე' -> Triple('ა', 'უ', 'ო')
+        'ნ' -> Triple('მ', 'წ', 'ა')
+        'თ' -> Triple('დ', 'ფ', 'ო')
         else -> {
-            Triple('x', 'y', 'z')
+            Triple('.', '.', '.')
         }
     }
 }

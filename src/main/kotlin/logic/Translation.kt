@@ -16,6 +16,8 @@ val alphabet_q = Translation("q", "ქ")
 val alphabet_v = Translation("v", "ვ")
 val alphabet_i = Translation("i", "ი")
 val alphabet_e = Translation("e", "ე")
+val alphabet_n = Translation("n", "ნ")
+val alphabet_t = Translation("t", "თ")
 
 // Names
 val name_Keti = Translation("Keti", "ქეთი")

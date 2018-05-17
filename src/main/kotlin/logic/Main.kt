@@ -3,7 +3,7 @@
 
 package logic
 
-import course.lesson_hello
+import course.lesson_whatareyoucalled
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
 
     val u = User()
 
-    u.complete(lesson_hello, s, TranslationOverlay(), MultipleChoiceOverlay())
+    u.complete(lesson_whatareyoucalled, s, TranslationOverlay(), MultipleChoiceOverlay())
 
     u.saveProfile("/home/rob/kartvelang_user.json")
 

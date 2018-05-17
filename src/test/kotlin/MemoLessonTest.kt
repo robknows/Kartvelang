@@ -106,7 +106,7 @@ class MemoLessonTest {
         inOrder.verify(spyProductions).alphabetSound("a", "ant", 'ა', Triple('ს', 'მ', 'ე'))
         inOrder.verify(spyProductions).alphabetSound("b", "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
         inOrder.verify(spyProductions).alphabetSound("g", "girl", 'გ', Triple('მ', 'შ', 'კ'))
-        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("hello", "გამარჯობა", Triple("შენ", "ჩაი", "ათი"))
+        inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("hello", "გამარჯობა", Triple("ხე", "ჩაი", "ათი"))
         // verify that a TQ was made for each word
         inOrder.verify(spyProductions).englishToGeorgian(t4)
         inOrder.verify(spyProductions).englishToGeorgian(t5)
