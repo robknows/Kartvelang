@@ -1,7 +1,7 @@
 /*Created on 16/05/18. */
 package logic
 
-open class WordsToPhrasesLesson(val p: Productions, val letters: List<Translation>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
+open class WordsToPhrasesLesson(val p: Productions, val letters: List<Letter>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (mcqRuntime, mcqAnswered, mcqMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)
@@ -23,8 +23,8 @@ open class WordsToPhrasesLesson(val p: Productions, val letters: List<Translatio
     }
 
     fun completeMultipleChoiceStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
-        val alphabetMultipleChoiceQuestions = letters.map({ t ->
-            p.alphabetSound(t.english, inWord(t.english), t.georgian.first(), similarLetters(t.georgian.first()))
+        val alphabetMultipleChoiceQuestions = letters.map({ l ->
+            p.alphabetSound(l, similarLetters(l.kar))
         })
         val (aRuntime, aAnswered, aMistakes) = completeStage(alphabetMultipleChoiceQuestions, s, translationOverlay, multipleChoiceOverlay)
 

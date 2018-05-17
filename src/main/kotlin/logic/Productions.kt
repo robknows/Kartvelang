@@ -34,8 +34,8 @@ open class Productions {
         return TranslationQuestion("${farewell.english} ${name.english}", "${farewell.georgian} ${name.georgian}")
     }
 
-    open fun alphabetSound(eng: String, inWord: String, kar: Char, incorrect: Triple<Char, Char, Char>): MultipleChoiceQuestion {
-        return MultipleChoiceQuestion("makes a sound like \"$eng\" in \"$inWord\"", kar.toString(), incorrect.toStrings(), randomChoice())
+    open fun alphabetSound(l: Letter, incorrect: Triple<Char, Char, Char>): MultipleChoiceQuestion {
+        return MultipleChoiceQuestion("makes a sound like \"${l.engSound}\" in \"${l.inWord}\"", l.kar.toString(), incorrect.toStrings(), randomChoice())
     }
 
     open fun englishToGeorgianMultipleChoice(eng: String, kar: String, incorrect: Triple<String, String, String>): MultipleChoiceQuestion {

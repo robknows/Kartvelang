@@ -5,19 +5,6 @@ data class Translation(val english: String, val georgian: String)
 
 // Alphabet
 val alphabet = Translation("abcdefghijklmnopqrstuvwxyz", "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ")
-val alphabet_a = Translation("a", "ა")
-val alphabet_b = Translation("b", "ბ")
-val alphabet_g = Translation("g", "გ")
-val alphabet_m = Translation("m", "მ")
-val alphabet_r = Translation("r", "რ")
-val alphabet_j = Translation("j", "ჯ")
-val alphabet_sh = Translation("sh", "შ")
-val alphabet_q = Translation("q", "ქ")
-val alphabet_v = Translation("v", "ვ")
-val alphabet_i = Translation("i", "ი")
-val alphabet_e = Translation("e", "ე")
-val alphabet_n = Translation("n", "ნ")
-val alphabet_t = Translation("t", "თ")
 
 // Names
 val name_Keti = Translation("Keti", "ქეთი")

@@ -113,7 +113,7 @@ class ScreenTest {
         s.awaitCorrection(q)
     }
 
-    @Test(timeout = 260)
+    @Test(timeout = 900)
     fun awaitsCorrectionOnlyIfRequired() {
         doReturn("jibber jabber").`when`(mockBufferedReader).readLine()
         val spyQ = spy(MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A))

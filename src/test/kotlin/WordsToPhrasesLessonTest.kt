@@ -11,7 +11,7 @@ open class WordsToPhrasesLessonTest {
     val spyMultipleChoiceOverlay = Mockito.spy(MultipleChoiceOverlay())
 
     // Mockito wasn't working so I got the axe out
-    class MockWtpLesson(p: Productions, letters: List<Translation>, words: List<Translation>, phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : WordsToPhrasesLesson(p, letters, words, phraseProductions) {
+    class MockWtpLesson(p: Productions, letters: List<Letter>, words: List<Translation>, phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : WordsToPhrasesLesson(p, letters, words, phraseProductions) {
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
             if (qs.isEmpty()) {
                 return QuestionsResults(0.0, 0, 0)
@@ -28,7 +28,7 @@ open class WordsToPhrasesLessonTest {
 
         val wtpLesson = MockWtpLesson(
                 spyProductions,
-                listOf(alphabet_v),
+                listOf(letter_v),
                 listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),
                 listOf(
                         Pair({ _: Translation -> Translation("What is your name?", "შენ რა გქვია?") }, listOf()),
@@ -38,7 +38,7 @@ open class WordsToPhrasesLessonTest {
         assertEquals(LessonResults(100.0, 50.0), wtpLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay))
 
         // verify alphabet MCQs
-        inOrder.verify(spyProductions).alphabetSound("v", "voice", 'ვ', Triple('კ', 'პ', 'ჰ'))
+        inOrder.verify(spyProductions).alphabetSound(letter_v, Triple('კ', 'პ', 'ჰ'))
         // verify word MCQs
         inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(question_what.english, question_what.georgian, Triple("ხე", "ჩაი", "ათი"))
         inOrder.verify(spyProductions).englishToGeorgianMultipleChoice(pronoun_1st_s_nom.english, pronoun_1st_s_nom.georgian, Triple("ხე", "ჩაი", "ათი"))

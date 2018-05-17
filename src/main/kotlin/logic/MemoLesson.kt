@@ -1,7 +1,7 @@
 /*Created on 15/05/18. */
 package logic
 
-open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, val wordMemo: List<Translation>) : Lesson {
+open class MemoLesson(val p: Productions, val alphabetMemo: List<Letter>, val wordMemo: List<Translation>) : Lesson {
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (mcqRuntime, mcqAnswered, mcqMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)
@@ -23,10 +23,8 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
     }
 
     fun completeMultipleChoiceStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
-        val alphabetMultipleChoiceQs = alphabetMemo.map({ t ->
-            val eng = t.english
-            val kar = t.georgian.first()
-            p.alphabetSound(eng, inWord(eng), kar, similarLetters(kar))
+        val alphabetMultipleChoiceQs = alphabetMemo.map({ l ->
+            p.alphabetSound(l, similarLetters(l.kar))
         })
         val (aMcRuntime, aMcAnswered, aMcMistakes) = completeStage(alphabetMultipleChoiceQs, s, translationOverlay, multipleChoiceOverlay)
 
@@ -49,28 +47,6 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
 
 fun randomShortWords(): Triple<String, String, String> {
     return Triple("ხე", "ჩაი", "ათი")
-}
-
-fun inWord(eng: String): String {
-    return when (eng) {
-        "a" -> "ant"
-        "b" -> "bee"
-        "g" -> "girl"
-        "m" -> "morning"
-        "r" -> "rock"
-        "j" -> "jam"
-        "o" -> "court"
-        "q" -> "racquetball"
-        "v" -> "voice"
-        "i" -> "marine"
-        "sh" -> "shower"
-        "e" -> "elephant"
-        "n" -> "nut"
-        "t" -> "taste"
-        else -> {
-            ""
-        }
-    }
 }
 
 fun similarLetters(kar: Char): Triple<Char, Char, Char> {

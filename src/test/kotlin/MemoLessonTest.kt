@@ -13,7 +13,7 @@ class MemoLessonTest {
     val spyMultipleChoiceOverlay = spy(MultipleChoiceOverlay())
 
     // Mockito wasn't working so I got the axe out
-    class MockMemoLesson(p: Productions, alphabetMemo: List<Translation>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
+    class MockMemoLesson(p: Productions, alphabetMemo: List<Letter>, wordMemo: List<Translation>) : MemoLesson(p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
         val noWordsP: Int = if (wordMemo.isNotEmpty()) 1 else 0
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
@@ -54,29 +54,18 @@ class MemoLessonTest {
     fun runsStagesInOrder() {
         val spyProductions = spy(Productions())
         val inOrder = inOrder(spyProductions, mockScreen)
-        val t1 = Translation("a", "ა")
-        val t2 = Translation("b", "ბ")
-        val t3 = Translation("g", "გ")
-        val memo = listOf(t1, t2, t3)
+        val memo = listOf(letter_a, letter_b, letter_g)
 
         val memoLesson = MockMemoLesson(spyProductions, memo, listOf())
 
         memoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
-        // verify that completeStage was called thrice
+        // verify that completeStage was called only once - no translation questions
         assertEquals(1, memoLesson.stageMarker)
         // verify that a MCQ was made for each
-        inOrder.verify(spyProductions).alphabetSound("a", "ant", 'ა', Triple('ს', 'მ', 'ე'))
-        inOrder.verify(spyProductions).alphabetSound("b", "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
-        inOrder.verify(spyProductions).alphabetSound("g", "girl", 'გ', Triple('მ', 'შ', 'კ'))
-        // verify that no TQs were made
-        verify(spyProductions, never()).englishToGeorgian(t1)
-        verify(spyProductions, never()).englishToGeorgian(t2)
-        verify(spyProductions, never()).englishToGeorgian(t3)
-        // verify that no RTQs was made
-        verify(spyProductions, never()).georgianToEnglish(t1)
-        verify(spyProductions, never()).georgianToEnglish(t2)
-        verify(spyProductions, never()).georgianToEnglish(t3)
+        inOrder.verify(spyProductions).alphabetSound(letter_a, Triple('ს', 'მ', 'ე'))
+        inOrder.verify(spyProductions).alphabetSound(letter_b, Triple('გ', 'ფ', 'ა'))
+        inOrder.verify(spyProductions).alphabetSound(letter_g, Triple('მ', 'შ', 'კ'))
         // verify post completion actions
         inOrder.verify(mockScreen).closeInput()
         inOrder.verify(mockScreen).showPostLessonInfo(eq(100.0), eq(10.0), Matchers.anyString())
@@ -88,12 +77,9 @@ class MemoLessonTest {
     fun alphabetQuestionsComeFirst() {
         val spyProductions = spy(Productions())
         val inOrder = inOrder(spyProductions, mockScreen)
-        val t1 = Translation("a", "ა")
-        val t2 = Translation("b", "ბ")
-        val t3 = Translation("g", "გ")
         val t4 = Translation("hello", "გამარჯობა")
         val t5 = Translation("thanks", "გმადლობ")
-        val alphabetMemo = listOf(t1, t2, t3)
+        val alphabetMemo = listOf(letter_a, letter_b, letter_g)
         val wordMemo = listOf(t4, t5)
 
         val memoLesson = MockMemoLesson(spyProductions, alphabetMemo, wordMemo)
@@ -103,9 +89,9 @@ class MemoLessonTest {
         // verify that completeStage was called thrice
         assertEquals(4, memoLesson.stageMarker)
         // verify that a MCQ was made for each
-        inOrder.verify(spyProductions).alphabetSound("a", "ant", 'ა', Triple('ს', 'მ', 'ე'))
-        inOrder.verify(spyProductions).alphabetSound("b", "bee", 'ბ', Triple('გ', 'ფ', 'ა'))
-        inOrder.verify(spyProductions).alphabetSound("g", "girl", 'გ', Triple('მ', 'შ', 'კ'))
+        inOrder.verify(spyProductions).alphabetSound(letter_a, Triple('ს', 'მ', 'ე'))
+        inOrder.verify(spyProductions).alphabetSound(letter_b, Triple('გ', 'ფ', 'ა'))
+        inOrder.verify(spyProductions).alphabetSound(letter_g, Triple('მ', 'შ', 'კ'))
         inOrder.verify(spyProductions).englishToGeorgianMultipleChoice("hello", "გამარჯობა", Triple("ხე", "ჩაი", "ათი"))
         // verify that a TQ was made for each word
         inOrder.verify(spyProductions).englishToGeorgian(t4)

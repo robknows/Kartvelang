@@ -13,7 +13,7 @@ Vocab:
 
  */
 val lesson_hello = MemoLesson(Productions(),
-        listOf(alphabet_g, alphabet_a, alphabet_m, alphabet_r, alphabet_j, alphabet_b),
+        listOf(letter_g, letter_a, letter_m, letter_r, letter_j, letter_b),
         listOf(greeting_hello))
 
 /* What are you called?
@@ -35,7 +35,7 @@ Vocab:
 
 val lesson_whatareyoucalled = WordsToPhrasesLesson(
         Productions(),
-        listOf(alphabet_sh, alphabet_e, alphabet_n, alphabet_q, alphabet_v, alphabet_i, alphabet_t),
+        listOf(letter_sh, letter_e, letter_n, letter_q, letter_v, letter_i, letter_t),
         listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),
         listOf(
                 Pair({ _: Translation -> Translation("What are you called?", "შენ რა გქვია?") }, listOf()),

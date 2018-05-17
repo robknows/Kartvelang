@@ -4,6 +4,7 @@ import junit.framework.TestCase.assertEquals
 import logic.Productions
 import logic.Translation
 import logic.TranslationQuestion
+import logic.letter_m
 import org.junit.Test
 
 class ProductionsTest {
@@ -70,7 +71,7 @@ class ProductionsTest {
 
     @Test
     fun canProduceAlphabetSounding() {
-        val q = p.alphabetSound("m", "monkey", 'მ', Triple('გ', 'ლ', 'ო'))
+        val q = p.alphabetSound(letter_m, Triple('გ', 'ლ', 'ო'))
 
         assertEquals("makes a sound like \"m\" in \"monkey\"", q.question)
         assertEquals("მ", q.answer)
