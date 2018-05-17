@@ -50,10 +50,6 @@ class User {
         totalLessonCompletions++
         lessonTime += results.timeSeconds
 
-        updateModuleStrength(lesson)
-    }
-
-    private fun updateModuleStrength(lesson: Lesson) {
         strengths[lesson] = 100.0
     }
 
