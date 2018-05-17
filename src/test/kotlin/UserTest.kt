@@ -26,10 +26,10 @@ class UserTest {
     }
 
     @Test
-    fun completedLessonDataSavesToEmptyUserProfile() {
+    fun canCompleteFirstLesson() {
         val u = User()
 
-        val mockLesson = mock(QuickLesson::class.java)
+        val mockLesson = mock(Lesson::class.java)
         `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
 
         val t = Calendar.getInstance().time.time
@@ -43,7 +43,7 @@ class UserTest {
     }
 
     @Test
-    fun completedLessonDataSavesToArbitraryUserProfile() {
+    fun canCompleteSubsequentLessons() {
         val u = User()
         u.totalLessonCompletions = 1
         u.dailyLessonCompletions = 1
@@ -51,7 +51,7 @@ class UserTest {
         u.lessonTime = 100.0
         u.lastCompletion = Calendar.getInstance().time.time - 100
 
-        val mockLesson = mock(QuickLesson::class.java)
+        val mockLesson = mock(Lesson::class.java)
         `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(100.0, 80.0))
 
         val t = Calendar.getInstance().time.time
@@ -92,7 +92,7 @@ class UserTest {
     }
 
     @Test
-    fun canLoadUserToJSONFile() {
+    fun canLoadUserFromJSONFile() {
         val path = fp("src/test/resources/user.json")
         val uLoaded = User(path)
 
@@ -101,22 +101,5 @@ class UserTest {
         assertEquals(50.0, uLoaded.meanDailyAccuracy)
         assertEquals(100.0, uLoaded.lessonTime)
         assertEquals(1525986991184, uLoaded.lastCompletion)
-    }
-
-    @Test
-    fun canCompleteLesson() {
-        val u = User()
-
-        val mockLesson = mock(Lesson::class.java)
-        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
-
-        val t = Calendar.getInstance().time.time
-        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
-
-        assertEquals(1, u.totalLessonCompletions)
-        assertEquals(1, u.dailyLessonCompletions)
-        assertEquals(50.0, u.meanDailyAccuracy)
-        assertEquals(100.0, u.lessonTime)
-        assertTrue(t - u.lastCompletion < 50)
     }
 }
