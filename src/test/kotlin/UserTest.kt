@@ -102,4 +102,16 @@ class UserTest {
         assertEquals(100.0, uLoaded.lessonTime)
         assertEquals(1525986991184, uLoaded.lastCompletion)
     }
+
+    @Test
+    fun completingALessonAssignsProgressToThatLesson() {
+        val u = User()
+
+        val mockLesson = mock(Lesson::class.java)
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
+
+        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
+
+        assertEquals(100.0, u.strength(mockLesson))
+    }
 }
