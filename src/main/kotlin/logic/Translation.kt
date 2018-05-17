@@ -3,9 +3,6 @@ package logic
 
 data class Translation(val english: String, val georgian: String)
 
-// Alphabet
-val alphabet = Translation("abcdefghijklmnopqrstuvwxyz", "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ")
-
 // Names
 val name_Keti = Translation("Keti", "ქეთი")
 val name_Tengo = Translation("Tengo", "თენგო")

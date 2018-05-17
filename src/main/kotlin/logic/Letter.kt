@@ -4,6 +4,8 @@ package logic
 class Letter(val engSound: String, val kar: Char, val inWord: String) {
 }
 
+val alphabet = Translation("abcdefghijklmnopqrstuvwxyz", "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ")
+
 val letter_a = Letter("a", 'ა', "ant")
 val letter_b = Letter("b", 'ბ', "bee")
 val letter_g = Letter("g", 'გ', "girl")
