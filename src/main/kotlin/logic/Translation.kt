@@ -15,6 +15,7 @@ val alphabet_sh = Translation("sh", "შ")
 val alphabet_q = Translation("q", "ქ")
 val alphabet_v = Translation("v", "ვ")
 val alphabet_i = Translation("i", "ი")
+val alphabet_e = Translation("e", "ე")
 
 // Names
 val name_Keti = Translation("Keti", "ქეთი")
@@ -22,9 +23,10 @@ val name_Tengo = Translation("Tengo", "თენგო")
 
 // Greetings
 val greeting_hello = Translation("hello", "გამარჯობა")
-val greeting_nicetomeetyou = Translation("nice to meet you", "სასიამოვნოა")
-val phrase_whatareyoucalled = Translation("what are you called", "შენ რა გქვია")
-val phrase_howareyou = Translation("how are you", "როგორ ხარ")
-val mood_well = Translation("alright", "კარგად")
-val mood_notbad = Translation("not bad", "არამიშავს")
-val farewell_seeyousoon = Translation("see you soon", "ნახვამდის")
+
+// Question words
+val question_what = Translation("what", "რა")
+
+// Pronouns
+val pronoun_1st_s_nom = Translation("I", "მე")
+val pronoun_2nd_s_nom = Translation("you", "შენ")

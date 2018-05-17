@@ -4,8 +4,6 @@
 package logic
 
 import course.lesson_hello
-import logic.MultipleChoiceChoice.B
-import logic.MultipleChoiceChoice.C
 import org.jnativehook.GlobalScreen
 import org.jnativehook.NativeHookException
 import java.io.BufferedReader
@@ -19,15 +17,6 @@ fun main(args: Array<String>) {
     printTitle(printer)
 
     val u = User()
-    val p = Productions()
-
-    val quickLesson = QuickLesson(
-            Questions(
-                    listOf(
-                            MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), B),
-                            p.englishToGeorgian(greeting_hello),
-                            MultipleChoiceQuestion("makes a sound like \"d\" in \"daisy\"", "დ", Triple("გ", "ლ", "ო"), C),
-                            p.introduction(greeting_nicetomeetyou, name_Keti))))
 
     u.complete(lesson_hello, s, TranslationOverlay(), MultipleChoiceOverlay())
 

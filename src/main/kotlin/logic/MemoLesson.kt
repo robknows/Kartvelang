@@ -45,14 +45,6 @@ open class MemoLesson(val p: Productions, val alphabetMemo: List<Translation>, v
         val georgianToEnglishQs = wordMemo.map(p::georgianToEnglish)
         return completeStage(georgianToEnglishQs, s, translationOverlay, multipleChoiceOverlay)
     }
-
-    open fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
-        if (qs.isEmpty()) {
-            return QuestionsResults(0.0, 0, 0)
-        } else {
-            return Questions(qs).run(s, translationOverlay, multipleChoiceOverlay)
-        }
-    }
 }
 
 fun randomShortWords(): Triple<String, String, String> {

@@ -43,13 +43,13 @@ open class Productions {
     }
 }
 
+fun <E> concat(vararg c: List<E>): List<E> {
+    return c.map({ l -> l.toMutableList() }).reduce({ acc, nxt -> acc.concatList(nxt) }).toList()
+}
+
 private fun <E> MutableList<E>.concatList(phrases: Collection<E>): MutableList<E> {
     addAll(phrases)
     return this
-}
-
-private fun <E> concat(vararg c: List<E>): List<E> {
-    return c.map({ l -> l.toMutableList() }).reduce({ acc, nxt -> acc.concatList(nxt) }).toList()
 }
 
 private fun <A, B, C> Triple<A, B, C>.toStrings(): Triple<String, String, String> {
