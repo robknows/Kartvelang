@@ -40,7 +40,7 @@ open class TranslationQuestion(val given: String, override val answer: String) :
 }
 
 private fun prepareForMarking(s: String): String {
-    return s.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() }).despace()
+    return s.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() }).despace().toLowerCase()
 }
 
 private fun String.despace(): String {

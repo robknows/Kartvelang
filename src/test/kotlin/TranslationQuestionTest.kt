@@ -178,4 +178,11 @@ class TranslationQuestionTest {
         assertTrue(mark.correct)
         assertEquals(0, mark.errorIndices.count())
     }
+
+    @Test
+    fun englishVerificationIsCaseInsensitive() {
+        val q = TranslationQuestion("შენ რა გქვია", "What is your name")
+
+        assertTrue(q.verifyAnswer("what is your name"))
+    }
 }
