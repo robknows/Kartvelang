@@ -105,4 +105,11 @@ class MemoLessonTest {
         inOrder.verify(mockScreen).print()
         inOrder.verify(mockScreen).clear()
     }
+
+    @Test
+    fun canCountQuestions() {
+        assertEquals(9, MemoLesson(Productions(),
+                listOf(letter_g, letter_a, letter_m, letter_r, letter_j, letter_b),
+                listOf(greeting_hello)).countQuestions())
+    }
 }

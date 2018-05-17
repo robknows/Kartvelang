@@ -132,4 +132,9 @@ class QuickLessonTest {
         verify(spyScreen, never()).awaitCorrection(q2)
         verify(spyScreen, never()).awaitCorrection(q3)
     }
+
+    @Test
+    fun canCountQuestions() {
+        assertEquals(3, QuickLesson(Questions(listOf(q1, q4, q3))).countQuestions())
+    }
 }

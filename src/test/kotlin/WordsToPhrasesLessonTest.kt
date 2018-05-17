@@ -59,4 +59,16 @@ open class WordsToPhrasesLessonTest {
         verify(spyProductions).georgianToEnglish(Translation("What is your name?", "შენ რა გქვია?"))
         verify(spyProductions).georgianToEnglish(Translation("My name is Tengo", "მე თენგო მქვია"))
     }
+
+    @Test
+    fun canCountQuestions() {
+        assertEquals(17, WordsToPhrasesLesson(
+                Productions(),
+                listOf(letter_v, letter_e),
+                listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),
+                listOf(
+                        Pair({ _: Translation -> Translation("What is your name?", "შენ რა გქვია?") }, listOf()),
+                        Pair({ name: Translation -> Translation("My name is ${name.english}", "მე ${name.georgian} მქვია") }, listOf(name_Keti, name_Tengo)))
+        ).countQuestions())
+    }
 }

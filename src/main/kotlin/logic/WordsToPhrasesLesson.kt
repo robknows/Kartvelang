@@ -2,6 +2,10 @@
 package logic
 
 open class WordsToPhrasesLesson(val p: Productions, val letters: List<Letter>, val words: List<Translation>, val phraseProductions: List<Pair<(Translation) -> Translation, List<Translation>>>) : Lesson {
+    override fun countQuestions(): Int {
+        return letters.size + 3 * (words.size + phraseProductions.size)
+    }
+
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (mcqRuntime, mcqAnswered, mcqMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)

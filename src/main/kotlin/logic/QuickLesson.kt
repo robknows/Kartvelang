@@ -4,6 +4,10 @@ package logic
 import java.util.*
 
 open class QuickLesson(val qs: Questions) : Lesson {
+    override fun countQuestions(): Int {
+        return qs.count()
+    }
+
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (lessonTime, answered, mistakes) = qs.run(s, translationOverlay, multipleChoiceOverlay)
         s.closeInput()

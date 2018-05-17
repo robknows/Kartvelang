@@ -2,6 +2,10 @@
 package logic
 
 open class MemoLesson(val p: Productions, val alphabetMemo: List<Letter>, val wordMemo: List<Translation>) : Lesson {
+    override fun countQuestions(): Int {
+        return alphabetMemo.size + 3 * wordMemo.size
+    }
+
     override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
         val (mcqRuntime, mcqAnswered, mcqMistakes) = completeMultipleChoiceStage(s, translationOverlay, multipleChoiceOverlay)
         val (etgRuntime, etgAnswered, etgMistakes) = completeEnglishToGeorgianStage(s, translationOverlay, multipleChoiceOverlay)
