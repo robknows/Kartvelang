@@ -104,14 +104,14 @@ class UserTest {
     }
 
     @Test
-    fun canCompleteMemoLesson() {
+    fun canCompleteLesson() {
         val u = User()
 
-        val mockMemoLesson = mock(MemoLesson::class.java)
-        `when`(mockMemoLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
+        val mockLesson = mock(Lesson::class.java)
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(50.0, 100.0))
 
         val t = Calendar.getInstance().time.time
-        u.complete(mockMemoLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
+        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         assertEquals(1, u.totalLessonCompletions)
         assertEquals(1, u.dailyLessonCompletions)
