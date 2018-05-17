@@ -1,5 +1,5 @@
 /*Created on 10/05/18. */
-package logic.user
+package logic
 
 import logic.io.Screen
 import logic.lesson.Lesson

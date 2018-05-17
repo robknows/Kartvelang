@@ -8,7 +8,6 @@ import logic.io.ColourPrinter
 import logic.io.Screen
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
-import logic.user.User
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
