@@ -25,4 +25,15 @@ class ModuleMapTest {
 
         assertEquals(listOf(lesson_hello), mm.availableLessons(u))
     }
+
+    @Test
+    fun canGetLockedLessons() {
+        val mm = ModuleMap(lesson_hello, lesson_whatareyoucalled)
+        mm.dependency(lesson_hello, lesson_whatareyoucalled)
+        val u = spy(User())
+        `when`(u.hasAccessTo(lesson_hello)).thenReturn(true)
+        `when`(u.hasAccessTo(lesson_whatareyoucalled)).thenReturn(false)
+
+        assertEquals(listOf(lesson_whatareyoucalled), mm.visibleButLockedLessons(u))
+    }
 }
