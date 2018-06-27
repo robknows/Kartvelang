@@ -35,13 +35,13 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
 
     override fun printWith(printer: ColourPrinter) {
         questionLine.printlnWith(printer)
-        printer.printWhite("  ")
+        printer.printWhite("  a) ")
         printer.print(choice1.baseColour, choice1.toString())
-        printer.printWhite("    ")
+        printer.printWhite("    b) ")
         printer.println(choice2.baseColour, choice2.toString())
-        printer.printWhite("  ")
+        printer.printWhite("  c) ")
         printer.print(choice3.baseColour, choice3.toString())
-        printer.printWhite("    ")
+        printer.printWhite("    d) ")
         printer.println(choice4.baseColour, choice4.toString())
 
     }
@@ -85,8 +85,10 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
         }
     }
 
+    // Note: This is not what is printed, because it doesn't incorporate colours.
+    //       To change the printed text, change the "printWith" function.
     override fun toString(): String {
-        return "$questionLine\n  $choice1    $choice2\n  $choice3    $choice4"
+        return "$questionLine\n  a) $choice1    b) $choice2\n  c) $choice3    d) $choice4"
     }
 
     override fun clear() {
@@ -99,8 +101,8 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
 
     override fun maxLineLength(): Int {
         return listOf(questionLine.toString().length,
-                6 + choice1.toString().length + choice2.toString().length,
-                6 + choice3.toString().length + choice4.toString().length).max() ?: 0
+                10 + choice1.toString().length + choice2.toString().length,
+                10 + choice3.toString().length + choice4.toString().length).max() ?: 0
     }
 
     private fun correspondingText(c: MultipleChoiceChoice): Text {

@@ -22,7 +22,7 @@ class MultipleChoiceOverlayTest {
 
         o.showQuestion(q)
 
-        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  მ    გ\n  ლ    ო", o.toString())
+        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  a) მ    b) გ\n  c) ლ    d) ო", o.toString())
     }
 
     @Test
@@ -68,13 +68,13 @@ class MultipleChoiceOverlayTest {
         o.printWith(spyPrinter)
 
         inOrder.verify(spyPrinter).printlnWhite("Which of these makes a sound like \"m\" in \"monkey\"?")
-        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).printWhite("  a) ")
         inOrder.verify(spyPrinter).print(W, "მ")
-        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).printWhite("    b) ")
         inOrder.verify(spyPrinter).println(W, "გ")
-        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).printWhite("  c) ")
         inOrder.verify(spyPrinter).print(W, "ლ")
-        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).printWhite("    d) ")
         inOrder.verify(spyPrinter).println(W, "ო")
     }
 
@@ -84,7 +84,7 @@ class MultipleChoiceOverlayTest {
 
         o.showQuestion(q)
 
-        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  გ    ლ\n  ო    მ", o.toString())
+        assertEquals("Which of these makes a sound like \"m\" in \"monkey\"?\n  a) გ    b) ლ\n  c) ო    d) მ", o.toString())
     }
 
     @Test
@@ -110,13 +110,13 @@ class MultipleChoiceOverlayTest {
         o.printWith(spyPrinter)
 
         inOrder.verify(spyPrinter).printlnWhite("Which of these makes a sound like \"m\" in \"monkey\"?")
-        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).printWhite("  a) ")
         inOrder.verify(spyPrinter).print(W, "გ")
-        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).printWhite("    b) ")
         inOrder.verify(spyPrinter).println(W, "ლ")
-        inOrder.verify(spyPrinter).printWhite("  ")
+        inOrder.verify(spyPrinter).printWhite("  c) ")
         inOrder.verify(spyPrinter).print(G, "მ")
-        inOrder.verify(spyPrinter).printWhite("    ")
+        inOrder.verify(spyPrinter).printWhite("    d) ")
         inOrder.verify(spyPrinter).println(W, "ო")
     }
 
