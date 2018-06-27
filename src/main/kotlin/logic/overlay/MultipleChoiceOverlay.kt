@@ -101,8 +101,9 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
 
     override fun maxLineLength(): Int {
         return listOf(questionLine.toString().length,
-                10 + choice1.toString().length + choice2.toString().length,
-                10 + choice3.toString().length + choice4.toString().length).max() ?: 0
+                "  a) ".length + "    b) ".length + choice1.toString().length + choice2.toString().length,
+                "  a) ".length + "    b) ".length + choice3.toString().length + choice4.toString().length,
+                "Press enter to continue".length).max() ?: 0
     }
 
     private fun correspondingText(c: MultipleChoiceChoice): Text {

@@ -51,11 +51,17 @@ class MultipleChoiceOverlayTest {
 
     @Test
     fun canGetMaxLengthLine() {
-        val q = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
-
-        o.showQuestion(q)
-
+        val q1 = MultipleChoiceQuestion("makes a sound like \"m\" in \"monkey\"", "მ", Triple("გ", "ლ", "ო"), A)
+        o.showQuestion(q1)
         assertEquals(50, o.maxLineLength())
+
+        val q2 = MultipleChoiceQuestion("?", "მ", Triple("გ", "ლ", "ო"), A)
+        o.showQuestion(q2)
+        assertEquals(23, o.maxLineLength())
+
+        val q3 = MultipleChoiceQuestion("?", "123456789abcdef", Triple("გ", "ლ", "ო"), A)
+        o.showQuestion(q3)
+        assertEquals(28, o.maxLineLength())
     }
 
     @Test
