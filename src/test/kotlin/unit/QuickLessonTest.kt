@@ -1,3 +1,5 @@
+package unit
+
 /*Created on 30/04/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
