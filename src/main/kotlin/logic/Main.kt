@@ -14,13 +14,13 @@ import java.io.InputStreamReader
 fun main(args: Array<String>) {
     val printer = ColourPrinter()
     val input = BufferedReader(InputStreamReader(System.`in`))
-    val s = Screen(printer, input)
+    val screen = Screen(printer, input)
 
     printTitle(printer)
 
     val u = User()
 
-    u.complete(lesson_whatareyoucalled, s, TranslationOverlay(), MultipleChoiceOverlay())
+    u.complete(lesson_whatareyoucalled, screen, TranslationOverlay(), MultipleChoiceOverlay())
 
     u.saveProfile("/home/rob/kartvelang_user.json")
 
