@@ -3,7 +3,7 @@ package unit
 
 import course.lesson_hello
 import course.lesson_whatareyoucalled
-import logic.Kartvelang
+import logic.LessonMap
 import logic.User
 import logic.io.ColourPrinter
 import logic.io.Screen
@@ -14,7 +14,7 @@ import org.mockito.Mockito.mock
 import java.io.BufferedReader
 import java.io.StringReader
 
-class KartvelangTest {
+class LessonMapTest {
     @Test
     fun canNavigateLessonMap() {
         val mockPrinter = mock(ColourPrinter::class.java)
@@ -24,9 +24,9 @@ class KartvelangTest {
 
         `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
-        val k = Kartvelang(testScreen, mockUser)
+        val lessonMap = LessonMap(mockUser, testScreen)
 
-        assertEquals(lesson_hello, k.navigateLessonMap())
+        assertEquals(lesson_hello, lessonMap.navigate())
     }
 
     @Test
@@ -38,9 +38,9 @@ class KartvelangTest {
 
         `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
-        val k = Kartvelang(testScreen, mockUser)
+        val lessonMap = LessonMap(mockUser, testScreen)
 
-        assertEquals(lesson_hello, k.navigateLessonMap())
+        assertEquals(lesson_hello, lessonMap.navigate())
     }
 
     @Test
@@ -52,8 +52,8 @@ class KartvelangTest {
 
         `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
-        val k = Kartvelang(testScreen, mockUser)
+        val lessonMap = LessonMap(mockUser, testScreen)
 
-        assertEquals(lesson_whatareyoucalled, k.navigateLessonMap())
+        assertEquals(lesson_whatareyoucalled, lessonMap.navigate())
     }
 }
