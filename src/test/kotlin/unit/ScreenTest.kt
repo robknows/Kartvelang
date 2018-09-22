@@ -3,10 +3,7 @@ package unit
 /*Created on 29/04/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import logic.io.ColourPrinter
-import logic.io.LineLabel
-import logic.io.Screen
-import logic.io.Text
+import logic.io.*
 import logic.overlay.QuestionOverlay
 import logic.question.MultipleChoiceChoice.A
 import logic.question.MultipleChoiceQuestion
@@ -217,5 +214,13 @@ class ScreenTest {
         verify(spyPrinter).printGreen("tve")
         verify(spyPrinter).printWhite("lang")
         verify(spyPrinter).printlnBlue(" ===")
+    }
+
+    @Test
+    fun canPromptForKeyPress() {
+        doReturn("jibber jabber").`when`(mockBufferedReader).readLine()
+        s.input = mockBufferedReader
+        s.promptForKeyPress("Press enter (and print EXACTLY this)", Key.ENTER)
+        verify(spyPrinter).printlnWhite("Press enter (and print EXACTLY this)")
     }
 }

@@ -73,7 +73,11 @@ open class Screen(private val printer: ColourPrinter, var input: BufferedReader)
     }
 
     open fun awaitKeyPress(key: Key) {
-        prompt("Press " + key.name.toLowerCase() + " to continue")
+        promptForKeyPress("Press " + key.name.toLowerCase() + " to continue", key)
+    }
+
+    fun promptForKeyPress(prompt: String, key: Key) {
+        prompt(prompt)
         if (key == Key.ENTER) {
             input.readLine()
         } else {
