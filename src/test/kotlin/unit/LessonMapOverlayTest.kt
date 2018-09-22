@@ -1,11 +1,11 @@
 /*Created on 22/09/18. */
 package unit
 
-import junit.framework.Assert.assertEquals
 import logic.io.ColourPrinter
 import logic.lesson.Questions
 import logic.lesson.QuickLesson
 import logic.overlay.LessonMapOverlay
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.Mockito
 
