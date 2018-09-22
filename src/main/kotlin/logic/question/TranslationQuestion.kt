@@ -8,8 +8,8 @@ open class TranslationQuestion(val given: String, override val answer: String) :
 
     fun markAnswer(attempt: String): TranslationMark {
         @Suppress("NAME_SHADOWING")
-        val attempt = prepareForMarking(attempt)
-        val answer = prepareForMarking(answer)
+        val attempt = homogenise(attempt)
+        val answer = homogenise(answer)
         val correct = answer == attempt
         val diff = if (answer.length == attempt.length) {
             diffWord(answer, attempt)
@@ -39,7 +39,7 @@ open class TranslationQuestion(val given: String, override val answer: String) :
     }
 }
 
-private fun prepareForMarking(s: String): String {
+fun homogenise(s: String): String {
     return s.trim({ c -> c.isPunctuation() or c.isWhitespace() }).filter({ c -> !c.isPunctuation() }).despace().toLowerCase()
 }
 

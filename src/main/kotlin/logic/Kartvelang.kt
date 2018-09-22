@@ -7,6 +7,7 @@ import logic.lesson.Lesson
 import logic.overlay.LessonMapOverlay
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
+import logic.question.homogenise
 
 class Kartvelang(val screen: Screen, private val user: User) {
     fun run() {
@@ -34,11 +35,11 @@ class Kartvelang(val screen: Screen, private val user: User) {
         while (!isValidLessonChoice(shownLessons, input)) {
             input = screen.awaitPromptedLine("Choose a lesson from the list")
         }
-        val selectedLesson = shownLessons.first({ lesson -> lesson.name == input })
+        val selectedLesson = shownLessons.first({ lesson -> homogenise(lesson.name) == homogenise(input) })
         return selectedLesson
     }
 
     fun isValidLessonChoice(shownLessons: List<Lesson>, input: String): Boolean {
-        return shownLessons.map(Lesson::name).contains(input)
+        return shownLessons.map({ lesson -> homogenise(lesson.name) }).contains(homogenise(input))
     }
 }
