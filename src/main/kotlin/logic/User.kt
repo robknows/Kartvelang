@@ -64,6 +64,7 @@ open class User {
     }
 
     open fun currentLessons(): List<Lesson> {
+        // TODO: Make this use some lesson dependency tree like Duolingo
         return listOf(lesson_hello, lesson_whatareyoucalled)
     }
 }
