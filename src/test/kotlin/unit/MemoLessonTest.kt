@@ -26,29 +26,23 @@ class MemoLessonTest {
     class MockMemoLesson(p: Productions, alphabetMemo: List<Letter>, wordMemo: List<Translation>) : MemoLesson("", p, alphabetMemo, wordMemo) {
         var stageMarker: Int = 0
         val noWordsP: Int = if (wordMemo.isNotEmpty()) 1 else 0
+
         override fun completeStage(qs: List<Question>, s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
             if (qs.isEmpty()) {
                 return QuestionsResults(0.0, 0, 0)
             } else {
                 val firstQ = qs.first()
                 when (firstQ) {
-                    is MultipleChoiceQuestion -> { // multiple choice
-                        assertTrue(stageMarker < 1 + noWordsP)
-                        stageMarker++
-                    }
+                    is MultipleChoiceQuestion -> assertMCQsFirst()
                     is TranslationQuestion -> {
-                        assertTrue(stageMarker > noWordsP)
-                        val letter = firstQ.given.first()
+                        assertTranslationQuestionsAfterMCQs()
+
+                        val firstLetter = firstQ.given.first()
+                        val englishToGeorgianP = alphabet.english.contains(firstLetter)
+                        val georgianToEnglishP = alphabet.georgian.contains(firstLetter)
                         when {
-                            alphabet.english.contains(letter) -> { // english -> georgian
-                                assertTrue(stageMarker < 2 + noWordsP)
-                                stageMarker++
-                            }
-                            alphabet.georgian.contains(letter) -> { // georgian -> english
-                                assertTrue(stageMarker > 1 + noWordsP)
-                                assertTrue(stageMarker < 3 + noWordsP)
-                                stageMarker++
-                            }
+                            englishToGeorgianP -> assertEnglishToGeorgianTranslationQuestionsSecond()
+                            georgianToEnglishP -> assertGeorgianToEnglishTranslationQuestionsThird()
                             else -> {
                                 assertTrue(false)
                             }
@@ -57,6 +51,26 @@ class MemoLessonTest {
                 }
                 return QuestionsResults(10.0, 5, 0)
             }
+        }
+
+        fun assertMCQsFirst() {
+            assertTrue(stageMarker < 1 + noWordsP)
+            stageMarker++
+        }
+
+        fun assertTranslationQuestionsAfterMCQs() {
+            assertTrue(stageMarker > noWordsP)
+        }
+
+        fun assertEnglishToGeorgianTranslationQuestionsSecond() {
+            assertTrue(stageMarker < 2 + noWordsP)
+            stageMarker++
+        }
+
+        fun assertGeorgianToEnglishTranslationQuestionsThird() {
+            assertTrue(stageMarker > 1 + noWordsP)
+            assertTrue(stageMarker < 3 + noWordsP)
+            stageMarker++
         }
     }
 
