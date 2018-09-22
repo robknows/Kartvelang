@@ -35,11 +35,15 @@ class Kartvelang(val screen: Screen, private val user: User) {
         while (!isValidLessonChoice(shownLessons, input)) {
             input = screen.awaitPromptedLine("Choose a lesson from the list")
         }
-        val selectedLesson = shownLessons.first({ lesson -> homogenise(lesson.name) == homogenise(input) })
-        return selectedLesson
+        return findIntendedLessonMatch(input, shownLessons)!!
     }
 
     fun isValidLessonChoice(shownLessons: List<Lesson>, input: String): Boolean {
-        return shownLessons.map({ lesson -> homogenise(lesson.name) }).contains(homogenise(input))
+        val match = findIntendedLessonMatch(input, shownLessons)
+        return (match != null)
+    }
+
+    fun findIntendedLessonMatch(needle: String, haystack: List<Lesson>): Lesson? {
+        return haystack.firstOrNull({ lesson -> homogenise(lesson.name) == homogenise(needle) })
     }
 }
