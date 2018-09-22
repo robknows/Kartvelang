@@ -43,7 +43,7 @@ class ScreenTest {
         }
 
         override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
-            TODO("not needed")
+            throw RuntimeException("realisticExampleOverlay.runQuestion: Shouldn't get called")
         }
     }
 
@@ -63,11 +63,11 @@ class ScreenTest {
         }
 
         override fun clear() {
-            TODO("not needed")
+            throw RuntimeException("tackyExampleOverlay.clear: Shouldn't get called")
         }
 
         override fun runQuestion(s: Screen, q: TranslationQuestion): TranslationMark {
-            TODO("not needed")
+            throw RuntimeException("tackyExampleOverlay.runQuestion: Shouldn't get called")
         }
     }
 
