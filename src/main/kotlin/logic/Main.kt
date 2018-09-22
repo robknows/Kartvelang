@@ -3,11 +3,8 @@
 
 package logic
 
-import course.lesson_whatareyoucalled
 import logic.io.ColourPrinter
 import logic.io.Screen
-import logic.overlay.MultipleChoiceOverlay
-import logic.overlay.TranslationOverlay
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -15,22 +12,12 @@ fun main(args: Array<String>) {
     val printer = ColourPrinter()
     val input = BufferedReader(InputStreamReader(System.`in`))
     val screen = Screen(printer, input)
+    val user = User()
 
-    printTitle(printer)
+    val app = Kartvelang(screen, user)
 
-    val u = User()
-
-    u.complete(lesson_whatareyoucalled, screen, TranslationOverlay(), MultipleChoiceOverlay())
-
-    u.saveProfile("/home/rob/kartvelang_user.json")
+    app.run()
 
     System.exit(0)
 }
 
-fun printTitle(printer: ColourPrinter) {
-    printer.printBlue("=== ")
-    printer.printRed("kar")
-    printer.printGreen("tve")
-    printer.printWhite("lang")
-    printer.printlnBlue(" ===")
-}

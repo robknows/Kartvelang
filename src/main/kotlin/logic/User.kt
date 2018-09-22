@@ -1,6 +1,8 @@
 /*Created on 10/05/18. */
 package logic
 
+import course.lesson_hello
+import course.lesson_whatareyoucalled
 import logic.io.Screen
 import logic.lesson.Lesson
 import logic.overlay.MultipleChoiceOverlay
@@ -59,5 +61,9 @@ open class User {
 
     fun strength(lesson: Lesson): Double {
         return strengths[lesson]!!
+    }
+
+    fun currentLessons(): List<Lesson> {
+        return listOf(lesson_hello, lesson_whatareyoucalled)
     }
 }
