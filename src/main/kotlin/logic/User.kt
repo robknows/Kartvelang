@@ -60,8 +60,4 @@ open class User {
     fun strength(lesson: Lesson): Double {
         return strengths[lesson]!!
     }
-
-    open fun hasAccessTo(lesson: Lesson): Boolean {
-        return strengths.containsKey(lesson)
-    }
 }
