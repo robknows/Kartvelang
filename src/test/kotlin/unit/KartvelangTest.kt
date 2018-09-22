@@ -28,4 +28,18 @@ class KartvelangTest {
 
         assertEquals(lesson_hello, k.navigateLessonMap())
     }
+
+    @Test
+    fun canNavigateLessonMapWithTypo() {
+        val mockPrinter = mock(ColourPrinter::class.java)
+        val testInput = BufferedReader(StringReader("hellp\nhello"))
+        val testScreen = Screen(mockPrinter, testInput)
+        val mockUser = mock(User::class.java)
+
+        `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
+
+        val k = Kartvelang(testScreen, mockUser)
+
+        assertEquals(lesson_hello, k.navigateLessonMap())
+    }
 }
