@@ -1,6 +1,6 @@
+/*Created on 10/05/18. */
 package unit
 
-/*Created on 10/05/18. */
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import logic.User
@@ -9,7 +9,6 @@ import logic.lesson.Lesson
 import logic.lesson.LessonResults
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
-import org.json.JSONObject
 import org.junit.Test
 import org.mockito.Mockito.*
 import java.io.File
@@ -82,13 +81,6 @@ class UserTest {
         uSaved.lastCompletion = t
 
         uSaved.saveProfile("user.json")
-
-        val o = JSONObject()
-        o.put("totalLessonCompletions", 1)
-        o.put("dailyLessonCompletions", 1)
-        o.put("meanDailyAccuracy", 50.0)
-        o.put("lessonTime", 100.0)
-        o.put("lastCompletion", t)
 
         val bufferedReader = File("user.json").inputStream().reader().buffered()
         val text = bufferedReader.readText()

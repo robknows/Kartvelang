@@ -13,6 +13,6 @@ class Kartvelang(val screen: Screen, private val user: User) {
         val selectedLesson = lessonMap.navigate()
         screen.promptForKeyPress("Now starting ${selectedLesson.name}. Press enter to continue", Key.ENTER)
         user.complete(selectedLesson, screen, TranslationOverlay(), MultipleChoiceOverlay())
-        user.saveProfile("/home/rob/Documents/language/Kartvelang/kartvelang_user.json")
+        user.saveProfile()
     }
 }

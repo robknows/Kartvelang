@@ -13,6 +13,7 @@ fun main(args: Array<String>) {
     val input = BufferedReader(InputStreamReader(System.`in`))
     val screen = Screen(printer, input)
     val user = User()
+    user.profileFile = "kartvelang_user.json"
 
     val app = Kartvelang(screen, user)
 

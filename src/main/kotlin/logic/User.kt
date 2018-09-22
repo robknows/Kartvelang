@@ -20,6 +20,7 @@ open class User {
     var lessonTime: Double = 0.0
     var lastCompletion: Long = 0L
     val strengths: HashMap<Lesson, Double> = HashMap()
+    lateinit var profileFile: String
 
     constructor()
     constructor(filename: String) {
@@ -33,9 +34,15 @@ open class User {
         meanDailyAccuracy = uJSON.getDouble("meanDailyAccuracy")
         lessonTime = uJSON.getDouble("lessonTime")
         lastCompletion = uJSON.getLong("lastCompletion")
+        profileFile = filename
     }
 
     fun saveProfile(filename: String) {
+        profileFile = filename
+        saveProfile()
+    }
+
+    fun saveProfile() {
         val o = JSONObject()
         o.put("totalLessonCompletions", totalLessonCompletions)
         o.put("dailyLessonCompletions", dailyLessonCompletions)
@@ -43,7 +50,7 @@ open class User {
         o.put("lessonTime", lessonTime)
         o.put("lastCompletion", lastCompletion)
 
-        FileWriter(filename).use { file ->
+        FileWriter(profileFile).use { file ->
             file.write(o.toString())
         }
     }
@@ -55,7 +62,6 @@ open class User {
         dailyLessonCompletions++
         totalLessonCompletions++
         lessonTime += results.timeSeconds
-
         strengths[lesson] = 100.0
     }
 
