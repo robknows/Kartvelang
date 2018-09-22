@@ -63,7 +63,7 @@ open class User {
         return strengths[lesson]!!
     }
 
-    fun currentLessons(): List<Lesson> {
+    open fun currentLessons(): List<Lesson> {
         return listOf(lesson_hello, lesson_whatareyoucalled)
     }
 }
