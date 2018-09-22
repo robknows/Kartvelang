@@ -207,4 +207,15 @@ class ScreenTest {
 
         s.awaitCorrection(mockQuestion)
     }
+
+    @Test
+    fun canPrintCoverScreen() {
+        s.printCoverScreen()
+
+        verify(spyPrinter).printBlue("=== ")
+        verify(spyPrinter).printRed("kar")
+        verify(spyPrinter).printGreen("tve")
+        verify(spyPrinter).printWhite("lang")
+        verify(spyPrinter).printlnBlue(" ===")
+    }
 }

@@ -2,13 +2,13 @@
 package logic.io
 
 open class ColourPrinter {
-    fun printRed(s: String) {
+    open fun printRed(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;196m$s'").start()
         val readLine = proc.inputStream.bufferedReader().readLine()
         print(readLine)
     }
 
-    fun printGreen(s: String) {
+    open fun printGreen(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;028m$s'").start()
         val readLine = proc.inputStream.bufferedReader().readLine()
         print(readLine)
@@ -20,7 +20,7 @@ open class ColourPrinter {
         print(readLine)
     }
 
-    fun printBlue(s: String) {
+    open fun printBlue(s: String) {
         val proc = ProcessBuilder("/bin/bash", "-c", "printf '\\e[38;5;021m$s'").start()
         val readLine = proc.inputStream.bufferedReader().readLine()
         print(readLine)

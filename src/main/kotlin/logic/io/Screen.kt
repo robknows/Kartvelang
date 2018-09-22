@@ -106,6 +106,14 @@ open class Screen(private val printer: ColourPrinter, var input: BufferedReader)
         lines.add(Pair(LineLabel.I, Text("Lesson time: " + seconds.toString() + " seconds")))
         lines.add(Pair(LineLabel.I, Text("Hint: $hint")))
     }
+
+    fun printCoverScreen() {
+        printer.printBlue("=== ")
+        printer.printRed("kar")
+        printer.printGreen("tve")
+        printer.printWhite("lang")
+        printer.printlnBlue(" ===")
+    }
 }
 
 enum class LineLabel {
