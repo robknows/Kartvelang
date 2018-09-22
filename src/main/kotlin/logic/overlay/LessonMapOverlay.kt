@@ -13,7 +13,7 @@ class LessonMapOverlay(val lessons: List<Lesson>) : Overlay {
     }
 
     override fun clear() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        // No state so doesn't need to do anything
     }
 
     override fun maxLineLength(): Int {
