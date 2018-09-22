@@ -76,7 +76,7 @@ open class Screen(private val printer: ColourPrinter, var input: BufferedReader)
         promptForKeyPress("Press " + key.name.toLowerCase() + " to continue", key)
     }
 
-    fun promptForKeyPress(prompt: String, key: Key) {
+    open fun promptForKeyPress(prompt: String, key: Key) {
         prompt(prompt)
         if (key == Key.ENTER) {
             input.readLine()

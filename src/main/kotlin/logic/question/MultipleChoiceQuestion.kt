@@ -10,7 +10,7 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
         throw RuntimeException("MultipleChoiceQuestion.verifyAnswer: Shouldn't be called")
     }
 
-    fun markAnswer(attempt: String): MultipleChoiceMark {
+    open fun markAnswer(attempt: String): MultipleChoiceMark {
         val char = attempt.first().toLowerCase()
         if (!listOf('a', 'b', 'c', 'd').contains(char)) {
             return MultipleChoiceMark(false, MultipleChoiceChoice.NONE, answerChoice)
