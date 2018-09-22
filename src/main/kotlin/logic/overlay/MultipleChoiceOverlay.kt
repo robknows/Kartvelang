@@ -73,6 +73,8 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
                 choice3 = Text(q.incorrect.third)
                 choice4 = Text(q.answer)
             }
+            else -> {
+            }
         }
     }
 
@@ -112,6 +114,9 @@ open class MultipleChoiceOverlay : QuestionOverlay<MultipleChoiceQuestion, Multi
             B -> choice2
             C -> choice3
             D -> choice4
+            else -> {
+                Text("")
+            }
         }
     }
 }

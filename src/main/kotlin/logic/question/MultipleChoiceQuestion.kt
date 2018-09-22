@@ -7,12 +7,17 @@ open class MultipleChoiceQuestion(val question: String, override val answer: Str
     override val fullCorrections: Boolean = false
 
     override fun verifyAnswer(attempt: String): Boolean {
-        TODO("not implemented for multiple choice questions")
+        throw RuntimeException("MultipleChoiceQuestion.verifyAnswer: Shouldn't be called")
     }
 
     fun markAnswer(attempt: String): MultipleChoiceMark {
-        val choice = attempt.first().toLowerCase().toChoice()
-        return MultipleChoiceMark(choice == answerChoice, choice, answerChoice)
+        val char = attempt.first().toLowerCase()
+        if (!listOf('a', 'b', 'c', 'd').contains(char)) {
+            return MultipleChoiceMark(false, MultipleChoiceChoice.NONE, answerChoice)
+        } else {
+            val choice = char.toChoice()
+            return MultipleChoiceMark(choice == answerChoice, choice, answerChoice)
+        }
     }
 }
 
@@ -22,16 +27,14 @@ private fun Char.toChoice(): MultipleChoiceChoice {
         'b' -> MultipleChoiceChoice.B
         'c' -> MultipleChoiceChoice.C
         'd' -> MultipleChoiceChoice.D
-        else -> {
-            TODO("Cannot get choice which isn't in {a, b, c, d}")
-        }
+        else -> MultipleChoiceChoice.NONE
     }
 }
 
 data class MultipleChoiceMark(override val correct: Boolean, val choice: MultipleChoiceChoice, val answer: MultipleChoiceChoice) : Mark
 
 enum class MultipleChoiceChoice {
-    A, B, C, D;
+    A, B, C, D, NONE;
 }
 
 fun randomChoice(): MultipleChoiceChoice {
