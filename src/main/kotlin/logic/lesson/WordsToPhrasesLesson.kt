@@ -35,14 +35,10 @@ open class WordsToPhrasesLesson(override val name: String, val p: Productions, v
     }
 
     fun completeMultipleChoiceStage(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): QuestionsResults {
-        val alphabetMultipleChoiceQuestions = letters.map({ l ->
-            p.alphabetSound(l, similarLetters(l.kar))
-        })
+        val alphabetMultipleChoiceQuestions = letters.map({ l -> p.alphabetSound(l, similarLetters(l.kar)) })
         val (aRuntime, aAnswered, aMistakes) = completeStage(alphabetMultipleChoiceQuestions, s, translationOverlay, multipleChoiceOverlay)
 
-        val wordsMultipleChoiceQuestions = words.map({ t ->
-            p.englishToGeorgianMultipleChoice(t.english, t.georgian, randomShortWords())
-        })
+        val wordsMultipleChoiceQuestions = words.map({ t -> p.englishToGeorgianMultipleChoice(t.english, t.georgian, randomShortWords()) })
         val (wRuntime, wAnswered, wMistakes) = completeStage(wordsMultipleChoiceQuestions, s, translationOverlay, multipleChoiceOverlay)
 
         val phraseMultipleChoiceQuestions = phraseProductions.map({ (production, args) ->
