@@ -7,7 +7,13 @@ import logic.question.Mark
 import logic.question.Question
 
 interface Overlay {
+    /*
+    All the IO for the overlays should happen in this method, using the provided ColourPrinter.
+    Other areas of the overlay should manipulate only the Screen or the internal objects used
+    to provide the desired representation at print-time.
+    */
     fun printWith(printer: ColourPrinter)
+
     fun clear()
     fun maxLineLength(): Int
 }
@@ -17,12 +23,12 @@ interface QuestionOverlay<in Q : Question, out M : Mark> : Overlay {
 }
 
 object BaseOverlay : Overlay {
-    override fun toString(): String {
-        return ""
-    }
-
     override fun printWith(printer: ColourPrinter) {
         printer.printlnWhite("     ")
+    }
+
+    override fun toString(): String {
+        return ""
     }
 
     override fun maxLineLength(): Int {
