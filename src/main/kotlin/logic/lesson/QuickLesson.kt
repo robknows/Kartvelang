@@ -6,7 +6,7 @@ import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
 import java.util.*
 
-open class QuickLesson(override val name: String, val qs: Questions) : Lesson {
+open class QuickLesson(override val name: String, val qs: Questions, override var dependencies: List<Lesson> = listOf()) : Lesson {
     override fun countQuestions(): Int {
         return qs.count()
     }

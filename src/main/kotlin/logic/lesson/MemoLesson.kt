@@ -8,7 +8,7 @@ import logic.language.Translation
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
 
-open class MemoLesson(override val name: String, val p: Productions, val alphabetMemo: List<Letter>, val wordMemo: List<Translation>) : Lesson {
+open class MemoLesson(override val name: String, val p: Productions, val alphabetMemo: List<Letter>, val wordMemo: List<Translation>, override var dependencies: List<Lesson> = listOf()) : Lesson {
     override fun countQuestions(): Int {
         return alphabetMemo.size + 3 * wordMemo.size
     }

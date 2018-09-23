@@ -4,7 +4,7 @@ import logic.io.ColourPrinter
 import logic.lesson.Lesson
 import kotlin.math.max
 
-class LessonMapOverlay(val lessons: List<Lesson>) : Overlay {
+class LessonMapOverlay(private val lessons: Set<Lesson>) : Overlay {
     override fun printWith(printer: ColourPrinter) {
         printer.printlnWhite("Choose a lesson")
         for (lesson in lessons) {

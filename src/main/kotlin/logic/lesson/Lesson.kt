@@ -8,6 +8,7 @@ import logic.question.Question
 
 interface Lesson {
     val name: String
+    val dependencies: List<Lesson>
 
     fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults
 

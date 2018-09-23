@@ -49,8 +49,8 @@ class KartvelangTest {
         val spyScreen = spy(Screen(mockPrinter, input))
         val user = object : User() {
             override var profileFile = fp("src/test/resources/testuser.json")
-            override fun availableLessons(): List<Lesson> {
-                return listOf(lesson1, lesson2)
+            override fun availableLessons(allLessons: Set<Lesson>): Set<Lesson> {
+                return setOf(lesson1, lesson2)
             }
         }
         val app = Kartvelang(spyScreen, user)

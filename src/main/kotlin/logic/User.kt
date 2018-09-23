@@ -14,13 +14,14 @@ import java.util.*
 import kotlin.collections.HashMap
 
 open class User {
+    open lateinit var profileFile: String
     var totalLessonCompletions: Int = 0
     var dailyLessonCompletions: Int = 0
     var meanDailyAccuracy: Double = 0.0
     var lessonTime: Double = 0.0
     var lastCompletion: Long = 0L
     private val completedLessonData: HashMap<String, CompletedLessonData> = HashMap()
-    open lateinit var profileFile: String
+    private val availableNewLessons: MutableSet<Lesson> = mutableSetOf(lesson_hello)
 
     constructor()
     constructor(filename: String) {
@@ -63,15 +64,29 @@ open class User {
         totalLessonCompletions++
         lessonTime += results.timeSeconds
         completedLessonData[lesson.name] = CompletedLessonData(lesson, 100.0)
+        availableNewLessons.remove(lesson)
     }
 
     fun strength(lesson: Lesson): Double {
         return completedLessonData[lesson.name]!!.strength
     }
 
-    open fun availableLessons(): List<Lesson> {
-        // TODO: Make this use some lesson dependency tree like Duolingo
-        return concat(listOf(lesson_hello), completedLessonData.values.map(CompletedLessonData::lesson))
+    private fun completedLessons(): List<Lesson> {
+        return completedLessonData.values.map(CompletedLessonData::lesson)
+    }
+
+    open fun availableLessons(allLessons: Set<Lesson>): Set<Lesson> {
+        updateNewAvailableLessons(allLessons)
+        return concat(availableNewLessons.toList(), completedLessons()).toSet()
+    }
+
+    private fun updateNewAvailableLessons(allLessons: Set<Lesson>) {
+        val currentlyAvailableLessons = concat(availableNewLessons.toList(), completedLessons())
+        for (lesson in allLessons.filter({ lesson -> lesson !in currentlyAvailableLessons })) {
+            if (lesson.dependencies.all({ dependency -> dependency in completedLessons() })) {
+                availableNewLessons.add(lesson)
+            }
+        }
     }
 }
 

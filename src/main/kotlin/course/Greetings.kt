@@ -41,7 +41,8 @@ val lesson_whatareyoucalled = WordsToPhrasesLesson("what are you called?",
         listOf(question_what, pronoun_1st_s_nom, pronoun_2nd_s_nom),
         listOf(
                 Pair({ _: Translation -> Translation("What are you called?", "შენ რა გქვია?") }, listOf()),
-                Pair({ name: Translation -> Translation("I am called ${name.english}", "მე ${name.georgian} მქვია") }, listOf(name_Keti, name_Tengo)))
+                Pair({ name: Translation -> Translation("I am called ${name.english}", "მე ${name.georgian} მქვია") }, listOf(name_Keti, name_Tengo))),
+        listOf(lesson_hello)
 )
 
 /* How are you?

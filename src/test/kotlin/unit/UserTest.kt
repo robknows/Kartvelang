@@ -119,17 +119,56 @@ class UserTest {
     fun currentlyAvailableLessonsAreThoseThatAreInitiallyAvailableOrCompleted() {
         val u = User()
 
-        assertEquals(listOf(lesson_hello), u.availableLessons())
+        assertEquals(setOf(lesson_hello), u.availableLessons(setOf()))
     }
 
     @Test
     fun completingALessonMakesItAvailable() {
         val u = User()
+        val mockScreen = mock(Screen::class.java)
 
         val mockLesson = mock(Lesson::class.java)
         `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(100.0, 75.0))
         u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
-        assertEquals(listOf(lesson_hello, mockLesson), u.availableLessons())
+        assertEquals(setOf(lesson_hello, mockLesson), u.availableLessons(setOf()))
+    }
+
+
+    @Test
+    fun completingALessonCausesDependentLessonsToBecomeAvailable() {
+        val u = User()
+        val mockScreen = mock(Screen::class.java)
+
+        val dependencyLesson = object : Lesson {
+            override val name: String = "dependency"
+            override val dependencies: List<Lesson> = listOf()
+
+            override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
+                return LessonResults(100.0, 75.0)
+            }
+
+            override fun countQuestions(): Int {
+                throw RuntimeException("completingALessonCausesDependentLessonsToBecomeAvailable.dependencyLesson.countQuestions: Shouldn't get called")
+            }
+
+        }
+
+        val dependingLesson = object : Lesson {
+            override val name = "dependent"
+            override val dependencies = listOf(dependencyLesson)
+
+            override fun complete(s: Screen, translationOverlay: TranslationOverlay, multipleChoiceOverlay: MultipleChoiceOverlay): LessonResults {
+                throw RuntimeException("completingALessonCausesDependentLessonsToBecomeAvailable.dependingLesson.complete: Shouldn't get called")
+            }
+
+            override fun countQuestions(): Int {
+                throw RuntimeException("completingALessonCausesDependentLessonsToBecomeAvailable.dependingLesson.countQuestions: Shouldn't get called")
+            }
+        }
+
+        u.complete(dependencyLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
+
+        assertEquals(setOf(lesson_hello, dependencyLesson, dependingLesson), u.availableLessons(setOf(dependencyLesson, dependingLesson)))
     }
 }

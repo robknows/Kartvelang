@@ -18,7 +18,7 @@ class LessonMapOverlayTest {
         val testLesson2 = QuickLesson("L2", Questions())
         val testLesson3 = QuickLesson("L3", Questions())
 
-        val lessons = listOf(testLesson1, testLesson2, testLesson3)
+        val lessons = setOf(testLesson1, testLesson2, testLesson3)
 
         val o = LessonMapOverlay(lessons)
 
@@ -38,7 +38,7 @@ class LessonMapOverlayTest {
         val testLesson2 = QuickLesson("L2", Questions())
         val testLesson3 = QuickLesson("L3", Questions())
 
-        val lessons = listOf(testLesson1, testLesson2, testLesson3)
+        val lessons = setOf(testLesson1, testLesson2, testLesson3)
 
         val o = LessonMapOverlay(lessons)
 
@@ -51,7 +51,7 @@ class LessonMapOverlayTest {
         val testLesson2 = QuickLesson("L2", Questions())
         val testLesson3 = QuickLesson("L3", Questions())
 
-        val lessons = listOf(testLesson1, testLesson2, testLesson3)
+        val lessons = setOf(testLesson1, testLesson2, testLesson3)
 
         val o = LessonMapOverlay(lessons)
 
