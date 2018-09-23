@@ -3,6 +3,7 @@ package logic
 
 import course.lesson_hello
 import logic.io.Screen
+import logic.language.concat
 import logic.lesson.Lesson
 import logic.overlay.MultipleChoiceOverlay
 import logic.overlay.TranslationOverlay
@@ -18,7 +19,7 @@ open class User {
     var meanDailyAccuracy: Double = 0.0
     var lessonTime: Double = 0.0
     var lastCompletion: Long = 0L
-    val strengths: HashMap<Lesson, Double> = HashMap()
+    private val completedLessonData: HashMap<String, CompletedLessonData> = HashMap()
     lateinit var profileFile: String
 
     constructor()
@@ -61,15 +62,17 @@ open class User {
         dailyLessonCompletions++
         totalLessonCompletions++
         lessonTime += results.timeSeconds
-        strengths[lesson] = 100.0
+        completedLessonData[lesson.name] = CompletedLessonData(lesson, 100.0)
     }
 
     fun strength(lesson: Lesson): Double {
-        return strengths[lesson]!!
+        return completedLessonData[lesson.name]!!.strength
     }
 
-    open fun currentLessons(): List<Lesson> {
+    open fun availableLessons(): List<Lesson> {
         // TODO: Make this use some lesson dependency tree like Duolingo
-        return listOf(lesson_hello)
+        return concat(listOf(lesson_hello), completedLessonData.values.map(CompletedLessonData::lesson))
     }
 }
+
+data class CompletedLessonData(val lesson: Lesson, val strength: Double)

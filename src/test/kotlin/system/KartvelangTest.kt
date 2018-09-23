@@ -48,7 +48,7 @@ class KartvelangTest {
         val lesson1 = QuickLesson("Test Lesson", Questions(listOf(q1, q3, q5)))
         val lesson2 = QuickLesson("Lesson Du Test", Questions(listOf(q2, q4, q6)))
         val user = object : User() {
-            override fun currentLessons(): List<Lesson> {
+            override fun availableLessons(): List<Lesson> {
                 return listOf(lesson1, lesson2)
             }
         }

@@ -119,8 +119,17 @@ class UserTest {
     fun currentlyAvailableLessonsAreThoseThatAreInitiallyAvailableOrCompleted() {
         val u = User()
 
-        val lessons = u.currentLessons()
+        assertEquals(listOf(lesson_hello), u.availableLessons())
+    }
 
-        assertEquals(listOf(lesson_hello), lessons)
+    @Test
+    fun completingALessonMakesItAvailable() {
+        val u = User()
+
+        val mockLesson = mock(Lesson::class.java)
+        `when`(mockLesson.complete(mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)).thenReturn(LessonResults(100.0, 75.0))
+        u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
+
+        assertEquals(listOf(lesson_hello, mockLesson), u.availableLessons())
     }
 }

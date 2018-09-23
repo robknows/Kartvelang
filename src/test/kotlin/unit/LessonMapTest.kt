@@ -22,7 +22,7 @@ class LessonMapTest {
         val testScreen = Screen(mockPrinter, testInput)
         val mockUser = mock(User::class.java)
 
-        `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
+        `when`(mockUser.availableLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
         val lessonMap = LessonMap(mockUser, testScreen)
 
@@ -36,7 +36,7 @@ class LessonMapTest {
         val testScreen = Screen(mockPrinter, testInput)
         val mockUser = mock(User::class.java)
 
-        `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
+        `when`(mockUser.availableLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
         val lessonMap = LessonMap(mockUser, testScreen)
 
@@ -50,7 +50,7 @@ class LessonMapTest {
         val testScreen = Screen(mockPrinter, testInput)
         val mockUser = mock(User::class.java)
 
-        `when`(mockUser.currentLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
+        `when`(mockUser.availableLessons()).thenReturn(listOf(lesson_hello, lesson_whatareyoucalled))
 
         val lessonMap = LessonMap(mockUser, testScreen)
 

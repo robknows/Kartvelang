@@ -8,7 +8,7 @@ import logic.question.homogenise
 
 class LessonMap(private val user: User, private val screen: Screen) {
     fun navigate(): Lesson {
-        val lessons = user.currentLessons()
+        val lessons = user.availableLessons()
         val lessonMapOverlay = LessonMapOverlay(lessons)
         screen.overlay = lessonMapOverlay
         screen.print()
