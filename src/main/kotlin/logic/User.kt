@@ -20,7 +20,7 @@ open class User {
     var lessonTime: Double = 0.0
     var lastCompletion: Long = 0L
     private val completedLessonData: HashMap<String, CompletedLessonData> = HashMap()
-    lateinit var profileFile: String
+    open lateinit var profileFile: String
 
     constructor()
     constructor(filename: String) {

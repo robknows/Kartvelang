@@ -31,12 +31,14 @@ class KartvelangTest {
     val q4 = spy(MultipleChoiceQuestion("is \"m\"", "m", Triple("a", "b", "c"), MultipleChoiceChoice.B))
     val q5 = MultipleChoiceQuestion("is \"z\"", "z", Triple("a", "b", "c"), MultipleChoiceChoice.A)
     val q6 = spy(MultipleChoiceQuestion("is \"t\"", "t", Triple("a", "b", "c"), MultipleChoiceChoice.D))
+    val lesson1 = QuickLesson("Test Lesson", Questions(listOf(q1, q3, q5)))
+    val lesson2 = QuickLesson("Lesson Du Test", Questions(listOf(q2, q4, q6)))
     val mockPrinter = mock(ColourPrinter::class.java)
 
     /*
     In this test
         a user starts the app,
-        picks a lesson,
+        picks a lesson (making no mistakes),
         completes the lesson (making no mistakes),
         has their profile saved to file
      */
@@ -45,14 +47,12 @@ class KartvelangTest {
         // Setup variables
         val input = BufferedReader(StringReader("Lesson Du Test\n\ndoremi\n\nb\n\nd\n\n\n"))
         val spyScreen = spy(Screen(mockPrinter, input))
-        val lesson1 = QuickLesson("Test Lesson", Questions(listOf(q1, q3, q5)))
-        val lesson2 = QuickLesson("Lesson Du Test", Questions(listOf(q2, q4, q6)))
         val user = object : User() {
+            override var profileFile = fp("src/test/resources/testuser.json")
             override fun availableLessons(): List<Lesson> {
                 return listOf(lesson1, lesson2)
             }
         }
-        user.profileFile = fp("src/test/resources/testuser.json")
         val app = Kartvelang(spyScreen, user)
         val inOrder = inOrder(spyScreen, mockPrinter, q2, q4, q6)
 
