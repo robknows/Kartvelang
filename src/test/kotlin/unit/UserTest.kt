@@ -1,6 +1,7 @@
 /*Created on 10/05/18. */
 package unit
 
+import course.lesson_hello
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import logic.User
@@ -112,5 +113,14 @@ class UserTest {
         u.complete(mockLesson, mockScreen, spyTranslationOverlay, spyMultipleChoiceOverlay)
 
         assertEquals(100.0, u.strength(mockLesson))
+    }
+
+    @Test
+    fun currentlyAvailableLessonsAreThoseThatAreInitiallyAvailableOrCompleted() {
+        val u = User()
+
+        val lessons = u.currentLessons()
+
+        assertEquals(listOf(lesson_hello), lessons)
     }
 }

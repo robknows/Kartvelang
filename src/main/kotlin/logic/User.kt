@@ -2,7 +2,6 @@
 package logic
 
 import course.lesson_hello
-import course.lesson_whatareyoucalled
 import logic.io.Screen
 import logic.lesson.Lesson
 import logic.overlay.MultipleChoiceOverlay
@@ -71,6 +70,6 @@ open class User {
 
     open fun currentLessons(): List<Lesson> {
         // TODO: Make this use some lesson dependency tree like Duolingo
-        return listOf(lesson_hello, lesson_whatareyoucalled)
+        return listOf(lesson_hello)
     }
 }
